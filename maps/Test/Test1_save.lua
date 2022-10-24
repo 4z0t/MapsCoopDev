@@ -1411,14 +1411,14 @@ Scenario = {
                 orders = '',
                 platoon = '',
                 Units = {
-                    ['CybranPlayer_0'] = {
+                    ['CybranPlayer_1'] = {
                         type = 'url0001',
                         orders = '',
                         platoon = '',
                         Position = { 933.5, 25.66563, 120.5 },
                         Orientation = { 0, 0, 0 },
                     },
-                    ['CybranPlayer_1'] = {
+                    ['UEFPlayer_1'] = {
                         type = 'uel0001',
                         orders = '',
                         platoon = '',

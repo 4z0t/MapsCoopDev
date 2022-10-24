@@ -21,7 +21,8 @@ function DeathResult(unit)
 	LOG("Punch lox")
 end
 
-local objectives = ObjectiveManager():Init
+local objectives = ObjectiveManager()
+objectives:Init
 {
 	objectiveBuilder
 		:New "start"
@@ -42,7 +43,7 @@ local objectives = ObjectiveManager():Init
 					WaitSeconds(1)
 					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam2"), 3)
 					ScenarioFramework.KillBaseInArea(ArmyBrains[ScenarioInfo.TheWheelie], 'StartArea')
-					WaitSeconds(1)
+					WaitSeconds(2)
 					playersManager:Spawn(DeathResult)
 					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam3"), 3)
 				end
