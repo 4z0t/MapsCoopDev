@@ -41,10 +41,10 @@ local objectives = ObjectiveManager():Init
 					ScenarioFramework.Dialogue(VOStrings.Start, nil, true)
 					WaitSeconds(1)
 					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam2"), 3)
-					WaitSeconds(1)
 					ScenarioFramework.KillBaseInArea(ArmyBrains[ScenarioInfo.TheWheelie], 'StartArea')
-					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam3"), 3)
+					WaitSeconds(1)
 					playersManager:Spawn(DeathResult)
+					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam3"), 3)
 				end
 			)
 		end)
@@ -67,6 +67,11 @@ function OnPopulate()
 				Cybran = 'CybranPlayer_1',
 				UEF = 'UEFPlayer_1',
 				Aeon = 'AeonPlayer_1',
+			},
+			enhancements = {
+				Cybran = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation" },
+				UEF = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation" },
+				Aeon = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation" },
 			}
 		},
 		{
@@ -76,6 +81,11 @@ function OnPopulate()
 				Cybran = 'CybranPlayer_2',
 				UEF = 'UEFPlayer_2',
 				Aeon = 'AeonPlayer_2',
+			},
+			enhancements = {
+				Cybran = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation" },
+				UEF = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation" },
+				Aeon = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation" },
 			}
 		},
 	}
