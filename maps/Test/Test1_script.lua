@@ -13,6 +13,9 @@ local TauntManager = import('/lua/TauntManager.lua')
 local objectiveBuilder = import("/lua/ASF/ObjectiveBuilder.lua").ObjectiveBuilder()
 local VOStrings = import("/maps/Test/VOStrings.lua").lines
 
+
+ScenarioInfo.TheWheelie = 2
+
 local objectives = ObjectiveManager():Init
 {
 	objectiveBuilder
@@ -34,6 +37,7 @@ local objectives = ObjectiveManager():Init
 					WaitSeconds(1)
 					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam2"), 3)
 					WaitSeconds(1)
+					ScenarioFramework.KillBaseInArea(ArmyBrains[ScenarioInfo.TheWheelie], 'StartArea')
 					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam3"), 3)
 				end
 			)
@@ -46,9 +50,14 @@ local objectives = ObjectiveManager():Init
 
 function OnPopulate()
 	ScenarioUtils.InitializeScenarioArmies()
+
+	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1Qbase1')
+	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1Qbase2')
+	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1QOuterEco')
 end
 
 function OnStart(self)
 	ScenarioFramework.SetPlayableArea('StartArea', false)
+	reprsl(ArmyBrains)
 	objectives:Start("start")
 end

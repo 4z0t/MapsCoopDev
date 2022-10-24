@@ -6,8 +6,8 @@ ScenarioInfo = {
     map_version = 1,
     type = 'campaign_coop',
     starts = true,
-    size = {1024, 1024},
-    reclaim = {37814.32, 336974.8},
+    size = { 1024, 1024 },
+    reclaim = { 94032.84, 336974.8 },
     map = '/maps/Test/Test1.scmap',
     save = '/maps/Test/Test1_save.lua',
     script = '/maps/Test/Test1_script.lua',
@@ -17,7 +17,7 @@ ScenarioInfo = {
             teams = {
                 {
                     name = 'FFA',
-                    armies = {'Player1', 'Player2'}
+                    armies = { 'Player1', 'TheWheelie',  'Player2',}
                 },
             },
             customprops = {
