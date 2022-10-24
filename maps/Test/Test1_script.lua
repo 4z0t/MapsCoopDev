@@ -10,11 +10,16 @@ local Cinematics = import('/lua/cinematics.lua')
 local Buff = import('/lua/sim/Buff.lua')
 local TauntManager = import('/lua/TauntManager.lua')
 
-local objectiveBuilder = import("/lua/ASF/ObjectiveBuilder.lua").ObjectiveBuilder()
 local VOStrings = import("/maps/Test/VOStrings.lua").lines
+local objectiveBuilder = import("/lua/ASF/ObjectiveBuilder.lua").ObjectiveBuilder()
+local playersManager = import("/lua/ASF/PlayersManager.lua").PlayersManager()
 
 
 ScenarioInfo.TheWheelie = 2
+
+function DeathResult(unit)
+	LOG("Punch lox")
+end
 
 local objectives = ObjectiveManager():Init
 {
@@ -39,6 +44,7 @@ local objectives = ObjectiveManager():Init
 					WaitSeconds(1)
 					ScenarioFramework.KillBaseInArea(ArmyBrains[ScenarioInfo.TheWheelie], 'StartArea')
 					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam3"), 3)
+					playersManager:Spawn(DeathResult)
 				end
 			)
 		end)
@@ -48,8 +54,31 @@ local objectives = ObjectiveManager():Init
 		:Create()
 }
 
+
 function OnPopulate()
 	ScenarioUtils.InitializeScenarioArmies()
+
+	playersManager:Init
+	{
+		{
+			color = "ff0000ff",
+			units =
+			{
+				Cybran = 'CybranPlayer_1',
+				UEF = 'UEFPlayer_1',
+				Aeon = 'AeonPlayer_1',
+			}
+		},
+		{
+			color = "ffffff00",
+			units =
+			{
+				Cybran = 'CybranPlayer_2',
+				UEF = 'UEFPlayer_2',
+				Aeon = 'AeonPlayer_2',
+			}
+		},
+	}
 
 	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1Qbase1')
 	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1Qbase2')
@@ -58,6 +87,5 @@ end
 
 function OnStart(self)
 	ScenarioFramework.SetPlayableArea('StartArea', false)
-	reprsl(ArmyBrains)
 	objectives:Start("start")
 end
