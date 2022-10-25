@@ -68,12 +68,15 @@ function OnPopulate()
 				Aeon = 'AeonPlayer_1',
 				Cybran = 'CybranPlayer_1',
 				UEF = 'UEFPlayer_1',
+				Seraphim = 'SeraPlayer_1',
 			},
 			enhancements = {
 				Aeon = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "ResourceAllocationAdvanced",
 					"EnhancedSensors" },
 				Cybran = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "MicrowaveLaserGenerator" },
 				UEF = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "Shield", "ShieldGeneratorField" },
+				Seraphim = { "AdvancedEngineering", "T3Engineering", "DamageStabilization", "DamageStabilizationAdvanced",
+					"ResourceAllocation", "ResourceAllocationAdvanced" }
 			}
 		},
 		{
@@ -83,12 +86,15 @@ function OnPopulate()
 				Cybran = 'CybranPlayer_2',
 				UEF = 'UEFPlayer_2',
 				Aeon = 'AeonPlayer_2',
+				Seraphim = 'SeraPlayer_2',
 			},
 			enhancements = {
 				Aeon = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "ResourceAllocationAdvanced",
 					"EnhancedSensors" },
 				Cybran = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "MicrowaveLaserGenerator" },
 				UEF = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "Shield", "ShieldGeneratorField" },
+				Seraphim = { "AdvancedEngineering", "T3Engineering", "DamageStabilization", "DamageStabilizationAdvanced",
+					"ResourceAllocation", "ResourceAllocationAdvanced" }
 			}
 		},
 	}

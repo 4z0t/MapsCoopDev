@@ -1470,6 +1470,13 @@ Scenario = {
                         Position = { 933.5, 25.66563, 120.5 },
                         Orientation = { 0, 0, 0 },
                     },
+                    ['SeraPlayer_1'] = {
+                        type = 'xsl0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 933.5, 25.66563, 120.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
                     ['CybranPlayer_1'] = {
                         type = 'url0001',
                         orders = '',
@@ -1515,6 +1522,13 @@ Scenario = {
                 Units = {
                     ['CybranPlayer_2'] = {
                         type = 'url0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 924.5, 25.66563, 98.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
+                    ['SeraPlayer_2'] = {
+                        type = 'xsl0001',
                         orders = '',
                         platoon = '',
                         Position = { 924.5, 25.66563, 98.5 },
