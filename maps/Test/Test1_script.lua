@@ -21,6 +21,19 @@ function DeathResult(unit)
 	LOG("Punch lox")
 end
 
+local prizoners = {
+	"Razarem",
+	"Accor",
+	"EyelessMole",
+	"Nandatum",
+	"MoldPlit",
+	"Bruh-",
+	"Zloyvasya",
+	"Oidaho",
+	"Mbimra228",
+	"Farizm"
+}
+
 local objectives = ObjectiveManager()
 objectives:Init
 {
