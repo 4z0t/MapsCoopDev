@@ -77,7 +77,7 @@ function OnPopulate(self)
 end
  
 function OnStart(self) 
-    ScenarioFramework.SetPlayableArea('AREA_1', false)   
+    ScenarioFramework.SetPlayableArea('AREA_1', false)
     
     ForkThread(Intro1)
 end 

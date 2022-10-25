@@ -50,7 +50,7 @@ objectives:Init
 			)
 		end)
 		:OnSuccess(function()
-
+			objectives:EndGame(true)
 		end)
 		:Create()
 }
@@ -65,14 +65,15 @@ function OnPopulate()
 			color = "ff0000ff",
 			units =
 			{
+				Aeon = 'AeonPlayer_1',
 				Cybran = 'CybranPlayer_1',
 				UEF = 'UEFPlayer_1',
-				Aeon = 'AeonPlayer_1',
 			},
 			enhancements = {
-				Cybran = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation" },
-				UEF = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation" },
-				Aeon = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation" },
+				Aeon = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "ResourceAllocationAdvanced",
+					"EnhancedSensors" },
+				Cybran = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "MicrowaveLaserGenerator" },
+				UEF = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "Shield", "ShieldGeneratorField" },
 			}
 		},
 		{
@@ -84,9 +85,10 @@ function OnPopulate()
 				Aeon = 'AeonPlayer_2',
 			},
 			enhancements = {
-				Cybran = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation" },
-				UEF = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation" },
-				Aeon = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation" },
+				Aeon = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "ResourceAllocationAdvanced",
+					"EnhancedSensors" },
+				Cybran = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "MicrowaveLaserGenerator" },
+				UEF = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "Shield", "ShieldGeneratorField" },
 			}
 		},
 	}
