@@ -93,9 +93,7 @@ function OnPopulate()
 		},
 	}
 
-	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1Qbase1')
-	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1Qbase2')
-	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1QOuterEco')
+	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1Qbases')
 end
 
 function OnStart(self)
