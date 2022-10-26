@@ -9,6 +9,7 @@ local Utilities = import('/lua/Utilities.lua')
 local Cinematics = import('/lua/cinematics.lua')
 local Buff = import('/lua/sim/Buff.lua')
 local TauntManager = import('/lua/TauntManager.lua')
+local Utils = import("/lua/ASF/Utils.lua")
 
 local VOStrings = import("/maps/Test/VOStrings.lua").lines
 local objectiveBuilder = import("/lua/ASF/ObjectiveBuilder.lua").ObjectiveBuilder()
@@ -16,6 +17,7 @@ local playersManager = import("/lua/ASF/PlayersManager.lua").PlayersManager()
 
 
 ScenarioInfo.TheWheelie = 2
+ScenarioInfo.Yudi = 3
 
 function DeathResult(unit)
 	LOG("Punch lox")
@@ -86,7 +88,7 @@ objectives:Init
 			---@type ObjectiveTarget
 			return {
 				AlwaysVisible = true,
-				Units = {prison},
+				Units = { prison },
 			}
 		end)
 		:OnSuccess(function()
@@ -148,5 +150,7 @@ end
 
 function OnStart(self)
 	ScenarioFramework.SetPlayableArea('StartArea', false)
+	ScenarioFramework.SetArmyColor("Yudi", Utils.UnpackColor "FFDD78F1")
+	ScenarioFramework.SetArmyColor("TheWheelie", Utils.UnpackColor "FF022B1B")
 	objectives:Start("start")
 end
