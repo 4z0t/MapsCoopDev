@@ -61,11 +61,41 @@ objectives:Init
 					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam3"), 3)
 				end
 			)
+			objectives:Start "prison"
 		end)
 		:OnSuccess(function()
 			objectives:EndGame(true)
 		end)
+		:Create(),
+
+	objectiveBuilder
+		:NewSecondary "prison"
+		:Title "Save Ban prisoners"
+		:Description "Let prisoners escape"
+		:To "capture"
+		:OnStart(function()
+			WaitSeconds(5)
+			local prison = ScenarioUtils.CreateArmyUnit('Yudi', 'Prison')
+			prison:SetDoNotTarget(true)
+			prison:SetCanTakeDamage(false)
+			prison:SetCanBeKilled(false)
+			prison:SetReclaimable(false)
+			prison:SetCustomName('Ban prison')
+			ScenarioFramework.Dialogue(VOStrings.Save, nil, true)
+
+			---@type ObjectiveTarget
+			return {
+				AlwaysVisible = true,
+				Units = {prison},
+			}
+		end)
+		:OnSuccess(function()
+			ScenarioFramework.Dialogue(VOStrings.Saved, nil, true)
+			local unit = ScenarioUtils.CreateArmyUnit('Player1', 'Rescued_player')
+			unit:SetCustomName("Razarem")
+		end)
 		:Create()
+
 }
 
 
