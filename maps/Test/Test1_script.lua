@@ -57,7 +57,7 @@ objectives:Init
 					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam2"), 3)
 					ScenarioFramework.KillBaseInArea(ArmyBrains[ScenarioInfo.TheWheelie], 'StartArea')
 					WaitSeconds(2)
-					playersManager:Spawn(DeathResult)
+					playersManager:WarpIn(DeathResult)
 					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam3"), 3)
 				end
 			)
@@ -90,7 +90,8 @@ function OnPopulate()
 				UEF = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "Shield", "ShieldGeneratorField" },
 				Seraphim = { "AdvancedEngineering", "T3Engineering", "DamageStabilization", "DamageStabilizationAdvanced",
 					"ResourceAllocation", "ResourceAllocationAdvanced" }
-			}
+			},
+			name = "Punch lox"
 		},
 		{
 			color = "ffffff00",
