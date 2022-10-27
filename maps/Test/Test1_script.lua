@@ -75,6 +75,10 @@ objectives:Init
 		:Title "Save Ban prisoners"
 		:Description "Let prisoners escape"
 		:To "capture"
+		:Target
+		{
+			AlwaysVisible = true,
+		}
 		:OnStart(function()
 			WaitSeconds(5)
 			local prison = ScenarioUtils.CreateArmyUnit('Yudi', 'Prison')
@@ -87,14 +91,18 @@ objectives:Init
 
 			---@type ObjectiveTarget
 			return {
-				AlwaysVisible = true,
 				Units = { prison },
 			}
 		end)
 		:OnSuccess(function()
 			ScenarioFramework.Dialogue(VOStrings.Saved, nil, true)
-			local unit = ScenarioUtils.CreateArmyUnit('Player1', 'Rescued_player')
-			unit:SetCustomName("Razarem")
+			for _, name in prizoners do
+				local unit = ScenarioUtils.CreateArmyUnit('Player1', 'Rescued_player')
+				unit:SetCustomName(name)
+				unit:SetMaxHealth(1)
+				unit:GetWeapon(1):AddDamageMod(4000)
+
+			end
 		end)
 		:Create()
 

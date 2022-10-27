@@ -1465,6 +1465,7 @@ Scenario = {
             Alliances = {
                 ['Player2'] = 'Ally',
                 ['TheWheelie'] = 'Ally',
+                ['Yudi'] = 'Enemy',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -1529,6 +1530,7 @@ Scenario = {
             Alliances = {
                 ['Player1'] = 'Ally',
                 ['TheWheelie'] = 'Ally',
+                ['Yudi'] = 'Enemy',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -1586,6 +1588,7 @@ Scenario = {
             Alliances = {
                 ['Player1'] = 'Ally',
                 ['Player2'] = 'Ally',
+                ['Yudi'] = 'Enemy',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -3352,6 +3355,9 @@ Scenario = {
                 energy = 0,
             },
             Alliances = {
+                ['Player1'] = 'Enemy',
+                ['Player2'] = 'Enemy',
+                ['TheWheelie'] = 'Enemy',
             },
             ['Units'] = GROUP {
                 orders = '',
