@@ -57,8 +57,12 @@ objectives:Init
 					ScenarioFramework.Dialogue(VOStrings.Start, nil, true)
 					WaitSeconds(1)
 					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam2"), 3)
+					
+					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam4"), 0)
+					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam5"), 2)
+					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam6"), 0)
+					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam7"), 2)
 					ScenarioFramework.KillBaseInArea(ArmyBrains[ScenarioInfo.TheWheelie], 'StartArea')
-					WaitSeconds(2)
 					playersManager:WarpIn(DeathResult)
 					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam3"), 3)
 				end
@@ -75,18 +79,18 @@ objectives:Init
 		:Title "Save Ban prisoners"
 		:Description "Let prisoners escape"
 		:To "capture"
+		:StartDelay(5)
 		:Target
 		{
 			AlwaysVisible = true,
 		}
 		:OnStart(function()
-			WaitSeconds(5)
 			local prison = ScenarioUtils.CreateArmyUnit('Yudi', 'Prison')
 			prison:SetDoNotTarget(true)
 			prison:SetCanTakeDamage(false)
 			prison:SetCanBeKilled(false)
 			prison:SetReclaimable(false)
-			prison:SetCustomName('Ban prison')
+			prison:SetCustomName('Ban Jail')
 			ScenarioFramework.Dialogue(VOStrings.Save, nil, true)
 
 			---@type ObjectiveTarget
