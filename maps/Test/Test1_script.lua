@@ -10,6 +10,7 @@ local Cinematics = import('/lua/cinematics.lua')
 local Buff = import('/lua/sim/Buff.lua')
 local TauntManager = import('/lua/TauntManager.lua')
 local Utils = import("/lua/ASF/Utils.lua")
+local AC = import("/lua/ASF/AdvancedCinematics.lua")
 
 local VOStrings = import("/maps/Test/VOStrings.lua").lines
 local objectiveBuilder = import("/lua/ASF/ObjectiveBuilder.lua").ObjectiveBuilder()
@@ -51,20 +52,19 @@ objectives:Init
 			ExpireResult = 'complete',
 		}
 		:OnStart(function()
-			Cinematics.NISMode(
+			AC.NISMode(
 				function()
-					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam1"), 0)
+					AC.MoveTo("Cam1", 0)
 					ScenarioFramework.Dialogue(VOStrings.Start, nil, true)
 					WaitSeconds(1)
-					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam2"), 3)
-					
-					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam4"), 0)
-					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam5"), 2)
-					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam6"), 0)
-					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam7"), 2)
+					AC.MoveTo("Cam2", 3)
+					AC.MoveTo("Cam4", 0)
+					AC.MoveTo("Cam5", 2)
+					AC.MoveTo("Cam6", 0)
+					AC.MoveTo("Cam7", 2)
 					ScenarioFramework.KillBaseInArea(ArmyBrains[ScenarioInfo.TheWheelie], 'StartArea')
 					playersManager:WarpIn(DeathResult)
-					Cinematics.CameraMoveToMarker(ScenarioUtils.GetMarker("Cam3"), 3)
+					AC.MoveTo("Cam3", 3)
 				end
 			)
 			objectives:Start "prison"
@@ -79,11 +79,11 @@ objectives:Init
 		:Title "Save Ban prisoners"
 		:Description "Let prisoners escape"
 		:To "capture"
-		:StartDelay(5)
 		:Target
 		{
 			AlwaysVisible = true,
 		}
+		:StartDelay(5)
 		:OnStart(function()
 			local prison = ScenarioUtils.CreateArmyUnit('Yudi', 'Prison')
 			prison:SetDoNotTarget(true)
