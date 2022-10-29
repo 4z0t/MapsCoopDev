@@ -20,9 +20,7 @@ local playersManager = import("/lua/ASF/PlayersManager.lua").PlayersManager()
 ScenarioInfo.TheWheelie = 2
 ScenarioInfo.Yudi = 3
 
-_G.Brains = {
-
-}
+_G.Brains = {}
 
 function DeathResult(unit)
 	LOG("Punch lox")
