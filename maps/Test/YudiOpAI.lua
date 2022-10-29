@@ -36,7 +36,7 @@ function Main()
     local pl = PlatoonLoader(mainBase)
     pl:LoadPlatoons {
         pb:Default "Brick Attack"
-            :InstanceCount(10)
+            :InstanceCount(5)
             :Priority(200)
             :AddGroupDefault(UNIT "Brick", DV "Brick count")
             :AddGroupDefault(UNIT "Banger", DV "Banger count")
@@ -51,7 +51,7 @@ function Main()
             }
             :Create(),
         pb:Default "Lone Brick"
-            :InstanceCount(5)
+            :InstanceCount(3)
             :Priority(100)
             :AddGroupDefault(UNIT "Brick", 1)
             :AddGroupDefault(UNIT "Deceiver", DV "Deceiver count")
@@ -65,7 +65,7 @@ function Main()
             }
             :Create(),
         pb:Default "Massive Brick Attack"
-            :InstanceCount(10)
+            :InstanceCount(2)
             :Priority(100)
             :AddGroupDefault(UNIT "Brick", DV "M Brick count")
             :AddGroupDefault(UNIT "Banger", DV "M Banger count")
