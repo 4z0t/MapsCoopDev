@@ -1,6 +1,4 @@
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
-local ObjectiveManager = import("/lua/ASF/ObjectiveManager.lua").ObjectiveManager
-local Objectives = import('/lua/ScenarioFramework.lua').Objectives
 local ScenarioFramework = import('/lua/ScenarioFramework.lua')
 local AIBuildStructures = import('/lua/ai/aibuildstructures.lua')
 local ScenarioPlatoonAI = import('/lua/ScenarioPlatoonAI.lua')
@@ -9,9 +7,11 @@ local Utilities = import('/lua/Utilities.lua')
 local Cinematics = import('/lua/cinematics.lua')
 local Buff = import('/lua/sim/Buff.lua')
 local TauntManager = import('/lua/TauntManager.lua')
+local Objectives = import('/lua/ScenarioFramework.lua').Objectives
 local Utils = import("/lua/ASF/Utils.lua")
 local AC = import("/lua/ASF/AdvancedCinematics.lua")
 
+local ObjectiveManager = import("/lua/ASF/ObjectiveManager.lua").ObjectiveManager
 local VOStrings = import("/maps/Test/VOStrings.lua").lines
 local objectiveBuilder = import("/lua/ASF/ObjectiveBuilder.lua").ObjectiveBuilder()
 local playersManager = import("/lua/ASF/PlayersManager.lua").PlayersManager()
@@ -19,6 +19,10 @@ local playersManager = import("/lua/ASF/PlayersManager.lua").PlayersManager()
 
 ScenarioInfo.TheWheelie = 2
 ScenarioInfo.Yudi = 3
+
+_G.Brains = {
+
+}
 
 function DeathResult(unit)
 	LOG("Punch lox")
@@ -44,12 +48,15 @@ objectives:Init
 		:New "start"
 		:Title "TEST"
 		:Description "Test"
-		:To "timer"
+		:Function "CategoriesInArea"
+		:To "kill"
 		:Target
 		{
+			MarkUnits = true,
 			ShowProgress = true,
-			Timer = 60,
-			ExpireResult = 'complete',
+			Requirements = {
+				{ "StartArea", categories.STRUCTURE * categories.TECH3, "==", 0, ScenarioInfo.Yudi }
+			},
 		}
 		:OnStart(function()
 			AC.NISMode(
@@ -62,7 +69,7 @@ objectives:Init
 					AC.MoveTo("Cam5", 2)
 					AC.MoveTo("Cam6", 0)
 					AC.MoveTo("Cam7", 2)
-					ScenarioFramework.KillBaseInArea(ArmyBrains[ScenarioInfo.TheWheelie], 'StartArea')
+					ScenarioFramework.KillBaseInArea(Brains.TheWheelie, 'StartArea')
 					playersManager:WarpIn(DeathResult)
 					AC.MoveTo("Cam3", 3)
 				end
@@ -108,7 +115,10 @@ objectives:Init
 
 			end
 		end)
-		:Create()
+		:Create(),
+
+
+
 
 }
 
@@ -158,11 +168,15 @@ function OnPopulate()
 	}
 
 	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1Qbases')
+	ScenarioUtils.CreateArmyGroup('Yudi', 'MainBase')
 end
 
 function OnStart(self)
 	ScenarioFramework.SetPlayableArea('StartArea', false)
 	ScenarioFramework.SetArmyColor("Yudi", Utils.UnpackColor "FFDD78F1")
 	ScenarioFramework.SetArmyColor("TheWheelie", Utils.UnpackColor "FF022B1B")
+	Brains.TheWheelie = ArmyBrains[ScenarioInfo.TheWheelie]
+	Brains.Yudi = ArmyBrains[ScenarioInfo.Yudi]
+	import("/maps/Test/YudiOpAI.lua").Main()
 	objectives:Start("start")
 end
