@@ -166,7 +166,7 @@ function OnPopulate()
 	}
 
 	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1Qbases')
-	ScenarioUtils.CreateArmyGroup('Yudi', 'MainBase')
+	--ScenarioUtils.CreateArmyGroup('Yudi', 'MainBase')
 end
 
 function OnStart(self)
@@ -175,6 +175,16 @@ function OnStart(self)
 	ScenarioFramework.SetArmyColor("TheWheelie", Utils.UnpackColor "FF022B1B")
 	Brains.TheWheelie = ArmyBrains[ScenarioInfo.TheWheelie]
 	Brains.Yudi = ArmyBrains[ScenarioInfo.Yudi]
+
+	buffDef = Buffs['CheatIncome']
+	buffAffects = buffDef.Affects
+	buffAffects.EnergyProduction.Mult = 1.5
+	buffAffects.MassProduction.Mult = 2.0
+
+	
 	import("/maps/Test/YudiOpAI.lua").Main()
+	for _, u in Brains.Yudi:GetPlatoonUniquelyNamed('ArmyPool'):GetPlatoonUnits() do
+		Buff.ApplyBuff(u, 'CheatIncome')
+	end
 	objectives:Start("start")
 end

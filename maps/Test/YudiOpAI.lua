@@ -11,7 +11,7 @@ local SPAIFileName = '/lua/scenarioplatoonai.lua'
 local mainBase = BaseManager.CreateBaseManager()
 
 function Main()
-    mainBase:InitializeDifficultyTables(Brains.Yudi, "YudiBase", "YudiBase_M", 100, {})
+    mainBase:InitializeDifficultyTables(Brains.Yudi, "YudiBase", "YudiBase_M", 100, { MainBase = 1500 })
     mainBase:StartNonZeroBase({ { 7, 10, 12 }, { 5, 8, 10 } })
     mainBase:SetActive('AirScouting', true)
 
