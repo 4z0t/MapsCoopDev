@@ -11,9 +11,24 @@ local SPAIFileName = '/lua/scenarioplatoonai.lua'
 
 local mainBase = BaseManager.CreateBaseManager()
 
+
+DifficultyValue.Extend {
+
+    ["Engi Base count"] = { 10, 15, 20 },
+    ["Engi Base assisters"] = { 7, 12, 15 },
+
+    ["Brick count"] = { 3, 4, 5 },
+    ["Banger count"] = { 1, 2, 3 },
+    ["Deceiver count"] = { 0, 0, 1 },
+
+    ["M Brick count"] = { 6, 8, 10 },
+    ["M Banger count"] = { 3, 4, 5 },
+    ["M Deceiver count"] = { 0, 1, 2 }
+}
+
 function Main()
     mainBase:InitializeDifficultyTables(Brains.Yudi, "YudiBase", "YudiBase_M", 100, { MainBase = 1500 })
-    mainBase:StartNonZeroBase({ { 7, 10, 12 }, { 5, 8, 10 } })
+    mainBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
     mainBase:SetActive('AirScouting', true)
 
     local pb = PlatoonBuilder.Create()
@@ -22,15 +37,7 @@ function Main()
     ---@type OpAIBuilder
     local opAIb = OpAIBuilder()
 
-    DifficultyValue.Extend {
-        ["Brick count"] = { 3, 4, 5 },
-        ["Banger count"] = { 1, 2, 3 },
-        ["Deceiver count"] = { 0, 0, 1 },
 
-        ["M Brick count"] = { 6, 8, 10 },
-        ["M Banger count"] = { 3, 4, 5 },
-        ["M Deceiver count"] = { 0, 1, 2 }
-    }
 
     ---@type PlatoonLoader
     local pl = PlatoonLoader(mainBase)
@@ -66,10 +73,11 @@ function Main()
             :Create(),
         pb:Default "Massive Brick Attack"
             :InstanceCount(2)
-            :Priority(100)
+            :Priority(150)
             :AddGroupDefault(UNIT "Brick", DV "M Brick count")
             :AddGroupDefault(UNIT "Banger", DV "M Banger count")
             :AddGroupDefault(UNIT "Deceiver", DV "M Deceiver count")
+            :AddGroupDefault(UNIT "Medusa", DV "M Brick count")
             :Data
             {
                 PatrolChains = {
