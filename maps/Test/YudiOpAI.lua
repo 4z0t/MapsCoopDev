@@ -2,24 +2,26 @@ local PlatoonBuilder = import("/lua/ASF/PlatoonBuilder.lua")
 local OpAIBuilder = import("/lua/ASF/OpAIBuilder.lua").OpAIBuilder
 local PlatoonLoader = import("/lua/ASF/PlatoonLoader.lua").PlatoonLoader
 local UNIT = import("/lua/ASF/UnitNames.lua").Get
-local BaseManager = import('/lua/ai/opai/basemanager.lua')
+local AdvancedBaseManager = import("/lua/ASF/AdvancedBaseManager.lua")
 local DifficultyValue = import("/lua/ASF/DifficultyValue.lua")
 local DV = DifficultyValue.Get
 
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
 
 
-local mainBase = BaseManager.CreateBaseManager()
+local mainBase = AdvancedBaseManager.Create()
 
 
 DifficultyValue.Extend {
 
     ["Engi Base count"] = { 10, 15, 20 },
-    ["Engi Base assisters"] = { 7, 12, 15 },
+    ["Engi Base assisters"] = { 7, 10, 12 },
 
     ["Brick count"] = { 3, 4, 5 },
     ["Banger count"] = { 1, 2, 3 },
     ["Deceiver count"] = { 0, 0, 1 },
+
+    ["Rhino count"] = { 3, 4, 5 },
 
     ["M Brick count"] = { 6, 8, 10 },
     ["M Banger count"] = { 3, 4, 5 },
@@ -30,6 +32,7 @@ function Main()
     mainBase:InitializeDifficultyTables(Brains.Yudi, "YudiBase", "YudiBase_M", 100, { MainBase = 1500 })
     mainBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
     mainBase:SetActive('AirScouting', true)
+    mainBase:SetBuildAllStructures(true)
 
     local pb = PlatoonBuilder.Create()
         :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
@@ -88,6 +91,20 @@ function Main()
             }
             :Create(),
 
+        pb:Default "Rhinos"
+            :InstanceCount(4)
+            :Priority(280)
+            :AddGroupDefault(UNIT "Rhino", 4)
+            :AddGroupDefault(UNIT "Deceiver", DV "Deceiver count")
+            :Data
+            {
+                PatrolChains = {
+                    "LAC01",
+                    "LAC02",
+                    "LAC03",
+                }
+            }
+            :Create()
     }
 
     pl:LoadOpAIs
@@ -135,7 +152,15 @@ function Main()
 
     }
 
-
+    mainBase:AddBuildStructures("AirDefense", {
+        Priority = 2000,
+        BuildCondition = {
+            '/lua/editor/otherarmyunitcountbuildconditions.lua',
+            "BrainsCompareNumCategory",
+            { { 'HumanPlayers' }, 30, categories.AIR, ">=" }
+        }
+    })
+    mainBase.MaximumConstructionEngineers = 20
 
 
 
