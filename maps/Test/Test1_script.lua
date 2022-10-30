@@ -164,9 +164,10 @@ function OnPopulate()
 			}
 		},
 	}
-
+	SetArmyUnitCap(ScenarioInfo.Yudi, 4000)
 	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1Qbases')
 	--ScenarioUtils.CreateArmyGroup('Yudi', 'MainBase')
+
 end
 
 function OnStart(self)
