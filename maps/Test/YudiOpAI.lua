@@ -128,7 +128,7 @@ function Main()
                 KeepAlive = true,
                 Amount = 2,
             }
-            --:HumansCategoryCondition()
+            :HumansCategoryCondition(categories.EXPERIMENTAL, ">=", 1)
             :Create(),
 
 
