@@ -68,7 +68,9 @@ objectives:Init
 					-- AC.MoveTo("Cam6", 0)
 					-- AC.MoveTo("Cam7", 2)
 					ScenarioFramework.KillBaseInArea(Brains.TheWheelie, 'StartArea')
-					playersManager:WarpIn(DeathResult)
+					playersManager:WarpIn(function()
+						objectives:EndGame(false)
+					end)
 					AC.MoveTo("Cam3", 3)
 				end
 			)
@@ -182,7 +184,7 @@ function OnStart(self)
 	buffAffects.EnergyProduction.Mult = 1.5
 	buffAffects.MassProduction.Mult = 2.0
 
-	
+
 	import("/maps/Test/YudiOpAI.lua").Main()
 	for _, u in Brains.Yudi:GetPlatoonUniquelyNamed('ArmyPool'):GetPlatoonUnits() do
 		Buff.ApplyBuff(u, 'CheatIncome')
