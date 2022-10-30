@@ -111,10 +111,31 @@ function Main()
             }
             :Create(),
 
+        opAIb
+            :NewBuildGroup "ExpBug"
+            :Data
+            {
+                MasterPlatoonFunction = { SPAIFileName, 'PatrolChainPickerThread' },
+                PlatoonData = {
+                    PatrolChains = {
+                        "LAC01",
+                        "LAC02",
+                        "LAC03",
+                    },
+                },
+                MaxAssist = 4,
+                Retry = true,
+                KeepAlive = true,
+                Amount = 2,
+            }
+            --:HumansCategoryCondition()
+            :Create(),
+
+
 
     }
 
-    
+
 
 
 
