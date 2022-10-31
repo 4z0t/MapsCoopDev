@@ -160,6 +160,15 @@ function Main()
             { { 'HumanPlayers' }, 30, categories.AIR, ">=" }
         }
     })
+
+    mainBase:AddBuildStructures("LandDefense", {
+        Priority = 1800,
+        BuildCondition = {
+            '/lua/editor/otherarmyunitcountbuildconditions.lua',
+            "BrainsCompareNumCategory",
+            { { 'HumanPlayers' }, 30, categories.LAND, ">=" }
+        }
+    })
     mainBase.MaximumConstructionEngineers = 20
 
 
