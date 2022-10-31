@@ -15,7 +15,7 @@ local ObjectiveManager = import("/lua/ASF/ObjectiveManager.lua").ObjectiveManage
 local VOStrings = import("/maps/Test/VOStrings.lua").lines
 local objectiveBuilder = import("/lua/ASF/ObjectiveBuilder.lua").ObjectiveBuilder()
 local playersManager = import("/lua/ASF/PlayersManager.lua").PlayersManager()
-
+local RequireIn = import("/lua/ASF/ObjectiveBuilder.lua").RequireIn
 
 ScenarioInfo.TheWheelie = 2
 ScenarioInfo.Yudi = 3
@@ -53,7 +53,8 @@ objectives:Init
 			MarkUnits = true,
 			ShowProgress = true,
 			Requirements = {
-				{ "StartArea", categories.STRUCTURE * categories.TECH3, "==", 0, ScenarioInfo.Yudi }
+				RequireIn("StartArea", categories.STRUCTURE * categories.TECH3, "==", 0, ScenarioInfo.Yudi),
+				RequireIn("StartArea", categories.STRUCTURE * categories.DEFENSE- categories.WALL, "==", 0, ScenarioInfo.Yudi)
 			},
 		}
 		:OnStart(function()
