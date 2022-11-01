@@ -1,4 +1,4 @@
-local PlatoonBuilder = import("/lua/ASF/PlatoonBuilder.lua")
+local PlatoonBuilder = import("/lua/ASF/PlatoonBuilder.lua").PlatoonBuilder
 local OpAIBuilder = import("/lua/ASF/OpAIBuilder.lua").OpAIBuilder
 local PlatoonLoader = import("/lua/ASF/PlatoonLoader.lua").PlatoonLoader
 local UNIT = import("/lua/ASF/UnitNames.lua").Get
@@ -34,23 +34,21 @@ function Main()
     mainBase:SetActive('AirScouting', true)
     mainBase:SetBuildAllStructures(true)
 
-    local pb = PlatoonBuilder.Create()
+    ---@type PlatoonBuilder
+    local pb = PlatoonBuilder()
         :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
         :UseType('Land')
     ---@type OpAIBuilder
     local opAIb = OpAIBuilder()
 
 
-
-    ---@type PlatoonLoader
-    local pl = PlatoonLoader(mainBase)
-    pl:LoadPlatoons {
-        pb:Default "Brick Attack"
+    mainBase:LoadPlatoons {
+        pb:NewDefault "Brick Attack"
             :InstanceCount(5)
             :Priority(200)
-            :AddGroupDefault(UNIT "Brick", DV "Brick count")
-            :AddGroupDefault(UNIT "Banger", DV "Banger count")
-            :AddGroupDefault(UNIT "Deceiver", DV "Deceiver count")
+            :AddUnitDefault(UNIT "Brick", DV "Brick count")
+            :AddUnitDefault(UNIT "Banger", DV "Banger count")
+            :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
             :Data
             {
                 PatrolChains = {
@@ -60,11 +58,11 @@ function Main()
                 }
             }
             :Create(),
-        pb:Default "Lone Brick"
+        pb:NewDefault "Lone Brick"
             :InstanceCount(3)
             :Priority(100)
-            :AddGroupDefault(UNIT "Brick", 1)
-            :AddGroupDefault(UNIT "Deceiver", DV "Deceiver count")
+            :AddUnitDefault(UNIT "Brick", 1)
+            :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
             :Data
             {
                 PatrolChains = {
@@ -74,13 +72,13 @@ function Main()
                 }
             }
             :Create(),
-        pb:Default "Massive Brick Attack"
+        pb:NewDefault "Massive Brick Attack"
             :InstanceCount(2)
             :Priority(150)
-            :AddGroupDefault(UNIT "Brick", DV "M Brick count")
-            :AddGroupDefault(UNIT "Banger", DV "M Banger count")
-            :AddGroupDefault(UNIT "Deceiver", DV "M Deceiver count")
-            :AddGroupDefault(UNIT "Medusa", DV "M Brick count")
+            :AddUnitDefault(UNIT "Brick", DV "M Brick count")
+            :AddUnitDefault(UNIT "Banger", DV "M Banger count")
+            :AddUnitDefault(UNIT "Deceiver", DV "M Deceiver count")
+            :AddUnitDefault(UNIT "Medusa", DV "M Brick count")
             :Data
             {
                 PatrolChains = {
@@ -91,11 +89,11 @@ function Main()
             }
             :Create(),
 
-        pb:Default "Rhinos"
+        pb:NewDefault "Rhinos"
             :InstanceCount(4)
             :Priority(280)
-            :AddGroupDefault(UNIT "Rhino", 4)
-            :AddGroupDefault(UNIT "Deceiver", DV "Deceiver count")
+            :AddUnitDefault(UNIT "Rhino", 4)
+            :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
             :Data
             {
                 PatrolChains = {
@@ -107,7 +105,7 @@ function Main()
             :Create()
     }
 
-    pl:LoadOpAIs
+    mainBase:LoadOpAIs
     {
 
         opAIb
