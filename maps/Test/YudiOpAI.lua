@@ -24,7 +24,9 @@ DifficultyValue.Extend {
 
     ["M Brick count"] = { 6, 8, 10 },
     ["M Banger count"] = { 3, 4, 5 },
-    ["M Deceiver count"] = { 0, 1, 2 }
+    ["M Deceiver count"] = { 0, 1, 2 },
+
+    ["ASF attack count"] = { 15, 20, 25 }
 }
 
 function Main()
@@ -126,10 +128,24 @@ function Main()
             :Create(),
 
         opAIb
+            :New "ASF attack"
+            :Type "AirAttacks"
+            :Data
+            {
+                MasterPlatoonFunction = { '/lua/ScenarioPlatoonAI.lua', 'CategoryHunterPlatoonAI' },
+                PlatoonData = {
+                    CategoryList = { categories.AIR },
+                },
+                Priority = 250,
+            }
+            :Quantity("AirSuperiority", DV "ASF attack count")
+            :Create(),
+
+        opAIb
             :NewBuildGroup "ExpBug"
             :Data
             {
-                MasterPlatoonFunction = { SPAIFileName, 'PatrolChainPickerThread' },
+                PlatoonAIFunction = { SPAIFileName, 'PatrolChainPickerThread' },
                 PlatoonData = {
                     PatrolChains = {
                         "LAC01",
