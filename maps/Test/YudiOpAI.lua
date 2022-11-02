@@ -1,15 +1,14 @@
-local PlatoonBuilder = import("/lua/ASF/PlatoonBuilder.lua").PlatoonBuilder
-local OpAIBuilder = import("/lua/ASF/OpAIBuilder.lua").OpAIBuilder
-local PlatoonLoader = import("/lua/ASF/PlatoonLoader.lua").PlatoonLoader
-local UNIT = import("/lua/ASF/UnitNames.lua").Get
-local AdvancedBaseManager = import("/lua/ASF/AdvancedBaseManager.lua")
-local DifficultyValue = import("/lua/ASF/DifficultyValue.lua")
+local PlatoonBuilder = Oxygen.PlatoonBuilder
+local OpAIBuilder = Oxygen.OpAIBuilder
+local UNIT = Oxygen.UnitNames.Get
+local AdvancedBaseManager = Oxygen.BaseManager
+local DifficultyValue = Oxygen.DifficultyValue
 local DV = DifficultyValue.Get
 
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
 
-
-local mainBase = AdvancedBaseManager.Create()
+---@type AdvancedBaseManager
+local mainBase = AdvancedBaseManager()
 
 
 DifficultyValue.Extend {

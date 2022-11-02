@@ -8,14 +8,14 @@ local Cinematics = import('/lua/cinematics.lua')
 local Buff = import('/lua/sim/Buff.lua')
 local TauntManager = import('/lua/TauntManager.lua')
 local Objectives = import('/lua/ScenarioFramework.lua').Objectives
-local Utils = import("/lua/ASF/Utils.lua")
-local AC = import("/lua/ASF/AdvancedCinematics.lua")
+local Utils = Oxygen.Utils
+local AC = Oxygen.Cinematics
 
-local ObjectiveManager = import("/lua/ASF/ObjectiveManager.lua").ObjectiveManager
+local ObjectiveManager = Oxygen.ObjectiveManager
 local VOStrings = import("/maps/Test/VOStrings.lua").lines
-local objectiveBuilder = import("/lua/ASF/ObjectiveBuilder.lua").ObjectiveBuilder()
-local playersManager = import("/lua/ASF/PlayersManager.lua").PlayersManager()
-local RequireIn = import("/lua/ASF/ObjectiveBuilder.lua").RequireIn
+local objectiveBuilder = Oxygen.ObjectiveBuilder()
+local playersManager = Oxygen.PlayersManager()
+local RequireIn = Oxygen.RequireIn
 
 ScenarioInfo.TheWheelie = 2
 ScenarioInfo.Yudi = 3
@@ -54,7 +54,7 @@ objectives:Init
 			ShowProgress = true,
 			Requirements = {
 				RequireIn("StartArea", categories.STRUCTURE * categories.TECH3, "==", 0, ScenarioInfo.Yudi),
-				RequireIn("StartArea", categories.STRUCTURE * categories.DEFENSE- categories.WALL, "==", 0, ScenarioInfo.Yudi)
+				RequireIn("StartArea", categories.STRUCTURE * categories.DEFENSE - categories.WALL, "==", 0, ScenarioInfo.Yudi)
 			},
 		}
 		:OnStart(function()
