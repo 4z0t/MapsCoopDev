@@ -4,12 +4,14 @@ local UNIT = Oxygen.UnitNames.Get
 local AdvancedBaseManager = Oxygen.BaseManager
 local DifficultyValue = Oxygen.DifficultyValue
 local DV = DifficultyValue.Get
+local BC = Oxygen.BuildConditions
 
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
 local YPAIFileName = '/maps/Test/YudiPlatoonAI.lua'
 
 ---@type AdvancedBaseManager
 local mainBase = AdvancedBaseManager()
+
 
 
 DifficultyValue.Extend {
@@ -177,20 +179,12 @@ function Main()
 
     mainBase:AddBuildStructures("AirDefense", {
         Priority = 2000,
-        BuildCondition = {
-            '/lua/editor/otherarmyunitcountbuildconditions.lua',
-            "BrainsCompareNumCategory",
-            { { 'HumanPlayers' }, 30, categories.AIR, ">=" }
-        }
+        BuildCondition = BC.HumansCategoryCondition(categories.AIR, ">=", 30)
     })
 
     mainBase:AddBuildStructures("LandDefense", {
         Priority = 1800,
-        BuildCondition = {
-            '/lua/editor/otherarmyunitcountbuildconditions.lua',
-            "BrainsCompareNumCategory",
-            { { 'HumanPlayers' }, 30, categories.LAND, ">=" }
-        }
+        BuildCondition = BC.HumansCategoryCondition(categories.LAND, ">=", 30)
     })
     mainBase.MaximumConstructionEngineers = 20
 
