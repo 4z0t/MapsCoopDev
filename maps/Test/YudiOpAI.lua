@@ -35,7 +35,7 @@ function Main()
     mainBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
     mainBase:SetActive('AirScouting', true)
     mainBase:SetBuildAllStructures(true)
-    mainBase:SetSACUUpgrades { "ResourceAllocation" }
+    --mainBase:SetSACUUpgrades { "ResourceAllocation" }
     mainBase:AddBuildGroup('BoiProd', 3000, false, false)
 
     ---@type PlatoonBuilder
@@ -112,8 +112,7 @@ function Main()
             :Type "Gate"
             :AIFunction(YPAIFileName, "BoiBuild")
             :Priority(500)
-            :InstanceCount(30)
-            :AddUnitDefault("url0301", 1)
+            :AddUnitDefault("url0301_ras", 30)
             :Create(),
     }
 
