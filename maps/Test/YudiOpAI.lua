@@ -6,6 +6,7 @@ local DifficultyValue = Oxygen.DifficultyValue
 local DV = DifficultyValue.Get
 
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
+local YPAIFileName = '/maps/Test/YudiPlatoonAI.lua'
 
 ---@type AdvancedBaseManager
 local mainBase = AdvancedBaseManager()
@@ -34,6 +35,8 @@ function Main()
     mainBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
     mainBase:SetActive('AirScouting', true)
     mainBase:SetBuildAllStructures(true)
+    mainBase:SetSACUUpgrades { "ResourceAllocation" }
+    mainBase:AddBuildGroup('BoiProd', 3000, false, false)
 
     ---@type PlatoonBuilder
     local pb = PlatoonBuilder()
@@ -103,7 +106,15 @@ function Main()
                     "LAC03",
                 }
             }
-            :Create()
+            :Create(),
+
+        pb:NewDefault "bois"
+            :Type "Gate"
+            :AIFunction(YPAIFileName, "BoiBuild")
+            :Priority(500)
+            :InstanceCount(30)
+            :AddUnitDefault("url0301", 1)
+            :Create(),
     }
 
     mainBase:LoadOpAIs
