@@ -42,10 +42,18 @@ function Main()
 
     ---@type PlatoonBuilder
     local pb = PlatoonBuilder()
+    pb
         :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
         :UseType('Land')
-    ---@type OpAIBuilder
-    local opAIb = OpAIBuilder()
+        :UseData
+        {
+            PatrolChains = {
+                "LAC01",
+                "LAC02",
+                "LAC03",
+            }
+        }
+
 
 
     mainBase:LoadPlatoons {
@@ -55,29 +63,17 @@ function Main()
             :AddUnitDefault(UNIT "Brick", DV "Brick count")
             :AddUnitDefault(UNIT "Banger", DV "Banger count")
             :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
-            :Data
-            {
-                PatrolChains = {
-                    "LAC01",
-                    "LAC02",
-                    "LAC03",
-                }
-            }
             :Create(),
+
+            
         pb:NewDefault "Lone Brick"
             :InstanceCount(3)
             :Priority(100)
             :AddUnitDefault(UNIT "Brick", 1)
             :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
-            :Data
-            {
-                PatrolChains = {
-                    "LAC01",
-                    "LAC02",
-                    "LAC03",
-                }
-            }
             :Create(),
+
+
         pb:NewDefault "Massive Brick Attack"
             :InstanceCount(2)
             :Priority(150)
@@ -85,14 +81,6 @@ function Main()
             :AddUnitDefault(UNIT "Banger", DV "M Banger count")
             :AddUnitDefault(UNIT "Deceiver", DV "M Deceiver count")
             :AddUnitDefault(UNIT "Medusa", DV "M Brick count")
-            :Data
-            {
-                PatrolChains = {
-                    "LAC01",
-                    "LAC02",
-                    "LAC03",
-                }
-            }
             :Create(),
 
         pb:NewDefault "Rhinos"
@@ -100,14 +88,6 @@ function Main()
             :Priority(280)
             :AddUnitDefault(UNIT "Rhino", 4)
             :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
-            :Data
-            {
-                PatrolChains = {
-                    "LAC01",
-                    "LAC02",
-                    "LAC03",
-                }
-            }
             :Create(),
 
         pb:NewDefault "bois"
@@ -118,6 +98,8 @@ function Main()
             :Create(),
     }
 
+    ---@type OpAIBuilder
+    local opAIb = OpAIBuilder()
     mainBase:LoadOpAIs
     {
 
