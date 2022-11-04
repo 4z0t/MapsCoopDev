@@ -95,7 +95,7 @@ function Main()
             --:AIFunction(YPAIFileName, "BoiBuild")
             :AIFunction(SPAIFileName, "StartBaseEngineerThread")
             :Priority(500)
-            :AddUnitDefault("url0301_ras", 30)
+            :AddUnitDefault(UNIT "Cybran RAS SACU", 30)
             :Data
             {
                 Construction = {
@@ -135,7 +135,7 @@ function Main()
             :Type "AirAttacks"
             :Data
             {
-                MasterPlatoonFunction = { '/lua/ScenarioPlatoonAI.lua', 'CategoryHunterPlatoonAI' },
+                MasterPlatoonFunction = { SPAIFileName, 'CategoryHunterPlatoonAI' },
                 PlatoonData = {
                     CategoryList = { categories.AIR },
                 },
