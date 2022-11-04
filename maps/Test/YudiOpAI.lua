@@ -65,7 +65,7 @@ function Main()
             :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
             :Create(),
 
-            
+
         pb:NewDefault "Lone Brick"
             :InstanceCount(3)
             :Priority(100)
@@ -92,9 +92,18 @@ function Main()
 
         pb:NewDefault "bois"
             :Type "Gate"
-            :AIFunction(YPAIFileName, "BoiBuild")
+            --:AIFunction(YPAIFileName, "BoiBuild")
+            :AIFunction(SPAIFileName, "StartBaseEngineerThread")
             :Priority(500)
             :AddUnitDefault("url0301_ras", 30)
+            :Data
+            {
+                Construction = {
+                    BaseTemplate = "Scathis",
+                    BuildClose = true,
+                },
+                MaintainBaseTemplate = "Scathis"
+            }
             :Create(),
     }
 
