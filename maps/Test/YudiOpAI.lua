@@ -30,21 +30,23 @@ DifficultyValue.Extend {
     ["M Deceiver count"] = { 0, 1, 2 },
 
     ["ASF attack count"] = { 15, 20, 25 }
+
 }
 
 function Main()
-    mainBase:InitializeDifficultyTables(Brains.Yudi, "YudiBase", "YudiBase_M", 100, { MainBase = 1500 })
+    mainBase:InitializeDifficultyTables(Brains.Yudi, "YudiBase", "YudiBase_M", 100, { MainBase = 1500 }, true)
     mainBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
     mainBase:SetActive('AirScouting', true)
     mainBase:SetBuildAllStructures(true)
     --mainBase:SetSACUUpgrades { "ResourceAllocation" }
     mainBase:AddBuildGroup('BoiProd', 3000, false, false)
+    mainBase:SetACUUpgrades({ "T3Engineering" }, false)
 
     ---@type PlatoonBuilder
     local pb = PlatoonBuilder()
     pb
         :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
-        :UseType('Land')
+        :UseType 'Land'
         :UseData
         {
             PatrolChains = {
@@ -106,6 +108,7 @@ function Main()
             }
             :Create(),
     }
+
 
     ---@type OpAIBuilder
     local opAIb = OpAIBuilder()
