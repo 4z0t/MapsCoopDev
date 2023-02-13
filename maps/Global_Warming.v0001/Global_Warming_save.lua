@@ -18,14 +18,14 @@ Scenario = {
         ['A4'] = {
             ['rectangle'] = RECTANGLE( 0, 0, 1024, 1024 ),
         },
-        ['A3'] = {
-            ['rectangle'] = RECTANGLE( 512, 0, 1024, 1024 ),
-        },
         ['A2'] = {
             ['rectangle'] = RECTANGLE( 512, 0, 1024, 512 ),
         },
         ['A1'] = {
             ['rectangle'] = RECTANGLE( 724, 0, 1024, 256 ),
+        },
+        ['A3'] = {
+            ['rectangle'] = RECTANGLE( 512, 0, 1024, 1024 ),
         },
     },
     --[[                                                                           ]]--
@@ -48,12 +48,12 @@ Scenario = {
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
                     ['position'] = VECTOR3( 928.5, 28.00171, 110.5 ),
                 },
-                ['ARMY_2'] = {
+                ['ARMY_4'] = {
                     ['color'] = STRING( 'ff800080' ),
                     ['type'] = STRING( 'Blank Marker' ),
                     ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 880.4999, 29.24788, 105.5 ),
+                    ['position'] = VECTOR3( 897.5, 28.00171, 138.5 ),
                 },
                 ['Yudi'] = {
                     ['color'] = STRING( 'ff800080' ),
@@ -69,12 +69,12 @@ Scenario = {
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
                     ['position'] = VECTOR3( 919.5, 28.00171, 130.5 ),
                 },
-                ['ARMY_4'] = {
+                ['ARMY_2'] = {
                     ['color'] = STRING( 'ff800080' ),
                     ['type'] = STRING( 'Blank Marker' ),
                     ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 897.5, 28.00171, 138.5 ),
+                    ['position'] = VECTOR3( 880.4999, 29.24788, 105.5 ),
                 },
             },
         },
@@ -272,6 +272,59 @@ Scenario = {
                                         orders = '',
                                         platoon = '',
                                         Units = {
+                                            ['A1B1Main_D3'] = GROUP {
+                                                orders = '',
+                                                platoon = '',
+                                                Units = {
+                                                    ['A1B1Main_D2'] = GROUP {
+                                                        orders = '',
+                                                        platoon = '',
+                                                        Units = {
+                                                            ['A1B1Main_D1'] = GROUP {
+                                                                orders = '',
+                                                                platoon = '',
+                                                                Units = {
+                                                                    ['UNIT_0'] = {
+                                                                        type = 'urb0301',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 613.5, 32.00195, 167.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_1'] = {
+                                                                        type = 'zrb9601',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 621.5, 31.99414, 161.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_2'] = {
+                                                                        type = 'zrb9601',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 615.5, 32.00195, 153.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_3'] = {
+                                                                        type = 'zrb9601',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 607.5, 32.00195, 159.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                    ['UNIT_4'] = {
+                                                                        type = 'urb1303',
+                                                                        orders = '',
+                                                                        platoon = '',
+                                                                        Position = { 614.5, 32.00195, 160.5 },
+                                                                        Orientation = { 0, 0, 0 },
+                                                                    },
+                                                                },
+                                                            },
+                                                        },
+                                                    },
+                                                },
+                                            },
                                         },
                                     },
                                 },

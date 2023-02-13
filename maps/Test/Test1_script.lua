@@ -63,6 +63,7 @@ objectives:Init
 					AC.MoveTo("Cam1", 0)
 					ScenarioFramework.Dialogue(VOStrings.Start, nil, true)
 					WaitSeconds(1)
+					--AC.DisplayText("Global\nWarning", 120, 'ffffffff', 'center', 1)
 					-- AC.MoveTo("Cam2", 3)
 					-- AC.MoveTo("Cam4", 0)
 					-- AC.MoveTo("Cam5", 2)
@@ -113,7 +114,6 @@ objectives:Init
 				unit:SetCustomName(name)
 				unit:SetMaxHealth(1)
 				unit:GetWeapon(1):AddDamageMod(4000)
-
 			end
 		end)
 		:Create(),
@@ -129,6 +129,14 @@ function OnPopulate()
 
 	playersManager:Init
 	{
+		enhancements = {
+			Aeon = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "ResourceAllocationAdvanced",
+				"EnhancedSensors" },
+			Cybran = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "MicrowaveLaserGenerator" },
+			UEF = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "Shield", "ShieldGeneratorField" },
+			Seraphim = { "AdvancedEngineering", "T3Engineering", "DamageStabilization", "DamageStabilizationAdvanced",
+				"ResourceAllocation", "ResourceAllocationAdvanced" }
+		},
 		{
 			color = "ff0000ff",
 			units =
@@ -137,14 +145,6 @@ function OnPopulate()
 				Cybran = 'CybranPlayer_1',
 				UEF = 'UEFPlayer_1',
 				Seraphim = 'SeraPlayer_1',
-			},
-			enhancements = {
-				Aeon = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "ResourceAllocationAdvanced",
-					"EnhancedSensors" },
-				Cybran = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "MicrowaveLaserGenerator" },
-				UEF = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "Shield", "ShieldGeneratorField" },
-				Seraphim = { "AdvancedEngineering", "T3Engineering", "DamageStabilization", "DamageStabilizationAdvanced",
-					"ResourceAllocation", "ResourceAllocationAdvanced" }
 			},
 			name = "Punch lox"
 		},
@@ -157,14 +157,6 @@ function OnPopulate()
 				Aeon = 'AeonPlayer_2',
 				Seraphim = 'SeraPlayer_2',
 			},
-			enhancements = {
-				Aeon = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "ResourceAllocationAdvanced",
-					"EnhancedSensors" },
-				Cybran = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "MicrowaveLaserGenerator" },
-				UEF = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "Shield", "ShieldGeneratorField" },
-				Seraphim = { "AdvancedEngineering", "T3Engineering", "DamageStabilization", "DamageStabilizationAdvanced",
-					"ResourceAllocation", "ResourceAllocationAdvanced" }
-			}
 		},
 	}
 	SetArmyUnitCap(ScenarioInfo.Yudi, 4000)
