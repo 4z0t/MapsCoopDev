@@ -10,6 +10,7 @@ local TauntManager = import('/lua/TauntManager.lua')
 local Objectives = import('/lua/ScenarioFramework.lua').Objectives
 local Utils = Oxygen.Utils
 local AC = Oxygen.Cinematics
+local Game = Oxygen.Game
 
 local ObjectiveManager = Oxygen.ObjectiveManager
 local VOStrings = import("/maps/Test/VOStrings.lua").lines
@@ -20,6 +21,7 @@ local RequireIn = Oxygen.RequireIn
 ScenarioInfo.TheWheelie = 2
 ScenarioInfo.Yudi = 3
 
+---@type table<string, AIBrain>
 _G.Brains = {}
 
 function DeathResult(unit)
@@ -125,7 +127,7 @@ objectives:Init
 
 
 function OnPopulate()
-	ScenarioUtils.InitializeScenarioArmies()
+	Game.Armies.Initialize()
 
 	playersManager:Init
 	{
@@ -159,16 +161,20 @@ function OnPopulate()
 			},
 		},
 	}
-	SetArmyUnitCap(ScenarioInfo.Yudi, 4000)
+	Game.Armies.SetUnitCap(ScenarioInfo.Yudi, 4000)
+	
 	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1Qbases')
 	--ScenarioUtils.CreateArmyGroup('Yudi', 'MainBase')
 
 end
 
 function OnStart(self)
-	ScenarioFramework.SetPlayableArea('StartArea', false)
-	ScenarioFramework.SetArmyColor("Yudi", Utils.UnpackColor "FFDD78F1")
-	ScenarioFramework.SetArmyColor("TheWheelie", Utils.UnpackColor "FF022B1B")
+
+
+	Game.SetPlayableArea('StartArea', false)
+	Game.Armies.SetColor("Yudi", "FFDD78F1")
+	Game.Armies.SetColor("TheWheelie", "FF022B1B")
+
 	Brains.TheWheelie = ArmyBrains[ScenarioInfo.TheWheelie]
 	Brains.Yudi = ArmyBrains[ScenarioInfo.Yudi]
 

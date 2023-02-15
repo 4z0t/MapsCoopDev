@@ -1,0 +1,11 @@
+{
+  "configurations": [
+    {
+      "type": "node",
+      "preLaunchTask": "FAF Coop dev",
+      "name": "FAF COOP DEV",
+      "request": "launch",
+      "args": []
+    }
+  ]
+}
