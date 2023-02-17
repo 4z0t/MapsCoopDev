@@ -146,12 +146,34 @@ function OnPopulate()
 	playersManager:Init
 	{
 		enhancements = {
-			Aeon = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "ResourceAllocationAdvanced",
-				"EnhancedSensors" },
-			Cybran = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "MicrowaveLaserGenerator" },
-			UEF = { "AdvancedEngineering", "T3Engineering", "ResourceAllocation", "Shield", "ShieldGeneratorField" },
-			Seraphim = { "AdvancedEngineering", "T3Engineering", "DamageStabilization", "DamageStabilizationAdvanced",
-				"ResourceAllocation", "ResourceAllocationAdvanced" }
+			Aeon = {
+				"AdvancedEngineering",
+				"T3Engineering",
+				"ResourceAllocation",
+				"ResourceAllocationAdvanced",
+				"EnhancedSensors"
+			},
+			Cybran = {
+				"AdvancedEngineering",
+				"T3Engineering",
+				"ResourceAllocation",
+				"MicrowaveLaserGenerator"
+			},
+			UEF = {
+				"AdvancedEngineering",
+				"T3Engineering",
+				"ResourceAllocation",
+				"Shield",
+				"ShieldGeneratorField"
+			},
+			Seraphim = {
+				"AdvancedEngineering",
+				"T3Engineering",
+				"DamageStabilization",
+				"DamageStabilizationAdvanced",
+				"ResourceAllocation",
+				"ResourceAllocationAdvanced"
+			}
 		},
 		{
 			color = "ff0000ff",
