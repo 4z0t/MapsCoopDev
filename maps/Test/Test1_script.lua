@@ -24,10 +24,6 @@ ScenarioInfo.Yudi = 3
 ---@type table<string, AIBrain>
 _G.Brains = {}
 
-function DeathResult(unit)
-	LOG("Punch lox")
-end
-
 local prizoners = {
 	"Razarem",
 	"Accor",
@@ -62,6 +58,11 @@ local function TitlePreview()
 end
 
 local objectives = ObjectiveManager()
+
+local function PlayerDeath(unit)
+	objectives:EndGame(false)
+end
+
 objectives:Init
 {
 	objectiveBuilder
@@ -102,7 +103,7 @@ objectives:Init
 					-- AC.MoveTo("Cam7", 2)
 					ScenarioFramework.KillBaseInArea(Brains.TheWheelie, 'StartArea')
 					playersManager:WarpIn(function()
-						objectives:EndGame(false)
+						ScenarioFramework.Dialogue(VOStrings.E01_D01_010, PlayerDeath, true)
 					end)
 					AC.MoveTo("Cam3", 3)
 

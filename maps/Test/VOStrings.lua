@@ -26,5 +26,11 @@ lines = {
             cue = 'Intro1_1',
             faction = 'Cybran'
         },
+    },
+    -- Player Death Message
+    E01_D01_010 = {
+        { text = '<LOC E01_D01_010_010>[{i EarthCom}]: Lieutenant! Come in, Lieutenant!  We\'ve lost your signal...Lieutenant, report...',
+            vid = 'E01_EarthCom_D01_0022.sfd', bank = 'E01_VO', cue = 'E01_EarthCom_D01_0022', faction = 'UEF' },
     }
+
 }
