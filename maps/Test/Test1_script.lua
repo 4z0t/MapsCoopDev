@@ -41,6 +41,26 @@ local prizoners = {
 	"Farizm"
 }
 
+
+
+local function TitlePreview()
+	UI4Sim.Callback
+	{
+		name = "test",
+		fileName = "/maps/Test/UI/main.lua",
+		functionName = "CreateUI",
+		args = { 1, 2, 3 }
+	}
+	WaitSeconds(3)
+	UI4Sim.Callback
+	{
+		name = "test",
+		fileName = "/maps/Test/UI/main.lua",
+		functionName = "DestroyUI",
+
+	}
+end
+
 local objectives = ObjectiveManager()
 objectives:Init
 {
@@ -71,14 +91,6 @@ objectives:Init
 						:MoveToMarker "AhwassaDropTarget"
 
 
-					UI4Sim.Callback
-					{
-						name = "test",
-						fileName = "/maps/Test/UI/main.lua",
-						functionName = "CreateUI",
-						args = { 1, 2, 3 }
-					}
-
 					AC.MoveTo("Cam1", 0)
 					ScenarioFramework.Dialogue(VOStrings.Start, nil, true)
 					WaitSeconds(1)
@@ -94,18 +106,14 @@ objectives:Init
 					end)
 					AC.MoveTo("Cam3", 3)
 
-					UI4Sim.Callback
-					{
-						name = "test",
-						fileName = "/maps/Test/UI/main.lua",
-						functionName = "DestroyUI",
-					}
+
 					WaitSeconds(1)
 					ahwassaController
 						:ImmediatelyKill()
 
 				end
 			)
+			ForkThread(TitlePreview)
 			objectives:Start "prison"
 		end)
 		:OnSuccess(function()
