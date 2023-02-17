@@ -62,6 +62,14 @@ objectives:Init
 		:OnStart(function()
 			AC.NISMode(
 				function()
+					UI4Sim.Callback
+					{
+						name = "test",
+						fileName = "/maps/Test/UI/main.lua",
+						functionName = "CreateUI",
+						args = { 1, 2, 3 }
+					}
+
 					AC.MoveTo("Cam1", 0)
 					ScenarioFramework.Dialogue(VOStrings.Start, nil, true)
 					WaitSeconds(1)
@@ -76,6 +84,12 @@ objectives:Init
 						objectives:EndGame(false)
 					end)
 					AC.MoveTo("Cam3", 3)
+					UI4Sim.Callback
+					{
+						name = "test",
+						fileName = "/maps/Test/UI/main.lua",
+						functionName = "DestroyUI",
+					}
 				end
 			)
 			objectives:Start "prison"
@@ -162,7 +176,7 @@ function OnPopulate()
 		},
 	}
 	Game.Armies.SetUnitCap(ScenarioInfo.Yudi, 4000)
-	
+
 	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1Qbases')
 	--ScenarioUtils.CreateArmyGroup('Yudi', 'MainBase')
 
