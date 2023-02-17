@@ -62,13 +62,22 @@ objectives:Init
 		:OnStart(function()
 			AC.NISMode(
 				function()
-					UI4Sim.Callback
-					{
-						name = "test",
-						fileName = "/maps/Test/UI/main.lua",
-						functionName = "CreateUI",
-						args = { 1, 2, 3 }
-					}
+
+					---@type UnitsController
+					local ahwassaController = Oxygen.UnitsController()
+
+					ahwassaController
+						:FromMapArmyUnit("Yudi", "Ahwassa_drop")
+						:MoveToMarker "AhwassaDropTarget"
+
+
+					-- UI4Sim.Callback
+					-- {
+					-- 	name = "test",
+					-- 	fileName = "/maps/Test/UI/main.lua",
+					-- 	functionName = "CreateUI",
+					-- 	args = { 1, 2, 3 }
+					-- }
 
 					AC.MoveTo("Cam1", 0)
 					ScenarioFramework.Dialogue(VOStrings.Start, nil, true)
@@ -84,12 +93,17 @@ objectives:Init
 						objectives:EndGame(false)
 					end)
 					AC.MoveTo("Cam3", 3)
-					UI4Sim.Callback
-					{
-						name = "test",
-						fileName = "/maps/Test/UI/main.lua",
-						functionName = "DestroyUI",
-					}
+
+					WaitSeconds(1)
+					ahwassaController
+						:ImmediatelyKill()
+
+					-- UI4Sim.Callback
+					-- {
+					-- 	name = "test",
+					-- 	fileName = "/maps/Test/UI/main.lua",
+					-- 	functionName = "DestroyUI",
+					-- }
 				end
 			)
 			objectives:Start "prison"
