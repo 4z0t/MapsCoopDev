@@ -71,13 +71,13 @@ objectives:Init
 						:MoveToMarker "AhwassaDropTarget"
 
 
-					-- UI4Sim.Callback
-					-- {
-					-- 	name = "test",
-					-- 	fileName = "/maps/Test/UI/main.lua",
-					-- 	functionName = "CreateUI",
-					-- 	args = { 1, 2, 3 }
-					-- }
+					UI4Sim.Callback
+					{
+						name = "test",
+						fileName = "/maps/Test/UI/main.lua",
+						functionName = "CreateUI",
+						args = { 1, 2, 3 }
+					}
 
 					AC.MoveTo("Cam1", 0)
 					ScenarioFramework.Dialogue(VOStrings.Start, nil, true)
@@ -94,16 +94,16 @@ objectives:Init
 					end)
 					AC.MoveTo("Cam3", 3)
 
+					UI4Sim.Callback
+					{
+						name = "test",
+						fileName = "/maps/Test/UI/main.lua",
+						functionName = "DestroyUI",
+					}
 					WaitSeconds(1)
 					ahwassaController
 						:ImmediatelyKill()
 
-					-- UI4Sim.Callback
-					-- {
-					-- 	name = "test",
-					-- 	fileName = "/maps/Test/UI/main.lua",
-					-- 	functionName = "DestroyUI",
-					-- }
 				end
 			)
 			objectives:Start "prison"
