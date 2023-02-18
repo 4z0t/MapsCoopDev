@@ -8,11 +8,9 @@ local Cinematics = import('/lua/cinematics.lua')
 local Buff = import('/lua/sim/Buff.lua')
 local TauntManager = import('/lua/TauntManager.lua')
 local Objectives = import('/lua/ScenarioFramework.lua').Objectives
-local Utils = Oxygen.Utils
 local AC = Oxygen.Cinematics
 local Game = Oxygen.Game
 
-local ObjectiveManager = Oxygen.ObjectiveManager
 local VOStrings = import("/maps/Test/VOStrings.lua").lines
 local objectiveBuilder = Oxygen.ObjectiveBuilder()
 local playersManager = Oxygen.PlayersManager()
@@ -57,9 +55,9 @@ local function TitlePreview()
 	}
 end
 
-local objectives = ObjectiveManager()
+local objectives = Oxygen.ObjectiveManager()
 
-local function PlayerDeath(unit)
+local function PlayerDeath()
 	objectives:EndGame(false)
 end
 
@@ -81,38 +79,37 @@ objectives:Init
 			},
 		}
 		:OnStart(function()
-			AC.NISMode(
-				function()
+			AC.NISMode(function()
 
-					---@type UnitsController
-					local ahwassaController = Oxygen.UnitsController()
+				---@type UnitsController
+				local ahwassaController = Oxygen.UnitsController()
 
-					ahwassaController
-						:FromMapArmyUnit("Yudi", "Ahwassa_drop")
-						:MoveToMarker "AhwassaDropTarget"
-
-
-					AC.MoveTo("Cam1", 0)
-					ScenarioFramework.Dialogue(VOStrings.Start, nil, true)
-					WaitSeconds(1)
-					--AC.DisplayText("Global\nWarning", 120, 'ffffffff', 'center', 1)
-					-- AC.MoveTo("Cam2", 3)
-					-- AC.MoveTo("Cam4", 0)
-					-- AC.MoveTo("Cam5", 2)
-					-- AC.MoveTo("Cam6", 0)
-					-- AC.MoveTo("Cam7", 2)
-					ScenarioFramework.KillBaseInArea(Brains.TheWheelie, 'StartArea')
-					playersManager:WarpIn(function()
-						ScenarioFramework.Dialogue(VOStrings.E01_D01_010, PlayerDeath, true)
-					end)
-					AC.MoveTo("Cam3", 3)
+				ahwassaController
+					:FromMapArmyUnit("Yudi", "Ahwassa_drop")
+					:MoveToMarker "AhwassaDropTarget"
 
 
-					WaitSeconds(1)
-					ahwassaController
-						:ImmediatelyKill()
+				AC.MoveTo("Cam1", 0)
+				ScenarioFramework.Dialogue(VOStrings.Start, nil, true)
+				WaitSeconds(1)
+				--AC.DisplayText("Global\nWarning", 120, 'ffffffff', 'center', 1)
+				-- AC.MoveTo("Cam2", 3)
+				-- AC.MoveTo("Cam4", 0)
+				-- AC.MoveTo("Cam5", 2)
+				-- AC.MoveTo("Cam6", 0)
+				-- AC.MoveTo("Cam7", 2)
+				ScenarioFramework.KillBaseInArea(Brains.TheWheelie, 'StartArea')
+				playersManager:WarpIn(function()
+					ScenarioFramework.Dialogue(VOStrings.E01_D01_010, PlayerDeath, true)
+				end)
+				AC.MoveTo("Cam3", 3)
 
-				end
+
+				WaitSeconds(1)
+				ahwassaController
+					:ImmediatelyKill()
+
+			end
 			)
 			ForkThread(TitlePreview)
 			objectives:Start "prison"
@@ -199,7 +196,7 @@ function OnPopulate()
 			}
 		},
 		{
-			color = "ff0000ff",
+			color = "18DAE0",
 			units =
 			{
 				Aeon = 'AeonPlayer_1',
