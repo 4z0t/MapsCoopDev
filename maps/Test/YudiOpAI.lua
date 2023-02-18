@@ -40,9 +40,9 @@ function Main()
     mainBase:SetBuildAllStructures(true)
     --mainBase:SetSACUUpgrades { "ResourceAllocation" }
     mainBase:AddBuildGroup('BoiProd', 3000, false, false)
-    mainBase:SetACUUpgrades({ "T3Engineering" }, false)
+    mainBase:SetACUUpgrades({ "AdvancedEngineering", "T3Engineering" }, false)
 
-    ---@type PlatoonBuilder
+    ---@type PlatoonTemplateBuilder
     local pb = PlatoonBuilder()
     pb
         :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
@@ -55,7 +55,6 @@ function Main()
                 "LAC03",
             }
         }
-
 
 
     mainBase:LoadPlatoons {

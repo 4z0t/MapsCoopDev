@@ -79,6 +79,10 @@ objectives:Init
 			},
 		}
 		:OnStart(function()
+
+			---@type UnitsController
+			local playersController = Oxygen.UnitsController()
+
 			AC.NISMode(function()
 
 				---@type UnitsController
@@ -91,7 +95,7 @@ objectives:Init
 
 				AC.MoveTo("Cam1", 0)
 				ScenarioFramework.Dialogue(VOStrings.Start, nil, true)
-				WaitSeconds(1)
+				WaitSeconds(2)
 				--AC.DisplayText("Global\nWarning", 120, 'ffffffff', 'center', 1)
 				-- AC.MoveTo("Cam2", 3)
 				-- AC.MoveTo("Cam4", 0)
@@ -99,19 +103,36 @@ objectives:Init
 				-- AC.MoveTo("Cam6", 0)
 				-- AC.MoveTo("Cam7", 2)
 				ScenarioFramework.KillBaseInArea(Brains.TheWheelie, 'StartArea')
-				playersManager:WarpIn(function()
-					ScenarioFramework.Dialogue(VOStrings.E01_D01_010, PlayerDeath, true)
-				end)
-				AC.MoveTo("Cam3", 3)
 
+				AC.MoveTo("Cam3", 2.5)
 
-				WaitSeconds(1)
 				ahwassaController
 					:ImmediatelyKill()
+				WaitSeconds(1.5)
 
-			end
-			)
+				playersController:Units(
+					playersManager:WarpIn(function()
+						ScenarioFramework.Dialogue(VOStrings.E01_D01_010, PlayerDeath, true)
+					end)
+				)
+			end)
+
+			playersController
+				:ApplyToUnits(function(unit)
+					LOG("Making invincible")
+					unit.CanTakeDamage = false
+				end)
+
+			WaitSeconds(5)
+
+			playersController
+				:ApplyToUnits(function(unit)
+					LOG("Reseting")
+					unit.CanTakeDamage = true
+				end)
+
 			ForkThread(TitlePreview)
+			
 			objectives:Start "prison"
 		end)
 		:OnSuccess(function()
