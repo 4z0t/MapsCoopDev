@@ -172,12 +172,19 @@ function Main()
 
     mainBase:AddBuildStructures("AirDefense", {
         Priority = 2000,
-        BuildCondition = BC.HumansCategoryCondition(categories.AIR, ">=", 30)
+        BuildConditions =
+        {
+            BC.HumansCategoryCondition(categories.AIR, ">=", 30),
+            BC.HumansBuiltOrActiveCategoryCondition(categories.AIR * categories.EXPERIMENTAL, ">", 0)
+        }
     })
 
     mainBase:AddBuildStructures("LandDefense", {
         Priority = 1800,
-        BuildCondition = BC.HumansCategoryCondition(categories.LAND, ">=", 30)
+        BuildConditions =
+        {
+            BC.HumansCategoryCondition(categories.LAND, ">=", 30)
+        }
     })
     mainBase.MaximumConstructionEngineers = 20
 
