@@ -115,15 +115,17 @@ objectives:Init
 						ScenarioFramework.Dialogue(VOStrings.E01_D01_010, PlayerDeath, true)
 					end)
 				)
+				playersController
+					:ApplyToUnits(function(unit)
+						LOG("Making invincible")
+						unit.CanTakeDamage = false
+					end)
+
+				AC.VisionAtLocation("YudiBase_M", 60, Brains.Player1):DestroyOnExit(true)
+				AC.MoveTo("BaseCam1", 3)
+				AC.MoveTo("BaseCam2", 1)
+				AC.MoveTo("Cam3", 4)
 			end)
-
-			playersController
-				:ApplyToUnits(function(unit)
-					LOG("Making invincible")
-					unit.CanTakeDamage = false
-				end)
-
-			WaitSeconds(5)
 
 			playersController
 				:ApplyToUnits(function(unit)
@@ -132,7 +134,7 @@ objectives:Init
 				end)
 
 			ForkThread(TitlePreview)
-			
+
 			objectives:Start "prison"
 		end)
 		:OnSuccess(function()
@@ -252,8 +254,10 @@ function OnStart(self)
 	Game.Armies.SetColor("Yudi", "FFDD78F1")
 	Game.Armies.SetColor("TheWheelie", "FF022B1B")
 
+	Brains.Player1 = ArmyBrains[1]
 	Brains.TheWheelie = ArmyBrains[ScenarioInfo.TheWheelie]
 	Brains.Yudi = ArmyBrains[ScenarioInfo.Yudi]
+
 
 	buffDef = Buffs['CheatIncome']
 	buffAffects = buffDef.Affects
