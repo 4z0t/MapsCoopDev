@@ -42,6 +42,7 @@ function Main()
     mainBase:AddBuildGroup('BoiProd', 3000, false, false)
     mainBase:SetACUUpgrades({ "AdvancedEngineering", "T3Engineering" }, false)
     mainBase:SetBuildTransports(true)
+    mainBase.TransportsNeeded = 10
 
     ---@type PlatoonTemplateBuilder
     local pb = PlatoonBuilder()
@@ -217,7 +218,6 @@ function Main()
         }
     })
     mainBase.MaximumConstructionEngineers = 20
-    mainBase.TransportsNeeded = 10
 
 
 end
