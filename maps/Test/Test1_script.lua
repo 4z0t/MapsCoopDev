@@ -253,7 +253,7 @@ function OnPopulate()
 			name = "Punch lox"
 		},
 		{
-			color = "ffffff00",
+			color = "ff69D63E",
 			units =
 			{
 				Cybran = 'CybranPlayer_2',
@@ -261,6 +261,29 @@ function OnPopulate()
 				Aeon = 'AeonPlayer_2',
 				Seraphim = 'SeraPlayer_2',
 			},
+			name = "Zadsport"
+		},
+		{
+			color = "ffB968F0",
+			units =
+			{
+				Cybran = 'CybranPlayer_3',
+				UEF = 'UEFPlayer_3',
+				Aeon = 'AeonPlayer_3',
+				Seraphim = 'SeraPlayer_3',
+			},
+			name = "mrazot"
+		},
+		{
+			color = "ff6200FF",
+			units =
+			{
+				Cybran = 'CybranPlayer_4',
+				UEF = 'UEFPlayer_4',
+				Aeon = 'AeonPlayer_4',
+				Seraphim = 'SeraPlayer_4',
+			},
+			name = "Merazar"
 		},
 	}
 	Game.Armies.SetUnitCap(ScenarioInfo.Yudi, 4000)
