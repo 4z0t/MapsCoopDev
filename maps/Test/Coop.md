@@ -18,7 +18,7 @@ Basically it is a lego for creating natural and realistic terrains for games. It
 
 ## Scripting
 
-I'll tell you a secret, everything is trying to kill you is scripted to kill you on missions. There is no AI that thinks what to do actually. Script is a determined sequence of actions to keep track of all things players do and good scripts mean good flow of the mission.
+I'll tell you a secret: everything is trying to kill you is scripted to kill you on missions. There is no AI that thinks what to do actually. Script is a determined sequence of actions to keep track of all things players do and good scripts mean good flow of the mission.
 
 However, I find it a problem. Current state of Coop missions scripts is very disappointing. Imagine good looking house from outside but having inside a total mess upside down furniture. Well, you still can live there except having issues with finding things and having troubles walking around the house. If you will get used to it, it doesn't mean others can.
 
@@ -34,3 +34,5 @@ Scripts are allowing everything to tune according to difficulty: amount of units
 # What do I want?
 
 To share my experience! I'm doing that for fun and to challenge myself. Ofc if you are interested, you can always help me or suggest things :P
+
+I'll keep this thread updated throughout of mission dev sharing stuff I do.
