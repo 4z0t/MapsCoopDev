@@ -15,6 +15,9 @@ local VOStrings = import("/maps/Test/VOStrings.lua").lines
 local objectiveBuilder = Oxygen.ObjectiveBuilder()
 local playersManager = Oxygen.PlayersManager()
 local RequireIn = Oxygen.RequireIn
+local DifficultyValue = Oxygen.DifficultyValue
+local DV = DifficultyValue.Get
+
 
 ScenarioInfo.TheWheelie = 2
 ScenarioInfo.Yudi = 3
@@ -36,6 +39,11 @@ local prizoners = {
 }
 
 
+DifficultyValue.Extend
+{
+	["Transport Groups count"] = { 1, 3, 5 }
+}
+
 
 local function TitlePreview()
 	UI4Sim.Callback
@@ -53,6 +61,18 @@ local function TitlePreview()
 		functionName = "DestroyUI",
 
 	}
+end
+
+function Mission1Attack()
+	---@type PlatoonController
+	local transportPlatoonController = Oxygen.PlatoonController()
+
+	for _ = 1, DV "Transport Groups count" do
+		transportPlatoonController
+			:FromUnitGroupVeteran("Yudi", "Transports", "GrowthFormation", 5)
+			:AttackWithTransportsReturnToPool("TransportDrop", "TransportAttack", true)
+	end
+
 end
 
 local objectives = Oxygen.ObjectiveManager()
@@ -121,6 +141,7 @@ objectives:Init
 						unit.CanTakeDamage = false
 					end)
 
+				WaitSeconds(2.5)
 				AC.VisionAtLocation("YudiBase_M", 60, Brains.Player1):DestroyOnExit(true)
 				AC.MoveTo("BaseCam1", 3)
 				AC.MoveTo("BaseCam2", 1)
@@ -136,6 +157,8 @@ objectives:Init
 			ForkThread(TitlePreview)
 
 			objectives:Start "prison"
+
+			ForkThread(Mission1Attack)
 		end)
 		:OnSuccess(function()
 			objectives:EndGame(true)
@@ -219,7 +242,7 @@ function OnPopulate()
 			}
 		},
 		{
-			color = "18DAE0",
+			color = "ff18DAE0",
 			units =
 			{
 				Aeon = 'AeonPlayer_1',

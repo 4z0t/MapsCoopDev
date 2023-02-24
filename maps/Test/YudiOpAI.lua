@@ -41,6 +41,7 @@ function Main()
     --mainBase:SetSACUUpgrades { "ResourceAllocation" }
     mainBase:AddBuildGroup('BoiProd', 3000, false, false)
     mainBase:SetACUUpgrades({ "AdvancedEngineering", "T3Engineering" }, false)
+    mainBase:SetBuildTransports(true)
 
     ---@type PlatoonTemplateBuilder
     local pb = PlatoonBuilder()
@@ -74,6 +75,35 @@ function Main()
             :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
             :Create(),
 
+        pb:NewDefault "Flying Brick"
+            :InstanceCount(3)
+            :Priority(1000)
+            :AddUnitDefault(UNIT "Brick", 1)
+            :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
+            :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
+            :Data
+            {
+                TransportReturn = "YudiBase_M",
+                TransportChain = "FlyingBrickRoute",
+                LandingChain = "FlyingBrickLanding",
+                AttackChain = "TransportAttack"
+            }
+            :Create(),
+
+        pb:NewDefault "Flying Bricks"
+            :InstanceCount(3)
+            :Priority(2000)
+            :AddUnitDefault(UNIT "Brick", 10)
+            :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count" * 5)
+            :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
+            :Data
+            {
+                TransportReturn = "YudiBase_M",
+                TransportChain = "FlyingBrickRoute",
+                LandingChain = "FlyingBrickLanding",
+                AttackChain = "TransportAttack"
+            }
+            :Create(),
 
         pb:NewDefault "Massive Brick Attack"
             :InstanceCount(2)
@@ -187,7 +217,7 @@ function Main()
         }
     })
     mainBase.MaximumConstructionEngineers = 20
-
+    mainBase.TransportsNeeded = 10
 
 
 end
