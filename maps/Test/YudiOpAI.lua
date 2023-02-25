@@ -33,6 +33,8 @@ DifficultyValue.Extend {
 
     ["Flying Bricks count"] = { 5, 7, 10 },
 
+    ["RAS Bois count"] = { 10, 30, 50 },
+
 }
 
 function Main()
@@ -41,7 +43,7 @@ function Main()
     mainBase:SetActive('AirScouting', true)
     mainBase:SetBuildAllStructures(true)
     --mainBase:SetSACUUpgrades { "ResourceAllocation" }
-    mainBase:AddBuildGroup('BoiProd', 3000, false, false)
+    mainBase:AddBuildGroup('BoiProd', 2000, false, false)
     mainBase:SetACUUpgrades({ "AdvancedEngineering", "T3Engineering" }, false)
     mainBase:SetBuildTransports(true)
     mainBase.TransportsNeeded = 7
@@ -130,7 +132,7 @@ function Main()
             --:AIFunction(YPAIFileName, "BoiBuild")
             :AIFunction(SPAIFileName, "StartBaseEngineerThread")
             :Priority(500)
-            :AddUnitDefault(UNIT "Cybran RAS SACU", 30)
+            :AddUnitDefault(UNIT "Cybran RAS SACU", DV "RAS Bois count")
             :Data
             {
                 Construction = {
