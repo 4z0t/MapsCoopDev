@@ -105,7 +105,7 @@ objectives:Init
 
 
 
-			import("/maps/Test/PlayersUpgrades.lua").Main(playersData)
+			--import("/maps/Test/PlayersUpgrades.lua").Main(playersData)
 			---@type UnitsController
 			local playersController = Oxygen.UnitsController()
 
