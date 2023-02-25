@@ -41,7 +41,7 @@ local prizoners = {
 
 DifficultyValue.Extend
 {
-	["Transport Groups count"] = { 1, 3, 5 }
+	["Transport Groups count"] = { 1.25, 1.67, 2 }
 }
 
 
@@ -70,7 +70,7 @@ function Mission1Attack()
 	---@type PlatoonController
 	local transportPlatoonController = Oxygen.PlatoonController()
 
-	for _ = 1, DV "Transport Groups count" do
+	for _ = 1, DV "Transport Groups count" * table.getsize(playersData) do
 		transportPlatoonController
 			:FromUnitGroupVeteran("Yudi", "Transports", "GrowthFormation", 5)
 			:AttackWithTransportsReturnToPool("TransportDrop", "TransportAttack", true)
@@ -103,14 +103,14 @@ objectives:Init
 		}
 		:OnStart(function()
 
-			
-			
+
+
 			import("/maps/Test/PlayersUpgrades.lua").Main(playersData)
 			---@type UnitsController
 			local playersController = Oxygen.UnitsController()
-			
+
 			AC.NISMode(function()
-				
+
 
 				---@type UnitsController
 				local ahwassaController = Oxygen.UnitsController()
