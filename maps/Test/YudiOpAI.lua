@@ -11,6 +11,9 @@ local YPAIFileName = '/maps/Test/YudiPlatoonAI.lua'
 
 ---@type AdvancedBaseManager
 local mainBase = AdvancedBaseManager()
+---@type AdvancedBaseManager
+local seBase = AdvancedBaseManager()
+
 
 
 
@@ -37,8 +40,43 @@ DifficultyValue.Extend {
 
 }
 
+function SetupSEBase()
+
+    seBase:Initialize(Brains.Yudi, "SE_BASE", "SE_Base_M", 50, { ["SE Base"] = 1500 })
+    seBase:StartEmptyBase(DV "Engi Base assisters")
+    seBase:SetActive('AirScouting', true)
+    seBase:SetBuildAllStructures(true)
+    seBase.MaximumConstructionEngineers = 10
+
+
+
+    ---@type PlatoonTemplateBuilder
+    local pb = PlatoonBuilder()
+    pb
+        :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
+        :UseLocation "SE_BASE"
+        :UseType 'Land'
+        :UseData
+        {
+            PatrolChains = {
+                "LAC01",
+                "LAC02",
+                "LAC03",
+            }
+        }
+
+    seBase:LoadPlatoons {
+        pb:NewDefault "Rhinos SE"
+            :InstanceCount(5)
+            :Priority(280)
+            :AddUnitDefault(UNIT "Rhino", 4)
+            :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
+            :Create(),
+    }
+end
+
 function Main()
-    mainBase:InitializeDifficultyTables(Brains.Yudi, "YudiBase", "YudiBase_M", 100, { MainBase = 1500 }, true)
+    mainBase:InitializeDifficultyTables(Brains.Yudi, "YudiBase", "YudiBase_M", 100, { MainBase = 1000 }, true)
     mainBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
     mainBase:SetActive('AirScouting', true)
     mainBase:SetBuildAllStructures(true)
@@ -108,6 +146,25 @@ function Main()
                 TransportChain = "FlyingBrickRoute",
                 LandingChain = "FlyingBrickLanding",
                 AttackChain = "TransportAttack"
+            }
+            :Create(),
+
+
+        pb:NewDefault "SE Engineers"
+            :InstanceCount(1)
+            :Priority(500)
+            :AddUnitDefault(UNIT "T3 Cybran Engineer", 5)
+            :AIFunction('/lua/ScenarioPlatoonAI.lua', 'StartBaseEngineerThread')
+            :Data
+            {
+                UseTransports = true,
+                Construction =
+                {
+                    BaseTemplate = "SE Base",
+                },
+                MaintainBaseTemplate = "SE Base",
+                TransportChain = "SE_Base_chain",
+                LandingLocation = "SE_Base_M"
             }
             :Create(),
 
@@ -224,5 +281,6 @@ function Main()
     })
     mainBase.MaximumConstructionEngineers = 20
 
+    SetupSEBase()
 
 end
