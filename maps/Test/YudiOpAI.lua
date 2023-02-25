@@ -29,7 +29,9 @@ DifficultyValue.Extend {
     ["M Banger count"] = { 3, 4, 5 },
     ["M Deceiver count"] = { 0, 1, 2 },
 
-    ["ASF attack count"] = { 15, 20, 25 }
+    ["ASF attack count"] = { 15, 20, 25 },
+
+    ["Flying Bricks count"] = { 5, 7, 10 },
 
 }
 
@@ -42,12 +44,13 @@ function Main()
     mainBase:AddBuildGroup('BoiProd', 3000, false, false)
     mainBase:SetACUUpgrades({ "AdvancedEngineering", "T3Engineering" }, false)
     mainBase:SetBuildTransports(true)
-    mainBase.TransportsNeeded = 10
+    mainBase.TransportsNeeded = 7
 
     ---@type PlatoonTemplateBuilder
     local pb = PlatoonBuilder()
     pb
         :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
+        :UseLocation "YudiBase"
         :UseType 'Land'
         :UseData
         {
@@ -78,7 +81,7 @@ function Main()
 
         pb:NewDefault "Flying Brick"
             :InstanceCount(3)
-            :Priority(1000)
+            :Priority(250)
             :AddUnitDefault(UNIT "Brick", 1)
             :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
             :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
@@ -92,9 +95,9 @@ function Main()
             :Create(),
 
         pb:NewDefault "Flying Bricks"
-            :InstanceCount(3)
-            :Priority(2000)
-            :AddUnitDefault(UNIT "Brick", 10)
+            :InstanceCount(1)
+            :Priority(50)
+            :AddUnitDefault(UNIT "Brick", DV "Flying Bricks count")
             :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count" * 5)
             :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
             :Data
@@ -116,7 +119,7 @@ function Main()
             :Create(),
 
         pb:NewDefault "Rhinos"
-            :InstanceCount(4)
+            :InstanceCount(5)
             :Priority(280)
             :AddUnitDefault(UNIT "Rhino", 4)
             :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")

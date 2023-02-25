@@ -45,6 +45,9 @@ DifficultyValue.Extend
 }
 
 
+---@type PlayersData
+local playersData
+
 local function TitlePreview()
 	UI4Sim.Callback
 	{
@@ -100,10 +103,14 @@ objectives:Init
 		}
 		:OnStart(function()
 
+			
+			
+			import("/maps/Test/PlayersUpgrades.lua").Main(playersData)
 			---@type UnitsController
 			local playersController = Oxygen.UnitsController()
-
+			
 			AC.NISMode(function()
+				
 
 				---@type UnitsController
 				local ahwassaController = Oxygen.UnitsController()
@@ -206,10 +213,11 @@ objectives:Init
 }
 
 
+
 function OnPopulate()
 	Game.Armies.Initialize()
 
-	playersManager:Init
+	playersData = playersManager:Init
 	{
 		enhancements = {
 			Aeon = {
