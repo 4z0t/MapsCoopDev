@@ -1862,6 +1862,15 @@ Scenario = {
                 "Blank Marker 11",
             },
         },
+        ['SE_bomber_chain'] = {
+            Markers = {
+                "Blank Marker 27",
+                "Blank Marker 10",
+                "Blank Marker 33",
+                "Blank Marker 11",
+                "Blank Marker 28",
+            },
+        },
     },
     next_queue_id = '1',
     --[[                                                                           ]]--
@@ -4746,6 +4755,20 @@ Scenario = {
                                         Position = { 627.5, 19.34493, 452.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
+                                    ['UNIT_135'] = {
+                                        type = 'urb4207',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 609.5, 19.30196, 443.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_136'] = {
+                                        type = 'urb4207',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 600.5, 18.61442, 452.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
                                 },
                             },
                             ['Nuke'] = GROUP {
@@ -4757,6 +4780,13 @@ Scenario = {
                                         orders = '',
                                         platoon = '',
                                         Position = { 620.5, 19.35665, 466.5 },
+                                        Orientation = { 0, 0, 0 },
+                                    },
+                                    ['UNIT_134'] = {
+                                        type = 'urb2305',
+                                        orders = '',
+                                        platoon = '',
+                                        Position = { 608.5, 18.89959, 450.5 },
                                         Orientation = { 0, 0, 0 },
                                     },
                                 },

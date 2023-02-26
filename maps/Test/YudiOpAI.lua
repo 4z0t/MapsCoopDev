@@ -128,6 +128,20 @@ function SetupSEBase()
             :AddUnitDefault(UNIT "Rhino", 4)
             :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
             :Create(),
+
+        pb:NewDefault "Bomber attack"
+            :Type "Air"
+            :InstanceCount(5)
+            :Priority(100)
+            :AddUnitDefault(UNIT "Zeus", 5)
+            :Data
+            {
+                PatrolChains =
+                {
+                    "SE_bomber_chain"
+                }
+            }
+            :Create()
     }
 end
 
@@ -136,33 +150,13 @@ function NukeBase()
     nukeBase:Initialize(Brains.Yudi, "NukeBaseGroup", "NukeBase_M", 30, {
         Nuke = 1500,
         Defense = 2000,
-    })
-    nukeBase:StartEmptyBase(DV "RAS Bois count")
+    }, true)
+    nukeBase:StartEmptyBase(0)
 
     nukeBase:SetBuildAllStructures(true)
     nukeBase:SetActive('Nuke', true)
 
     nukeBase.PermanentAssistCount = DV "RAS Bois count"
-
-    -- ---@type OpAIBuilder
-    -- local opAIb = OpAIBuilder()
-    -- nukeBase:LoadOpAIs
-    -- {
-    --     opAIb
-    --         :NewBuildGroup "Nuke"
-    --         :Data
-    --         {
-    --             PlatoonAIFunction = { "/mods/Oxygen/modules/PlatoonAIs/Missiles.lua", 'PlatoonNukeAI' },
-    --             PlatoonData = {
-    --             },
-    --             MaxAssist = DV "RAS Bois count",
-    --             Retry = true,
-    --             KeepAlive = true,
-    --             Amount = 1,
-    --         }
-    --         :Create()
-    -- }
-
 
 
 end
@@ -286,7 +280,6 @@ function Main()
             {
                 Construction = {
                     BaseTemplate = "NukeBaseGroup",
-                    --BuildClose = true,
                 },
                 MaintainBaseTemplate = "NukeBaseGroup"
             }
