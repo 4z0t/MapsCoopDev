@@ -1,6 +1,6 @@
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 ---@type string
-local MAP_FOLDER = ScenarioInfo.save:gsub("[^/]*%.lua", "")
+local MAP_FOLDER = ScenarioInfo.save:gsub("[^/]*%.lua$", "")
 LOG(MAP_FOLDER)
 
 local ScenarioFramework = import('/lua/ScenarioFramework.lua')
