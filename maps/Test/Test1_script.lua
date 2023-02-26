@@ -109,7 +109,7 @@ objectives:Init
 			---@type UnitsController
 			local playersController = Oxygen.UnitsController()
 
-			AC.NISMode(function()
+			--AC.NISMode(function()
 
 
 				---@type UnitsController
@@ -153,7 +153,7 @@ objectives:Init
 				AC.MoveTo("BaseCam1", 3)
 				AC.MoveTo("BaseCam2", 1)
 				AC.MoveTo("Cam3", 4)
-			end)
+			--end)
 
 			playersController
 				:ApplyToUnits(function(unit)

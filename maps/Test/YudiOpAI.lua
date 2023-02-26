@@ -14,7 +14,8 @@ local mainBase = AdvancedBaseManager()
 ---@type AdvancedBaseManager
 local seBase = AdvancedBaseManager()
 
-
+---@type AdvancedBaseManager
+local nukeBase = AdvancedBaseManager()
 
 
 DifficultyValue.Extend {
@@ -36,7 +37,7 @@ DifficultyValue.Extend {
 
     ["Flying Bricks count"] = { 5, 7, 10 },
 
-    ["RAS Bois count"] = { 10, 30, 50 },
+    ["RAS Bois count"] = { 10, 30, 5 },
 
 }
 
@@ -73,6 +74,42 @@ function SetupSEBase()
             :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
             :Create(),
     }
+end
+
+function NukeBase()
+
+    nukeBase:Initialize(Brains.Yudi, "NukeBaseGroup", "NukeBase_M", 30, {
+        --Nuke = 1500,
+        Defense = 2000,
+    })
+    nukeBase:StartEmptyBase(DV "RAS Bois count")
+
+    nukeBase:SetBuildAllStructures(true)
+    nukeBase:SetActive('Nuke', true)
+
+    nukeBase.PermanentAssistCount = DV "RAS Bois count"
+
+    ---@type OpAIBuilder
+    local opAIb = OpAIBuilder()
+    nukeBase:LoadOpAIs
+    {
+        opAIb
+            :NewBuildGroup "Nuke"
+            :Data
+            {
+                PlatoonAIFunction = { "/mods/Oxygen/modules/PlatoonAIs/Missiles.lua", 'PlatoonNukeAI' },
+                PlatoonData = {
+                },
+                MaxAssist = DV "RAS Bois count",
+                Retry = true,
+                KeepAlive = true,
+                Amount = 1,
+            }
+            :Create()
+    }
+
+
+
 end
 
 function Main()
@@ -193,10 +230,10 @@ function Main()
             :Data
             {
                 Construction = {
-                    BaseTemplate = "Scathis",
-                    BuildClose = true,
+                    BaseTemplate = "NukeBaseGroup",
+                    --BuildClose = true,
                 },
-                MaintainBaseTemplate = "Scathis"
+                MaintainBaseTemplate = "NukeBaseGroup"
             }
             :Create(),
     }
@@ -281,6 +318,7 @@ function Main()
     })
     mainBase.MaximumConstructionEngineers = 20
 
+    NukeBase()
     SetupSEBase()
 
 end
