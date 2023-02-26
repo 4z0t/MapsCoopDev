@@ -1,6 +1,6 @@
 version = 3 -- Lua Version. Dont touch this
 ScenarioInfo = {
-    name = "GW",
+    name = "Kill The Crown",
     description = "",
     preview = '',
     map_version = 2,
@@ -17,7 +17,7 @@ ScenarioInfo = {
             teams = {
                 {
                     name = 'FFA',
-                    armies = {'ARMY_1', 'ARMY_2'}
+                    armies = {'Player1', 'Enemy1', 'Enemy2', 'Player2', 'Player3', 'Player4'}
                 },
             },
             customprops = {
