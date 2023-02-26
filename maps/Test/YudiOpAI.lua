@@ -14,8 +14,7 @@ local mainBase = AdvancedBaseManager()
 ---@type AdvancedBaseManager
 local seBase = AdvancedBaseManager()
 
----@type AdvancedBaseManager
-local nukeBase = AdvancedBaseManager()
+
 
 
 DifficultyValue.Extend {
@@ -40,6 +39,62 @@ DifficultyValue.Extend {
     ["RAS Bois count"] = { 10, 30, 5 },
 
 }
+
+
+local Factions = import('/lua/factions.lua').Factions
+
+local BMBC = '/lua/editor/BaseManagerBuildConditions.lua'
+
+---@class NukeBaseManger : AdvancedBaseManager
+NukeBaseManger = Class(AdvancedBaseManager)
+{
+
+    ---@param self NukeBaseManger
+    LoadDefaultBaseNukes = function(self)
+        local name = self.BaseName
+        if not self.MultiFaction then
+            self.AIBrain:PBMAddPlatoon {
+                BuilderName = 'BaseManager_NukePlatoon_' .. name,
+                PlatoonTemplate = self:CreateNukePlatoonTemplate(),
+                Priority = 400,
+                PlatoonType = 'Any',
+                RequiresConstruction = false,
+                LocationType = name,
+                PlatoonAIFunction = { Oxygen.PlatoonAI.Missiles, 'PlatoonNukeAI' },
+                BuildConditions = {
+                    { BMBC, 'BaseActive', { name } },
+                    { BMBC, 'NukesEnabled', { name } },
+                },
+                PlatoonData = {
+                    BaseName = name,
+                },
+            }
+            return
+        end
+        for faction = 1, 4 do
+            local factionName = Factions[faction].Key
+            self.AIBrain:PBMAddPlatoon {
+                BuilderName = 'BaseManager_NukePlatoon_' .. name .. factionName,
+                PlatoonTemplate = self:CreateNukePlatoonTemplate(faction),
+                Priority = 400,
+                PlatoonType = 'Any',
+                RequiresConstruction = false,
+                LocationType = name,
+                PlatoonAIFunction = { Oxygen.PlatoonAI.Missiles, 'PlatoonNukeAI' },
+                BuildConditions = {
+                    { BMBC, 'BaseActive', { name } },
+                    { BMBC, 'NukesEnabled', { name } },
+                },
+                PlatoonData = {
+                    BaseName = name,
+                },
+            }
+        end
+    end,
+}
+
+---@type NukeBaseManger
+local nukeBase = NukeBaseManger()
 
 function SetupSEBase()
 
@@ -79,7 +134,7 @@ end
 function NukeBase()
 
     nukeBase:Initialize(Brains.Yudi, "NukeBaseGroup", "NukeBase_M", 30, {
-        --Nuke = 1500,
+        Nuke = 1500,
         Defense = 2000,
     })
     nukeBase:StartEmptyBase(DV "RAS Bois count")
@@ -89,24 +144,24 @@ function NukeBase()
 
     nukeBase.PermanentAssistCount = DV "RAS Bois count"
 
-    ---@type OpAIBuilder
-    local opAIb = OpAIBuilder()
-    nukeBase:LoadOpAIs
-    {
-        opAIb
-            :NewBuildGroup "Nuke"
-            :Data
-            {
-                PlatoonAIFunction = { "/mods/Oxygen/modules/PlatoonAIs/Missiles.lua", 'PlatoonNukeAI' },
-                PlatoonData = {
-                },
-                MaxAssist = DV "RAS Bois count",
-                Retry = true,
-                KeepAlive = true,
-                Amount = 1,
-            }
-            :Create()
-    }
+    -- ---@type OpAIBuilder
+    -- local opAIb = OpAIBuilder()
+    -- nukeBase:LoadOpAIs
+    -- {
+    --     opAIb
+    --         :NewBuildGroup "Nuke"
+    --         :Data
+    --         {
+    --             PlatoonAIFunction = { "/mods/Oxygen/modules/PlatoonAIs/Missiles.lua", 'PlatoonNukeAI' },
+    --             PlatoonData = {
+    --             },
+    --             MaxAssist = DV "RAS Bois count",
+    --             Retry = true,
+    --             KeepAlive = true,
+    --             Amount = 1,
+    --         }
+    --         :Create()
+    -- }
 
 
 
