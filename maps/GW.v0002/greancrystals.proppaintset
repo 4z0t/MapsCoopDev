@@ -1,0 +1,92 @@
+{
+    "PaintProps": [
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-green/greencrystal02_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-green/greencrystal06_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-green/greencryssm04_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-green/greencryssm01_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-green/greencryssm05_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-green/greencrystal03_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-green/greencrystal07_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-green/greencryssm03_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-green/greencrystal01_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-green/greencryssm02_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-green/greencryssm06_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        }
+    ]
+}

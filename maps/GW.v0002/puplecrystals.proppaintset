@@ -1,0 +1,92 @@
+{
+    "PaintProps": [
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-purple/purplecryssm04_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-purple/purplecryssm05_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-purple/purplecryssm01_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-purple/purplecrystal01_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-purple/purplecryssm03_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-purple/purplecrystal03_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-purple/purplecrystal07_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-purple/purplecryssm06_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-purple/purplecryssm02_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-purple/purplecrystal02_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        },
+        {
+            "Blueprint": "env/crystalline-alt/props/crystals-purple/purplecrystal06_prop.bp",
+            "ScaleMin": 1.0,
+            "ScaleMax": 1.0,
+            "RotationMin": 0,
+            "RotationMax": 360,
+            "Chance": 100
+        }
+    ]
+}
