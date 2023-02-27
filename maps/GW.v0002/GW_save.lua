@@ -15,7 +15,13 @@ Scenario = {
     --[[  Areas                                                                    ]]--
     --[[                                                                           ]]--
     Areas = {
-        ['AREA_1'] = {
+        ['M1'] = {
+            ['rectangle'] = RECTANGLE( 0, 90, 500, 600 ),
+        },
+        ['M2'] = {
+            ['rectangle'] = RECTANGLE( 0, 0, 1024, 700 ),
+        },
+        ['M3'] = {
             ['rectangle'] = RECTANGLE( 0, 0, 1024, 1024 ),
         },
     },
@@ -25,19 +31,40 @@ Scenario = {
     MasterChain = {
         ['_MASTERCHAIN_'] = {
             Markers = {
-                ['ARMY_2'] = {
+                ['Player1'] = {
                     ['color'] = STRING( 'ff800080' ),
                     ['type'] = STRING( 'Blank Marker' ),
                     ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 511, 64.22267, 307 ),
+                    ['position'] = VECTOR3( 155.5, 66.2267, 259.5 ),
                 },
-                ['ARMY_1'] = {
+                ['Player2'] = {
                     ['color'] = STRING( 'ff800080' ),
                     ['type'] = STRING( 'Blank Marker' ),
                     ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 512, 65.07428, 716 ),
+                    ['position'] = VECTOR3( 145.5, 66.18373, 268.5 ),
+                },
+                ['Player3'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 152.5, 66.4025, 244.5 ),
+                },
+                ['Player4'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 137.5, 66.45328, 247.5 ),
+                },
+                ['Player5'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 134.5, 66.27358, 264.5 ),
                 },
             },
         },
@@ -64,12 +91,12 @@ Scenario = {
     --[[                                                                           ]]--
     Armies = {
         --[[                                                                           ]]--
-        --[[  ARMY_1                                                                   ]]--
+        --[[  Player1                                                                  ]]--
         --[[                                                                           ]]--
-        ['ARMY_1'] = 
+        ['Player1'] = 
         {
             personality = '',
-            plans = '',
+            plans = '/lua/ai/OpAI/DefaultBlankPlanlist.lua',
             color = 0,
             faction = 0,
             Economy = {
@@ -91,12 +118,12 @@ Scenario = {
             },
         },
         --[[                                                                           ]]--
-        --[[  ARMY_2                                                                   ]]--
+        --[[  Aeon                                                                     ]]--
         --[[                                                                           ]]--
-        ['ARMY_2'] = 
+        ['Aeon'] = 
         {
             personality = '',
-            plans = '',
+            plans = '/lua/ai/OpAI/DefaultBlankPlanlist.lua',
             color = 0,
             faction = 0,
             Economy = {
@@ -118,12 +145,12 @@ Scenario = {
             },
         },
         --[[                                                                           ]]--
-        --[[  ARMY_17                                                                  ]]--
+        --[[  UEF                                                                      ]]--
         --[[                                                                           ]]--
-        ['ARMY_17'] = 
+        ['UEF'] = 
         {
             personality = '',
-            plans = '',
+            plans = '/lua/ai/OpAI/DefaultBlankPlanlist.lua',
             color = 0,
             faction = 0,
             Economy = {
@@ -145,12 +172,147 @@ Scenario = {
             },
         },
         --[[                                                                           ]]--
-        --[[  NEUTRAL_CIVILIAN                                                         ]]--
+        --[[  Cybran                                                                   ]]--
         --[[                                                                           ]]--
-        ['NEUTRAL_CIVILIAN'] = 
+        ['Cybran'] = 
         {
             personality = '',
-            plans = '',
+            plans = '/lua/ai/OpAI/DefaultBlankPlanlist.lua',
+            color = 0,
+            faction = 0,
+            Economy = {
+                mass = 0,
+                energy = 0,
+            },
+            Alliances = {
+            },
+            ['Units'] = GROUP {
+                orders = '',
+                platoon = '',
+                Units = {
+                },
+            },
+            PlatoonBuilders = {
+                next_platoon_builder_id = '1',
+                Builders = {
+                },
+            },
+        },
+        --[[                                                                           ]]--
+        --[[  Unknown                                                                  ]]--
+        --[[                                                                           ]]--
+        ['Unknown'] = 
+        {
+            personality = '',
+            plans = '/lua/ai/OpAI/DefaultBlankPlanlist.lua',
+            color = 0,
+            faction = 0,
+            Economy = {
+                mass = 0,
+                energy = 0,
+            },
+            Alliances = {
+            },
+            ['Units'] = GROUP {
+                orders = '',
+                platoon = '',
+                Units = {
+                },
+            },
+            PlatoonBuilders = {
+                next_platoon_builder_id = '1',
+                Builders = {
+                },
+            },
+        },
+        --[[                                                                           ]]--
+        --[[  Player2                                                                  ]]--
+        --[[                                                                           ]]--
+        ['Player2'] = 
+        {
+            personality = '',
+            plans = '/lua/ai/OpAI/DefaultBlankPlanlist.lua',
+            color = 0,
+            faction = 0,
+            Economy = {
+                mass = 0,
+                energy = 0,
+            },
+            Alliances = {
+            },
+            ['Units'] = GROUP {
+                orders = '',
+                platoon = '',
+                Units = {
+                },
+            },
+            PlatoonBuilders = {
+                next_platoon_builder_id = '1',
+                Builders = {
+                },
+            },
+        },
+        --[[                                                                           ]]--
+        --[[  Player3                                                                  ]]--
+        --[[                                                                           ]]--
+        ['Player3'] = 
+        {
+            personality = '',
+            plans = '/lua/ai/OpAI/DefaultBlankPlanlist.lua',
+            color = 0,
+            faction = 0,
+            Economy = {
+                mass = 0,
+                energy = 0,
+            },
+            Alliances = {
+            },
+            ['Units'] = GROUP {
+                orders = '',
+                platoon = '',
+                Units = {
+                },
+            },
+            PlatoonBuilders = {
+                next_platoon_builder_id = '1',
+                Builders = {
+                },
+            },
+        },
+        --[[                                                                           ]]--
+        --[[  Player4                                                                  ]]--
+        --[[                                                                           ]]--
+        ['Player4'] = 
+        {
+            personality = '',
+            plans = '/lua/ai/OpAI/DefaultBlankPlanlist.lua',
+            color = 0,
+            faction = 0,
+            Economy = {
+                mass = 0,
+                energy = 0,
+            },
+            Alliances = {
+            },
+            ['Units'] = GROUP {
+                orders = '',
+                platoon = '',
+                Units = {
+                },
+            },
+            PlatoonBuilders = {
+                next_platoon_builder_id = '1',
+                Builders = {
+                },
+            },
+        },
+        --[[                                                                           ]]--
+        --[[  Player5                                                                  ]]--
+        --[[                                                                           ]]--
+        ['Player5'] = 
+        {
+            personality = '',
+            plans = '/lua/ai/OpAI/DefaultBlankPlanlist.lua',
             color = 0,
             faction = 0,
             Economy = {

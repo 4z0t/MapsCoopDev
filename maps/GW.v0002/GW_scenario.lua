@@ -6,8 +6,8 @@ ScenarioInfo = {
     map_version = 2,
     type = 'campaign_coop',
     starts = true,
-    size = { 1024, 1024 },
-    reclaim = { 461680, 0 },
+    size = {1024, 1024},
+    reclaim = {512530, 0},
     map = '/maps/GW.v0002/GW.scmap',
     save = '/maps/GW.v0002/GW_save.lua',
     script = '/maps/GW.v0002/GW_script.lua',
@@ -17,18 +17,18 @@ ScenarioInfo = {
             teams = {
                 {
                     name = 'FFA',
-                    armies = { 'Player1', 'Aeon', 'UEF', 'Cybran', 'Unknown', 'Player2', 'Player3', 'Player4', 'Player5' }
+                    armies = {'Player1', 'Aeon', 'UEF', 'Cybran', 'Unknown', 'Player2', 'Player3', 'Player4', 'Player5'}
                 },
             },
             customprops = {
             },
             factions = {
-                { "uef", "aeon", "cybran", },
-                { "uef", "aeon", "cybran", },
-                { "uef", "aeon", "cybran", },
-                { "uef", "aeon", "cybran", },
-                { "uef", "aeon", "cybran", },
-            }
+                {'uef', 'aeon', 'cybran'},
+                {'uef', 'aeon', 'cybran'},
+                {'uef', 'aeon', 'cybran'},
+                {'uef', 'aeon', 'cybran'},
+                {'uef', 'aeon', 'cybran'}
+            },
         },
     },
 }
