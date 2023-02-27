@@ -137,6 +137,27 @@ Scenario = {
                 orders = '',
                 platoon = '',
                 Units = {
+                    ['Cybran1'] = {
+                        type = 'url0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 155.5, 66.2267, 259.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
+                    ['Aeon1'] = {
+                        type = 'ual0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 155.5, 66.2267, 259.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
+                    ['UEF1'] = {
+                        type = 'uel0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 155.5, 66.2267, 259.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
                 },
             },
             PlatoonBuilders = {
@@ -272,6 +293,27 @@ Scenario = {
                 orders = '',
                 platoon = '',
                 Units = {
+                    ['Cybran2'] = {
+                        type = 'url0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 145.5, 66.18373, 268.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
+                    ['Aeon2'] = {
+                        type = 'ual0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 145.5, 66.18373, 268.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
+                    ['UEF2'] = {
+                        type = 'uel0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 145.5, 66.18373, 268.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
                 },
             },
             PlatoonBuilders = {
@@ -299,6 +341,27 @@ Scenario = {
                 orders = '',
                 platoon = '',
                 Units = {
+                    ['Cybran3'] = {
+                        type = 'url0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 152.5, 66.4025, 244.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
+                    ['Aeon3'] = {
+                        type = 'ual0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 152.5, 66.4025, 244.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
+                    ['UEF3'] = {
+                        type = 'uel0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 152.5, 66.4025, 244.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
                 },
             },
             PlatoonBuilders = {
@@ -326,6 +389,27 @@ Scenario = {
                 orders = '',
                 platoon = '',
                 Units = {
+                    ['Cybran4'] = {
+                        type = 'url0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 137.5, 66.45328, 247.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
+                    ['Aeon4'] = {
+                        type = 'ual0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 137.5, 66.45328, 247.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
+                    ['UEF4'] = {
+                        type = 'uel0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 137.5, 66.45328, 247.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
                 },
             },
             PlatoonBuilders = {
@@ -353,6 +437,27 @@ Scenario = {
                 orders = '',
                 platoon = '',
                 Units = {
+                    ['Cybran5'] = {
+                        type = 'url0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 134.5, 66.27358, 264.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
+                    ['Aeon5'] = {
+                        type = 'ual0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 134.5, 66.27358, 264.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
+                    ['UEF5'] = {
+                        type = 'uel0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 134.5, 66.27358, 264.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
                 },
             },
             PlatoonBuilders = {
