@@ -1,6 +1,6 @@
 version = 3 -- Lua Version. Dont touch this
 ScenarioInfo = {
-    name = "Kill The Crown",
+    name = "Global Warning",
     description = "",
     preview = '',
     map_version = 2,
@@ -22,6 +22,12 @@ ScenarioInfo = {
             },
             customprops = {
             },
+            factions = {
+                { "uef", "aeon", "cybran", },
+                { "uef", "aeon", "cybran", },
+                { "uef", "aeon", "cybran", },
+                { "uef", "aeon", "cybran", },
+            }
         },
     },
 }
