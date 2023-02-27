@@ -1,6 +1,4 @@
-local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
----@type string
-local MAP_FOLDER = ScenarioInfo.save:gsub("[^/]*%.lua$", "")
+local MAP_FOLDER = Oxygen.MapFolder()
 LOG(MAP_FOLDER)
 
 local ScenarioFramework = import('/lua/ScenarioFramework.lua')
@@ -20,7 +18,7 @@ local DV = DifficultyValue.Get
 
 
 
---local VOStrings = import("/maps/GW/VOStrings.lua").lines
+--local VOStrings = import(Oxygen.MapFolder "VOStrings.lua").lines
 local objectiveBuilder = Oxygen.ObjectiveBuilder()
 local playersManager = Oxygen.PlayersManager()
 
