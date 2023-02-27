@@ -132,6 +132,14 @@ Scenario = {
                 energy = 0,
             },
             Alliances = {
+                ['Aeon'] = 'Enemy',
+                ['UEF'] = 'Enemy',
+                ['Cybran'] = 'Enemy',
+                ['Unknown'] = 'Enemy',
+                ['Player2'] = 'Ally',
+                ['Player3'] = 'Ally',
+                ['Player4'] = 'Ally',
+                ['Player5'] = 'Ally',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -180,6 +188,14 @@ Scenario = {
                 energy = 0,
             },
             Alliances = {
+                ['Player1'] = 'Enemy',
+                ['UEF'] = 'Ally',
+                ['Cybran'] = 'Ally',
+                ['Unknown'] = 'Ally',
+                ['Player2'] = 'Enemy',
+                ['Player3'] = 'Enemy',
+                ['Player4'] = 'Enemy',
+                ['Player5'] = 'Enemy',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -207,6 +223,14 @@ Scenario = {
                 energy = 0,
             },
             Alliances = {
+                ['Player1'] = 'Enemy',
+                ['Aeon'] = 'Ally',
+                ['Cybran'] = 'Ally',
+                ['Unknown'] = 'Ally',
+                ['Player2'] = 'Enemy',
+                ['Player3'] = 'Enemy',
+                ['Player4'] = 'Enemy',
+                ['Player5'] = 'Enemy',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -234,6 +258,14 @@ Scenario = {
                 energy = 0,
             },
             Alliances = {
+                ['Player1'] = 'Enemy',
+                ['Aeon'] = 'Ally',
+                ['UEF'] = 'Ally',
+                ['Unknown'] = 'Ally',
+                ['Player2'] = 'Enemy',
+                ['Player3'] = 'Enemy',
+                ['Player4'] = 'Enemy',
+                ['Player5'] = 'Enemy',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -288,6 +320,14 @@ Scenario = {
                 energy = 0,
             },
             Alliances = {
+                ['Player1'] = 'Ally',
+                ['Aeon'] = 'Enemy',
+                ['UEF'] = 'Enemy',
+                ['Cybran'] = 'Enemy',
+                ['Unknown'] = 'Enemy',
+                ['Player3'] = 'Ally',
+                ['Player4'] = 'Ally',
+                ['Player5'] = 'Ally',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -336,6 +376,14 @@ Scenario = {
                 energy = 0,
             },
             Alliances = {
+                ['Player1'] = 'Ally',
+                ['Aeon'] = 'Enemy',
+                ['UEF'] = 'Enemy',
+                ['Cybran'] = 'Enemy',
+                ['Unknown'] = 'Enemy',
+                ['Player2'] = 'Ally',
+                ['Player4'] = 'Ally',
+                ['Player5'] = 'Ally',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -384,6 +432,14 @@ Scenario = {
                 energy = 0,
             },
             Alliances = {
+                ['Player1'] = 'Ally',
+                ['Aeon'] = 'Enemy',
+                ['UEF'] = 'Enemy',
+                ['Cybran'] = 'Enemy',
+                ['Unknown'] = 'Enemy',
+                ['Player2'] = 'Ally',
+                ['Player3'] = 'Ally',
+                ['Player5'] = 'Ally',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -432,6 +488,14 @@ Scenario = {
                 energy = 0,
             },
             Alliances = {
+                ['Player1'] = 'Ally',
+                ['Aeon'] = 'Enemy',
+                ['UEF'] = 'Enemy',
+                ['Cybran'] = 'Enemy',
+                ['Unknown'] = 'Enemy',
+                ['Player2'] = 'Ally',
+                ['Player3'] = 'Ally',
+                ['Player4'] = 'Ally',
             },
             ['Units'] = GROUP {
                 orders = '',

@@ -28,12 +28,68 @@ local objectives = Oxygen.ObjectiveManager()
 function OnPopulate()
     Game.Armies.Initialize()
 
+    playersManager:Init
+    {
+        {
+            units = {
+                UEF = "UEF1",
+                Cybran = "Cybran1",
+                Aeon = "Aeon1",
+            },
+            color = "3548B8"
+        },
+        {
+            units = {
+                UEF = "UEF2",
+                Cybran = "Cybran2",
+                Aeon = "Aeon2",
+            },
+            color = "113D00"
+        },
+        {
+            units = {
+                UEF = "UEF3",
+                Cybran = "Cybran3",
+                Aeon = "Aeon3",
+            },
+            color = "DF0000"
+        },
+        {
+            units = {
+                UEF = "UEF4",
+                Cybran = "Cybran4",
+                Aeon = "Aeon4",
+            },
+            color = "8835CC"
+        },
+        {
+            units = {
+                UEF = "UEF5",
+                Cybran = "Cybran5",
+                Aeon = "Aeon5",
+            },
+            color = "55D4B9"
+        },
+
+    }
+    
+    Game.Armies.SetSharedUnitCap(4000)
+    Game.Armies.SetUnitCap("Aeon", 4000)
+    Game.Armies.SetUnitCap("Cybran", 4000)
+    Game.Armies.SetUnitCap("UEF", 4000)
+    Game.Armies.SetUnitCap("Unknown", 4000)
+    Game.Armies.SetColor("Aeon", "6ED346")
+    Game.Armies.SetColor("Cybran", "3D0000")
+    Game.Armies.SetColor("UEF", "000144")
+    Game.Armies.SetColor("Unknown", "E68200")
 
 
 end
 
 function OnStart(self)
+    playersManager:WarpIn()
 
+    Game.SetPlayableArea('M1', false)
 
 
 end
