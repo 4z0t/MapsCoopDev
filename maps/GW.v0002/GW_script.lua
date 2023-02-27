@@ -72,15 +72,15 @@ function OnPopulate()
         },
 
     }
-    
+
     Game.Armies.SetSharedUnitCap(4000)
-    Game.Armies.SetUnitCap("Aeon", 4000)
-    Game.Armies.SetUnitCap("Cybran", 4000)
     Game.Armies.SetUnitCap("UEF", 4000)
+    Game.Armies.SetUnitCap("Cybran", 4000)
+    Game.Armies.SetUnitCap("Aeon", 4000)
     Game.Armies.SetUnitCap("Unknown", 4000)
-    Game.Armies.SetColor("Aeon", "6ED346")
-    Game.Armies.SetColor("Cybran", "3D0000")
     Game.Armies.SetColor("UEF", "000144")
+    Game.Armies.SetColor("Cybran", "3D0000")
+    Game.Armies.SetColor("Aeon", "6ED346")
     Game.Armies.SetColor("Unknown", "E68200")
 
 
@@ -90,6 +90,12 @@ function OnStart(self)
     playersManager:WarpIn()
 
     Game.SetPlayableArea('M1', false)
+
+    Oxygen.Brains.UEF = ArmyBrains[2]
+    Oxygen.Brains.Cybran = ArmyBrains[3]
+    Oxygen.Brains.Aeon = ArmyBrains[4]
+    Oxygen.Brains.Unknown = ArmyBrains[5]
+
 
 
 end
