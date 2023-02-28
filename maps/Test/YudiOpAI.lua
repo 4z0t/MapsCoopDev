@@ -40,61 +40,8 @@ DifficultyValue.Extend {
 
 }
 
-
-local Factions = import('/lua/factions.lua').Factions
-
-local BMBC = '/lua/editor/BaseManagerBuildConditions.lua'
-
----@class NukeBaseManger : AdvancedBaseManager
-NukeBaseManger = Class(AdvancedBaseManager)
-{
-
-    ---@param self NukeBaseManger
-    LoadDefaultBaseNukes = function(self)
-        local name = self.BaseName
-        if not self.MultiFaction then
-            self.AIBrain:PBMAddPlatoon {
-                BuilderName = 'BaseManager_NukePlatoon_' .. name,
-                PlatoonTemplate = self:CreateNukePlatoonTemplate(),
-                Priority = 400,
-                PlatoonType = 'Any',
-                RequiresConstruction = false,
-                LocationType = name,
-                PlatoonAIFunction = { Oxygen.PlatoonAI.Missiles, 'PlatoonNukeAI' },
-                BuildConditions = {
-                    { BMBC, 'BaseActive', { name } },
-                    { BMBC, 'NukesEnabled', { name } },
-                },
-                PlatoonData = {
-                    BaseName = name,
-                },
-            }
-            return
-        end
-        for faction = 1, 4 do
-            local factionName = Factions[faction].Key
-            self.AIBrain:PBMAddPlatoon {
-                BuilderName = 'BaseManager_NukePlatoon_' .. name .. factionName,
-                PlatoonTemplate = self:CreateNukePlatoonTemplate(faction),
-                Priority = 400,
-                PlatoonType = 'Any',
-                RequiresConstruction = false,
-                LocationType = name,
-                PlatoonAIFunction = { Oxygen.PlatoonAI.Missiles, 'PlatoonNukeAI' },
-                BuildConditions = {
-                    { BMBC, 'BaseActive', { name } },
-                    { BMBC, 'NukesEnabled', { name } },
-                },
-                PlatoonData = {
-                    BaseName = name,
-                },
-            }
-        end
-    end,
-}
-
 ---@type NukeBaseManger
-local nukeBase = NukeBaseManger()
+local nukeBase = Oxygen.BaseManagers.NukeBaseManger()
 
 function SetupSEBase()
 
