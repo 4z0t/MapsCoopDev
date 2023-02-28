@@ -9,7 +9,7 @@
         "init-coop-dev.lua",
         "/nobugreport",
         "/log",
-        ".\\logs\\game.log",
+        "C:\\Users\\4z0t\\AppData\\Roaming\\Forged Alliance Forever\\logs\\game.log",
         "/EnableDiskWatch",
         "/showlog"
       ],

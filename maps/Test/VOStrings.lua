@@ -3,16 +3,16 @@ lines = {
     Start = {
         {
             text = '[TheWheelie]: GG WP.',
-            vid = '',
-            bank = 'JJ_VO2',
-            cue = 'Intro1_1',
+            vid = 'video.sfd',
+            bank = 'wolf',
+            cue = 'corre',
             faction = 'Cybran'
         },
     },
     Save = {
         {
             text = '[Razarem]: I have been perma banned help me!',
-            vid = '',
+            vid = 'Abasi.sfd',
             bank = 'JJ_VO2',
             cue = 'Intro1_1',
             faction = 'Cybran'
