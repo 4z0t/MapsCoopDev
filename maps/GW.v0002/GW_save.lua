@@ -15,14 +15,14 @@ Scenario = {
     --[[  Areas                                                                    ]]--
     --[[                                                                           ]]--
     Areas = {
-        ['M1'] = {
-            ['rectangle'] = RECTANGLE( 0, 90, 500, 600 ),
+        ['M3'] = {
+            ['rectangle'] = RECTANGLE( 0, 0, 1024, 1024 ),
         },
         ['M2'] = {
             ['rectangle'] = RECTANGLE( 0, 0, 1024, 700 ),
         },
-        ['M3'] = {
-            ['rectangle'] = RECTANGLE( 0, 0, 1024, 1024 ),
+        ['M1'] = {
+            ['rectangle'] = RECTANGLE( 0, 90, 500, 600 ),
         },
     },
     --[[                                                                           ]]--
@@ -31,13 +31,6 @@ Scenario = {
     MasterChain = {
         ['_MASTERCHAIN_'] = {
             Markers = {
-                ['Player1'] = {
-                    ['color'] = STRING( 'ff800080' ),
-                    ['type'] = STRING( 'Blank Marker' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 155.5, 66.2267, 259.5 ),
-                },
                 ['Player2'] = {
                     ['color'] = STRING( 'ff800080' ),
                     ['type'] = STRING( 'Blank Marker' ),
@@ -45,12 +38,12 @@ Scenario = {
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
                     ['position'] = VECTOR3( 145.5, 66.18373, 268.5 ),
                 },
-                ['Player3'] = {
+                ['UEF'] = {
                     ['color'] = STRING( 'ff800080' ),
                     ['type'] = STRING( 'Blank Marker' ),
                     ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 152.5, 66.4025, 244.5 ),
+                    ['position'] = VECTOR3( 408.5, 66.4025, 522.5 ),
                 },
                 ['Player4'] = {
                     ['color'] = STRING( 'ff800080' ),
@@ -59,6 +52,20 @@ Scenario = {
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
                     ['position'] = VECTOR3( 137.5, 66.45328, 247.5 ),
                 },
+                ['Player1'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 155.5, 66.2267, 259.5 ),
+                },
+                ['Unknown'] = {
+                    ['color'] = STRING( 'ff800080' ),
+                    ['type'] = STRING( 'Blank Marker' ),
+                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
+                    ['orientation'] = VECTOR3( 0, 0, 0 ),
+                    ['position'] = VECTOR3( 947.5, 63.65623, 924.5001 ),
+                },
                 ['Player5'] = {
                     ['color'] = STRING( 'ff800080' ),
                     ['type'] = STRING( 'Blank Marker' ),
@@ -66,12 +73,12 @@ Scenario = {
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
                     ['position'] = VECTOR3( 134.5, 66.27358, 264.5 ),
                 },
-                ['UEF'] = {
+                ['Player3'] = {
                     ['color'] = STRING( 'ff800080' ),
                     ['type'] = STRING( 'Blank Marker' ),
                     ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 408.5, 66.4025, 522.5 ),
+                    ['position'] = VECTOR3( 152.5, 66.4025, 244.5 ),
                 },
                 ['Cybran'] = {
                     ['color'] = STRING( 'ff800080' ),
@@ -86,13 +93,6 @@ Scenario = {
                     ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
                     ['orientation'] = VECTOR3( 0, 0, 0 ),
                     ['position'] = VECTOR3( 923.5, 42.58073, 615.5 ),
-                },
-                ['Unknown'] = {
-                    ['color'] = STRING( 'ff800080' ),
-                    ['type'] = STRING( 'Blank Marker' ),
-                    ['prop'] = STRING( '/env/common/props/markers/M_Blank_prop.bp' ),
-                    ['orientation'] = VECTOR3( 0, 0, 0 ),
-                    ['position'] = VECTOR3( 947.5, 63.65623, 924.5001 ),
                 },
             },
         },
@@ -132,14 +132,14 @@ Scenario = {
                 energy = 0,
             },
             Alliances = {
-                ['Aeon'] = 'Enemy',
+                ['Player5'] = 'Ally',
+                ['Player4'] = 'Ally',
+                ['Player2'] = 'Ally',
+                ['Player3'] = 'Ally',
                 ['UEF'] = 'Enemy',
                 ['Cybran'] = 'Enemy',
                 ['Unknown'] = 'Enemy',
-                ['Player2'] = 'Ally',
-                ['Player3'] = 'Ally',
-                ['Player4'] = 'Ally',
-                ['Player5'] = 'Ally',
+                ['Aeon'] = 'Enemy',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -149,58 +149,23 @@ Scenario = {
                         type = 'url0001',
                         orders = '',
                         platoon = '',
-                        Position = { 155.5, 66.2267, 259.5 },
+                        Position = { 155.5, 66.21889, 259.5 },
                         Orientation = { 0, 0, 0 },
                     },
                     ['Aeon1'] = {
                         type = 'ual0001',
                         orders = '',
                         platoon = '',
-                        Position = { 155.5, 66.2267, 259.5 },
+                        Position = { 155.5, 66.21889, 259.5 },
                         Orientation = { 0, 0, 0 },
                     },
                     ['UEF1'] = {
                         type = 'uel0001',
                         orders = '',
                         platoon = '',
-                        Position = { 155.5, 66.2267, 259.5 },
+                        Position = { 155.5, 66.21889, 259.5 },
                         Orientation = { 0, 0, 0 },
                     },
-                },
-            },
-            PlatoonBuilders = {
-                next_platoon_builder_id = '1',
-                Builders = {
-                },
-            },
-        },
-        --[[                                                                           ]]--
-        --[[  Aeon                                                                     ]]--
-        --[[                                                                           ]]--
-        ['Aeon'] = 
-        {
-            personality = '',
-            plans = '/lua/ai/OpAI/DefaultBlankPlanlist.lua',
-            color = 0,
-            faction = 0,
-            Economy = {
-                mass = 0,
-                energy = 0,
-            },
-            Alliances = {
-                ['Player1'] = 'Enemy',
-                ['UEF'] = 'Ally',
-                ['Cybran'] = 'Ally',
-                ['Unknown'] = 'Ally',
-                ['Player2'] = 'Enemy',
-                ['Player3'] = 'Enemy',
-                ['Player4'] = 'Enemy',
-                ['Player5'] = 'Enemy',
-            },
-            ['Units'] = GROUP {
-                orders = '',
-                platoon = '',
-                Units = {
                 },
             },
             PlatoonBuilders = {
@@ -224,13 +189,13 @@ Scenario = {
             },
             Alliances = {
                 ['Player1'] = 'Enemy',
-                ['Aeon'] = 'Ally',
+                ['Player5'] = 'Enemy',
+                ['Player2'] = 'Enemy',
+                ['Player4'] = 'Enemy',
+                ['Player3'] = 'Enemy',
                 ['Cybran'] = 'Ally',
                 ['Unknown'] = 'Ally',
-                ['Player2'] = 'Enemy',
-                ['Player3'] = 'Enemy',
-                ['Player4'] = 'Enemy',
-                ['Player5'] = 'Enemy',
+                ['Aeon'] = 'Ally',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -259,13 +224,48 @@ Scenario = {
             },
             Alliances = {
                 ['Player1'] = 'Enemy',
-                ['Aeon'] = 'Ally',
+                ['Player5'] = 'Enemy',
+                ['Player2'] = 'Enemy',
+                ['Player4'] = 'Enemy',
                 ['UEF'] = 'Ally',
                 ['Unknown'] = 'Ally',
-                ['Player2'] = 'Enemy',
                 ['Player3'] = 'Enemy',
-                ['Player4'] = 'Enemy',
+                ['Aeon'] = 'Ally',
+            },
+            ['Units'] = GROUP {
+                orders = '',
+                platoon = '',
+                Units = {
+                },
+            },
+            PlatoonBuilders = {
+                next_platoon_builder_id = '1',
+                Builders = {
+                },
+            },
+        },
+        --[[                                                                           ]]--
+        --[[  Aeon                                                                     ]]--
+        --[[                                                                           ]]--
+        ['Aeon'] = 
+        {
+            personality = '',
+            plans = '/lua/ai/OpAI/DefaultBlankPlanlist.lua',
+            color = 0,
+            faction = 0,
+            Economy = {
+                mass = 0,
+                energy = 0,
+            },
+            Alliances = {
+                ['Player1'] = 'Enemy',
                 ['Player5'] = 'Enemy',
+                ['Player2'] = 'Enemy',
+                ['Player4'] = 'Enemy',
+                ['UEF'] = 'Ally',
+                ['Cybran'] = 'Ally',
+                ['Player3'] = 'Enemy',
+                ['Unknown'] = 'Ally',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -321,37 +321,37 @@ Scenario = {
             },
             Alliances = {
                 ['Player1'] = 'Ally',
-                ['Aeon'] = 'Enemy',
+                ['Player5'] = 'Ally',
+                ['Player4'] = 'Ally',
+                ['Player3'] = 'Ally',
                 ['UEF'] = 'Enemy',
                 ['Cybran'] = 'Enemy',
                 ['Unknown'] = 'Enemy',
-                ['Player3'] = 'Ally',
-                ['Player4'] = 'Ally',
-                ['Player5'] = 'Ally',
+                ['Aeon'] = 'Enemy',
             },
             ['Units'] = GROUP {
                 orders = '',
                 platoon = '',
                 Units = {
-                    ['Cybran2'] = {
-                        type = 'url0001',
+                    ['UEF2'] = {
+                        type = 'uel0001',
                         orders = '',
                         platoon = '',
-                        Position = { 145.5, 66.18373, 268.5 },
+                        Position = { 145.5, 66.17592, 268.5 },
                         Orientation = { 0, 0, 0 },
                     },
                     ['Aeon2'] = {
                         type = 'ual0001',
                         orders = '',
                         platoon = '',
-                        Position = { 145.5, 66.18373, 268.5 },
+                        Position = { 145.5, 66.17592, 268.5 },
                         Orientation = { 0, 0, 0 },
                     },
-                    ['UEF2'] = {
-                        type = 'uel0001',
+                    ['Cybran2'] = {
+                        type = 'url0001',
                         orders = '',
                         platoon = '',
-                        Position = { 145.5, 66.18373, 268.5 },
+                        Position = { 145.5, 66.17592, 268.5 },
                         Orientation = { 0, 0, 0 },
                     },
                 },
@@ -377,37 +377,37 @@ Scenario = {
             },
             Alliances = {
                 ['Player1'] = 'Ally',
-                ['Aeon'] = 'Enemy',
+                ['Player5'] = 'Ally',
+                ['Player2'] = 'Ally',
+                ['Player4'] = 'Ally',
                 ['UEF'] = 'Enemy',
                 ['Cybran'] = 'Enemy',
                 ['Unknown'] = 'Enemy',
-                ['Player2'] = 'Ally',
-                ['Player4'] = 'Ally',
-                ['Player5'] = 'Ally',
+                ['Aeon'] = 'Enemy',
             },
             ['Units'] = GROUP {
                 orders = '',
                 platoon = '',
                 Units = {
+                    ['UEF3'] = {
+                        type = 'uel0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 152.5, 66.39468, 244.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
                     ['Cybran3'] = {
                         type = 'url0001',
                         orders = '',
                         platoon = '',
-                        Position = { 152.5, 66.4025, 244.5 },
+                        Position = { 152.5, 66.39468, 244.5 },
                         Orientation = { 0, 0, 0 },
                     },
                     ['Aeon3'] = {
                         type = 'ual0001',
                         orders = '',
                         platoon = '',
-                        Position = { 152.5, 66.4025, 244.5 },
-                        Orientation = { 0, 0, 0 },
-                    },
-                    ['UEF3'] = {
-                        type = 'uel0001',
-                        orders = '',
-                        platoon = '',
-                        Position = { 152.5, 66.4025, 244.5 },
+                        Position = { 152.5, 66.39468, 244.5 },
                         Orientation = { 0, 0, 0 },
                     },
                 },
@@ -433,13 +433,13 @@ Scenario = {
             },
             Alliances = {
                 ['Player1'] = 'Ally',
-                ['Aeon'] = 'Enemy',
+                ['Player5'] = 'Ally',
+                ['Player2'] = 'Ally',
+                ['Player3'] = 'Ally',
                 ['UEF'] = 'Enemy',
                 ['Cybran'] = 'Enemy',
                 ['Unknown'] = 'Enemy',
-                ['Player2'] = 'Ally',
-                ['Player3'] = 'Ally',
-                ['Player5'] = 'Ally',
+                ['Aeon'] = 'Enemy',
             },
             ['Units'] = GROUP {
                 orders = '',
@@ -449,21 +449,21 @@ Scenario = {
                         type = 'url0001',
                         orders = '',
                         platoon = '',
-                        Position = { 137.5, 66.45328, 247.5 },
+                        Position = { 137.5, 66.44546, 247.5 },
                         Orientation = { 0, 0, 0 },
                     },
                     ['Aeon4'] = {
                         type = 'ual0001',
                         orders = '',
                         platoon = '',
-                        Position = { 137.5, 66.45328, 247.5 },
+                        Position = { 137.5, 66.44546, 247.5 },
                         Orientation = { 0, 0, 0 },
                     },
                     ['UEF4'] = {
                         type = 'uel0001',
                         orders = '',
                         platoon = '',
-                        Position = { 137.5, 66.45328, 247.5 },
+                        Position = { 137.5, 66.44546, 247.5 },
                         Orientation = { 0, 0, 0 },
                     },
                 },
@@ -489,37 +489,37 @@ Scenario = {
             },
             Alliances = {
                 ['Player1'] = 'Ally',
-                ['Aeon'] = 'Enemy',
+                ['Player4'] = 'Ally',
+                ['Player2'] = 'Ally',
+                ['Player3'] = 'Ally',
                 ['UEF'] = 'Enemy',
                 ['Cybran'] = 'Enemy',
                 ['Unknown'] = 'Enemy',
-                ['Player2'] = 'Ally',
-                ['Player3'] = 'Ally',
-                ['Player4'] = 'Ally',
+                ['Aeon'] = 'Enemy',
             },
             ['Units'] = GROUP {
                 orders = '',
                 platoon = '',
                 Units = {
-                    ['Cybran5'] = {
-                        type = 'url0001',
-                        orders = '',
-                        platoon = '',
-                        Position = { 134.5, 66.27358, 264.5 },
-                        Orientation = { 0, 0, 0 },
-                    },
                     ['Aeon5'] = {
                         type = 'ual0001',
                         orders = '',
                         platoon = '',
-                        Position = { 134.5, 66.27358, 264.5 },
+                        Position = { 134.5, 66.26576, 264.5 },
+                        Orientation = { 0, 0, 0 },
+                    },
+                    ['Cybran5'] = {
+                        type = 'url0001',
+                        orders = '',
+                        platoon = '',
+                        Position = { 134.5, 66.26576, 264.5 },
                         Orientation = { 0, 0, 0 },
                     },
                     ['UEF5'] = {
                         type = 'uel0001',
                         orders = '',
                         platoon = '',
-                        Position = { 134.5, 66.27358, 264.5 },
+                        Position = { 134.5, 66.26576, 264.5 },
                         Orientation = { 0, 0, 0 },
                     },
                 },
