@@ -311,7 +311,7 @@ Scenario = {
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_2'] = {
-                                                        type = 'zeb9501',
+                                                        type = 'ueb0201',
                                                         orders = '',
                                                         platoon = '',
                                                         Position = { 376.5, 66.44936, 152.5 },
@@ -598,7 +598,7 @@ Scenario = {
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_43'] = {
-                                                        type = 'zeb9502',
+                                                        type = 'ueb0202',
                                                         orders = '',
                                                         platoon = '',
                                                         Position = { 419.5, 66.32045, 140.5 },
