@@ -1,4 +1,4 @@
-local MAP_FOLDER = Oxygen.Folder()
+local MAP_FOLDER = Oxygen.ScenarioFolder()
 LOG(MAP_FOLDER)
 
 local ScenarioFramework = import('/lua/ScenarioFramework.lua')
@@ -36,7 +36,7 @@ function OnPopulate()
                 Cybran = "Cybran1",
                 Aeon = "Aeon1",
             },
-            color = "3548B8"
+            color = "0026FF"
         },
         {
             units = {
@@ -78,23 +78,28 @@ function OnPopulate()
     Game.Armies.SetUnitCap("Cybran", 4000)
     Game.Armies.SetUnitCap("Aeon", 4000)
     Game.Armies.SetUnitCap("Unknown", 4000)
-    Game.Armies.SetColor("UEF", "000144")
-    Game.Armies.SetColor("Cybran", "3D0000")
+    Game.Armies.SetColor("UEF", "2C2FE0")
+    Game.Armies.SetColor("Cybran", "680000")
     Game.Armies.SetColor("Aeon", "6ED346")
     Game.Armies.SetColor("Unknown", "E68200")
 
+  
 
 end
 
 function OnStart(self)
-    playersManager:WarpIn()
-
     Game.SetPlayableArea('M1', false)
+
+    playersManager:WarpIn()
 
     Oxygen.Brains.UEF = ArmyBrains[2]
     Oxygen.Brains.Cybran = ArmyBrains[3]
     Oxygen.Brains.Aeon = ArmyBrains[4]
     Oxygen.Brains.Unknown = ArmyBrains[5]
+
+    import(Oxygen.ScenarioFolder "M1_UEF_Bases.lua").Main()
+
+    
 
 
 
