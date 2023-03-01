@@ -36,7 +36,7 @@ function OnPopulate()
                 Cybran = "Cybran1",
                 Aeon = "Aeon1",
             },
-            color = "0026FF"
+            color = "00A2FF"
         },
         {
             units = {
@@ -83,7 +83,7 @@ function OnPopulate()
     Game.Armies.SetColor("Aeon", "6ED346")
     Game.Armies.SetColor("Unknown", "E68200")
 
-  
+
 
 end
 
@@ -99,7 +99,7 @@ function OnStart(self)
 
     import(Oxygen.ScenarioFolder "M1_UEF_Bases.lua").Main()
 
-    
+
 
 
 
