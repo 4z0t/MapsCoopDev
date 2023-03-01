@@ -19,10 +19,10 @@ Scenario = {
             ['rectangle'] = RECTANGLE( 0, 0, 1024, 1024 ),
         },
         ['M2'] = {
-            ['rectangle'] = RECTANGLE( 0, 0, 1024, 700 ),
+            ['rectangle'] = RECTANGLE( 0, 0, 1024, 660 ),
         },
         ['M1'] = {
-            ['rectangle'] = RECTANGLE( 0, 90, 500, 600 ),
+            ['rectangle'] = RECTANGLE( 0, 90, 450, 600 ),
         },
     },
     --[[                                                                           ]]--
