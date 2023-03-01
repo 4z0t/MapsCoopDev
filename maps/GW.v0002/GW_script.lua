@@ -1,4 +1,4 @@
-local MAP_FOLDER = Oxygen.MapFolder()
+local MAP_FOLDER = Oxygen.Folder()
 LOG(MAP_FOLDER)
 
 local ScenarioFramework = import('/lua/ScenarioFramework.lua')
