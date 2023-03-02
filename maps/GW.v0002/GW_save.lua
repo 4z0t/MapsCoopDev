@@ -456,7 +456,7 @@ Scenario = {
                                                         Orientation = { 0, 0, 0 },
                                                     },
                                                     ['UNIT_569'] = {
-                                                        type = 'zeb9501',
+                                                        type = 'ueb0201',
                                                         orders = '',
                                                         platoon = '',
                                                         Position = { 39.5, 66.30482, 439.5 },
