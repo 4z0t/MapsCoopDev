@@ -87,15 +87,18 @@ function OnPopulate()
 
 end
 
+
+local Brains = Oxygen.Brains
+
 function OnStart(self)
     Game.SetPlayableArea('M1', false)
 
     playersManager:WarpIn()
 
-    Oxygen.Brains.UEF = ArmyBrains[2]
-    Oxygen.Brains.Cybran = ArmyBrains[3]
-    Oxygen.Brains.Aeon = ArmyBrains[4]
-    Oxygen.Brains.Unknown = ArmyBrains[5]
+   Brains.UEF = ArmyBrains[2]
+   Brains.Cybran = ArmyBrains[3]
+   Brains.Aeon = ArmyBrains[4]
+   Brains.Unknown = ArmyBrains[5]
 
     import(Oxygen.ScenarioFolder "M1_UEF_Bases.lua").Main()
 
