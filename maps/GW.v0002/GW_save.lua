@@ -6335,7 +6335,7 @@ Scenario = {
         {
             personality = '',
             plans = '/lua/ai/OpAI/DefaultBlankPlanlist.lua',
-            color = 19,
+            color = 17,
             faction = 1,
             Economy = {
                 mass = 0,

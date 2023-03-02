@@ -1,3 +1,5 @@
+local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
+
 local PlatoonBuilder = Oxygen.PlatoonBuilder
 local OpAIBuilder = Oxygen.OpAIBuilder
 local UNIT = Oxygen.UnitNames.Get
@@ -35,6 +37,8 @@ DifficultyValue.Extend {
 
 ---@type AdvancedBaseManager
 local neBase = Oxygen.BaseManager()
+---@type AdvancedBaseManager
+local swBase = Oxygen.BaseManager()
 
 
 function NEBase()
@@ -42,13 +46,27 @@ function NEBase()
     neBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
     neBase:SetActive('AirScouting', true)
     neBase:SetBuildAllStructures(true)
-    
-  
+
+
     neBase:SetBuildTransports(true)
     neBase.TransportsNeeded = 7
 end
 
+function SWBase()
+    swBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_SW_Base", "M1_SW_Base_M", 65, { ["M1_SW_Base"] = 1000 })
+    swBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
+    swBase:SetActive('AirScouting', true)
+    swBase:SetBuildAllStructures(true)
+
+
+    swBase:SetBuildTransports(true)
+    swBase.TransportsNeeded = 7
+end
 
 function Main()
+
+    Oxygen.Game.Armies.CreateArmyGroup("UEF", 'M1_SW_Power', true)
+
     NEBase()
+    SWBase()
 end

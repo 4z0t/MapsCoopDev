@@ -26,7 +26,11 @@ local playersManager = Oxygen.PlayersManager()
 local objectives = Oxygen.ObjectiveManager()
 
 function OnPopulate()
+
+    LOG "INITIALIZING ARMIES"
     Game.Armies.Initialize()
+
+    LOG "SETTING UP PLAYERS"
 
     playersManager:Init
     {
@@ -73,6 +77,8 @@ function OnPopulate()
 
     }
 
+
+
     Game.Armies.SetSharedUnitCap(4000)
     Game.Armies.SetUnitCap("UEF", 4000)
     Game.Armies.SetUnitCap("Cybran", 4000)
@@ -85,20 +91,23 @@ function OnPopulate()
 
 
 
-end
 
+end
 
 local Brains = Oxygen.Brains
 
 function OnStart(self)
+
+    LOG "STARTING SCENARIO"
+
     Game.SetPlayableArea('M1', false)
 
     playersManager:WarpIn()
 
-   Brains.UEF = ArmyBrains[2]
-   Brains.Cybran = ArmyBrains[3]
-   Brains.Aeon = ArmyBrains[4]
-   Brains.Unknown = ArmyBrains[5]
+    Brains.UEF = ArmyBrains[2]
+    Brains.Cybran = ArmyBrains[3]
+    Brains.Aeon = ArmyBrains[4]
+    Brains.Unknown = ArmyBrains[5]
 
     import(Oxygen.ScenarioFolder "M1_UEF_Bases.lua").Main()
 
