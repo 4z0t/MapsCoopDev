@@ -33,6 +33,9 @@ DifficultyValue.Extend {
 
     ["RAS Bois count"] = { 10, 30, 5 },
 
+    ["Build Additional Land defenses"] = { false, false, true },
+    ["Build Additional Air defenses"] = { false, false, true },
+
 }
 
 ---@type AdvancedBaseManager
@@ -65,7 +68,6 @@ function SWBase()
     swBase.TransportsNeeded = 7
 end
 
-
 function SEBase()
     seBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_SE_Base", "M1_SE_Base_M", 150, { ["M1_SE_Base"] = 1000 })
     seBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
@@ -75,6 +77,29 @@ function SEBase()
 
     seBase:SetBuildTransports(true)
     seBase.TransportsNeeded = 7
+    seBase.MaximumConstructionEngineers = 15
+
+    if DV "Build Additional Air defenses" then
+        seBase:AddBuildStructures("M1_SE_Air", {
+            Priority = 2000,
+            BuildConditions =
+            {
+                BC.HumansCategoryCondition(categories.AIR, ">=", 30),
+                BC.HumansBuiltOrActiveCategoryCondition(categories.AIR * categories.EXPERIMENTAL, ">", 0)
+            }
+        })
+    end
+
+    if DV "Build Additional Land defenses" then
+
+        seBase:AddBuildStructures("M1_SE_Land", {
+            Priority = 1800,
+            BuildConditions =
+            {
+                BC.HumansCategoryCondition(categories.LAND, ">=", 30)
+            }
+        })
+    end
 end
 
 function Main()
