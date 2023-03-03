@@ -25,7 +25,7 @@ local playersManager = Oxygen.PlayersManager()
 
 local objectives = Oxygen.ObjectiveManager()
 
-
+objectives.Data = {}
 
 objectives:Init
 {
@@ -36,7 +36,14 @@ objectives:Init
         :To "locate"
         :OnStart(function()
 
+            AC.NISMode(function()
+                AC.MoveTo("Cam0", 0)
+                AC.MoveTo("Cam1", 3)
+                playersManager:WarpIn()
+            end)
+
             local unit = ScenarioUtils.CreateArmyUnit('Unknown', 'M1_MindController')
+            objectives.Data.M1_MindController = unit
             unit:SetDoNotTarget(true)
             unit:SetCanTakeDamage(false)
             unit:SetCanBeKilled(false)
@@ -44,13 +51,35 @@ objectives:Init
             --ScenarioFramework.Dialogue(VOStrings.Save, nil, true)
             ---@type ObjectiveTarget
             return {
-                Units = { unit },
+                Units = { objectives.Data.M1_MindController },
+            }
+        end)
+        :OnSuccess(function()
+            LOG("ABOBA")
+        end)
+        :Next "M1_capture"
+        :Create(),
+
+    objectiveBuilder
+        :New "M1_capture"
+        :Title "Capture unknown structure"
+        :Description ""
+        :To "capture"
+        :Target {
+            MarkUnits = true
+        }
+        :OnStart(function()
+            return {
+                Units = { objectives.Data.M1_MindController },
             }
         end)
         :OnSuccess(function()
             LOG("ABOBA")
         end)
         :Create()
+
+
+
 
 }
 
@@ -132,7 +161,7 @@ function OnStart(self)
 
     Game.SetPlayableArea('M1', false)
 
-    playersManager:WarpIn()
+
 
     Brains.UEF = ArmyBrains[2]
     Brains.Cybran = ArmyBrains[3]
