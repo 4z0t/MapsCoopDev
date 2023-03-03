@@ -215,6 +215,7 @@ function Main()
             :Priority(280)
             :AddUnitDefault(UNIT "Rhino", 4)
             :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
+            :Difficulties { "Medium", "Easy" }
             :Create(),
 
         pb:NewDefault "bois"
