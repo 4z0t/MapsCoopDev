@@ -25,6 +25,36 @@ local playersManager = Oxygen.PlayersManager()
 
 local objectives = Oxygen.ObjectiveManager()
 
+
+
+objectives:Init
+{
+    objectiveBuilder
+        :New "M1_locate"
+        :Title "Scout out the area"
+        :Description ""
+        :To "locate"
+        :OnStart(function()
+
+            local unit = ScenarioUtils.CreateArmyUnit('Unknown', 'M1_MindController')
+            unit:SetDoNotTarget(true)
+            unit:SetCanTakeDamage(false)
+            unit:SetCanBeKilled(false)
+            unit:SetReclaimable(false)
+            --ScenarioFramework.Dialogue(VOStrings.Save, nil, true)
+            ---@type ObjectiveTarget
+            return {
+                Units = { unit },
+            }
+        end)
+        :OnSuccess(function()
+            LOG("ABOBA")
+        end)
+        :Create()
+
+}
+
+
 function OnPopulate()
 
     LOG "INITIALIZING ARMIES"
@@ -112,7 +142,7 @@ function OnStart(self)
     import(Oxygen.ScenarioFolder "M1_UEF_Bases.lua").Main()
 
 
-
+    objectives:Start "M1_locate"
 
 
 end
