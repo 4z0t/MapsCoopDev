@@ -39,6 +39,8 @@ DifficultyValue.Extend {
 local neBase = Oxygen.BaseManager()
 ---@type AdvancedBaseManager
 local swBase = Oxygen.BaseManager()
+---@type AdvancedBaseManager
+local seBase = Oxygen.BaseManager()
 
 
 function NEBase()
@@ -63,10 +65,23 @@ function SWBase()
     swBase.TransportsNeeded = 7
 end
 
+
+function SEBase()
+    seBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_SE_Base", "M1_SE_Base_M", 100, { ["M1_SE_Base"] = 1000 })
+    seBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
+    seBase:SetActive('AirScouting', true)
+    seBase:SetBuildAllStructures(true)
+
+
+    seBase:SetBuildTransports(true)
+    seBase.TransportsNeeded = 7
+end
+
 function Main()
 
     Oxygen.Game.Armies.CreateArmyGroup("UEF", 'M1_SW_Power', true)
 
     NEBase()
     SWBase()
+    SEBase()
 end
