@@ -42,7 +42,7 @@ objectives:Init
                 playersManager:WarpIn()
             end)
 
-            local unit = ScenarioUtils.CreateArmyUnit('Unknown', 'M1_MindController')
+            local unit = Game.Armies.CreateUnit('Unknown', 'M1_MindController')
             objectives.Data.M1_MindController = unit
             unit:SetDoNotTarget(true)
             unit:SetCanTakeDamage(false)
@@ -65,7 +65,8 @@ objectives:Init
         :Title "Capture unknown structure"
         :Description ""
         :To "capture"
-        :Target {
+        :Target
+        {
             MarkUnits = true
         }
         :OnStart(function()

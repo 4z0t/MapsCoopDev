@@ -47,7 +47,11 @@ local seBase = Oxygen.BaseManager()
 
 
 function NEBase()
-    neBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_NE_Base", "M1_NE_Base_M", 100, { ["M1_NE_Base"] = 1000 })
+    neBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_NE_Base", "M1_NE_Base_M", 100,
+        {
+            ["M1_NE_Base"] = 1000
+        }
+    )
     neBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
     neBase:SetActive('AirScouting', true)
     neBase:SetBuildAllStructures(true)
@@ -58,7 +62,11 @@ function NEBase()
 end
 
 function SWBase()
-    swBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_SW_Base", "M1_SW_Base_M", 65, { ["M1_SW_Base"] = 1000 })
+    swBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_SW_Base", "M1_SW_Base_M", 65,
+        {
+            ["M1_SW_Base"] = 1000
+        }
+    )
     swBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
     swBase:SetActive('AirScouting', true)
     swBase:SetBuildAllStructures(true)
