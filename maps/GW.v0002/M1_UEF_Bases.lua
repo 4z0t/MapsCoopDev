@@ -1,7 +1,6 @@
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 
 local PlatoonBuilder = Oxygen.PlatoonBuilder
-local OpAIBuilder = Oxygen.OpAIBuilder
 local UNIT = Oxygen.UnitNames.Get
 local AdvancedBaseManager = Oxygen.BaseManager
 local DifficultyValue = Oxygen.DifficultyValue
@@ -10,6 +9,9 @@ local BC = Oxygen.BuildConditions
 
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
 local YPAIFileName = '/maps/Test/YudiPlatoonAI.lua'
+
+
+local OpAIBuilders = Oxygen.OpAIBuilders
 
 
 DifficultyValue.Extend {
@@ -36,7 +38,19 @@ DifficultyValue.Extend {
     ["Build Additional Land defenses"] = { false, false, true },
     ["Build Additional Air defenses"] = { false, false, true },
 
+
+    ["M1 NE Pillars"] = { 4, 5, 6 },
+
+    -- ["M1 NE flak"]={0,1,2},
+
+    -- ["M1 NE "]={}
+
 }
+local DiffValues = Oxygen.DifficultyValues
+DiffValues.M1_NE_Pillars = { 4, 5, 6 }
+DiffValues.M1_NE_Flak = { 0, 1, 2 }
+DiffValues.M1_NE_Shield = { 1, 2, 3 }
+
 
 ---@type AdvancedBaseManager
 local neBase = Oxygen.BaseManager()
@@ -55,10 +69,46 @@ function NEBase()
     neBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
     neBase:SetActive('AirScouting', true)
     neBase:SetBuildAllStructures(true)
-
-
     neBase:SetBuildTransports(true)
     neBase.TransportsNeeded = 7
+
+
+    ---@type LandAttacksOpAIBuilder
+    local landOpAI = OpAIBuilders.LandAttacks()
+
+
+    landOpAI
+        :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
+        :UseData
+        {
+            PatrolChains = {
+                "M1_LAC7",
+                "M1_LAC5",
+                "M1_LAC4",
+            }
+        }
+
+
+    -- neBase:LoadOpAIs
+    -- {
+    --     landOpAI
+    --         :New "NE Pillar attack"
+    --         :Priority(100)
+    --         :Quantity("HeavyTanks", DiffValues.M1_NE_Pillars)
+    --         :Quantity("MobileShields", DiffValues.M1_NE_Shield)
+    --         --:Quantity("MobileFlak", DiffValues.M1_NE_Flak)
+    --         :Create(),
+
+    --     landOpAI
+    --         :New "NE Light attack"
+    --         :Priority(200)
+    --         :Quantity("LightArtillery", 4)
+    --         :Quantity("LightTanks", 6)
+    --         :Create()
+    -- }
+
+
+    
 end
 
 function SWBase()
