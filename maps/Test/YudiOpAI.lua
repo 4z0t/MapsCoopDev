@@ -249,7 +249,8 @@ function Main()
 
         engyOpAIb
             :New "Engi attack"
-            :Quantity("T1Engineers", 4)
+            :Quantity("T2Engineers", 4)
+            :EnableChild('T2Engineers')
             :AIFunction(SPAIFileName, 'SplitPatrolThread')
             :Data
             {
@@ -271,6 +272,17 @@ function Main()
             :Data
             {
                 CategoryList = { categories.AIR },
+            }
+            :Create(),
+
+        airOpAIb
+            :New "Bombers"
+            :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+            :Priority(300)
+            :Quantity("Bombers", 5)
+            :Data
+            {
+                CategoryList = { categories.LAND },
             }
             :Create(),
 
