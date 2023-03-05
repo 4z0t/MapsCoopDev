@@ -109,7 +109,7 @@ function NukeBase()
 end
 
 function Main()
-    mainBase:InitializeDifficultyTables(Brains.Yudi, "YudiBase", "YudiBase_M", 100, { MainBase = 1000 }, true)
+    mainBase:InitializeDifficultyTables(Brains.Yudi, "YudiBase", "YudiBase_M", 100, { MainBase = 1000 })
     mainBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
     mainBase:SetActive('AirScouting', true)
     mainBase:SetBuildAllStructures(true)
@@ -237,39 +237,41 @@ function Main()
 
     ---@type OpAIBuilder
     local opAIb = OpAIBuilder()
+
+    ---@type AirAttacksOpAIBuilder
+    local airOpAIb = Oxygen.OpAIBuilders.AirAttacks()
+
+    ---@type EngineerAttacksOpAIBuilder
+    local engyOpAIb = Oxygen.OpAIBuilders.EngineerAttacks()
+
     mainBase:LoadOpAIs
     {
 
-        opAIb
+        engyOpAIb
             :New "Engi attack"
-            :Type "EngineerAttack"
-            :Quantity("T1Engineer", 4)
+            :Quantity("T1Engineers", 4)
+            :AIFunction(SPAIFileName, 'SplitPatrolThread')
             :Data
             {
-                MasterPlatoonFunction = { SPAIFileName, 'SplitPatrolThread' },
-                PlatoonData = {
-                    PatrolChains = {
-                        "LAC01",
-                        "LAC02",
-                        "LAC03",
-                    },
+                PatrolChains = {
+                    "LAC01",
+                    "LAC02",
+                    "LAC03",
                 },
-                Priority = 300,
             }
+            :Priority(300)
             :Create(),
 
-        opAIb
+
+        airOpAIb
             :New "ASF attack"
-            :Type "AirAttacks"
+            :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+            :Priority(250)
+            :Quantity('AirSuperiority', DV "ASF attack count")
             :Data
             {
-                MasterPlatoonFunction = { SPAIFileName, 'CategoryHunterPlatoonAI' },
-                PlatoonData = {
-                    CategoryList = { categories.AIR },
-                },
-                Priority = 250,
+                CategoryList = { categories.AIR },
             }
-            :Quantity("AirSuperiority", DV "ASF attack count")
             :Create(),
 
         opAIb
