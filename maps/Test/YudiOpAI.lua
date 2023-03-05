@@ -241,6 +241,9 @@ function Main()
     ---@type AirAttacksOpAIBuilder
     local airOpAIb = Oxygen.OpAIBuilders.AirAttacks()
 
+    airOpAIb
+        :UseAIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+
     ---@type EngineerAttacksOpAIBuilder
     local engyOpAIb = Oxygen.OpAIBuilders.EngineerAttacks()
 
@@ -260,13 +263,13 @@ function Main()
                     "LAC03",
                 },
             }
+            :AddCondition(BC.BrainEconomyCondition("MassStorage", "<", 5000))
             :Priority(300)
             :Create(),
 
 
         airOpAIb
             :New "ASF attack"
-            :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
             :Priority(250)
             :Quantity('AirSuperiority', DV "ASF attack count")
             :Data
@@ -277,13 +280,25 @@ function Main()
 
         airOpAIb
             :New "Bombers"
-            :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
             :Priority(300)
             :Quantity("Bombers", 5)
+            :TargettingPriorities { categories.ENGINEER - categories.COMMAND - categories.SUBCOMMANDER }
             :Data
             {
                 CategoryList = { categories.LAND },
             }
+            :Create(),
+
+        airOpAIb
+            :New "Strats"
+            :Priority(500)
+            :Data
+            {
+                CategoryList = { categories.MASSPRODUCTION }
+            }
+            :Quantity("StratBombers", 5)
+            :EnableChild("StratBombers")
+            :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 300 / 10))
             :Create(),
 
         opAIb
