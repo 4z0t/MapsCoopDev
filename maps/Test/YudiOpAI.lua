@@ -109,7 +109,7 @@ function NukeBase()
 end
 
 function Main()
-    mainBase:InitializeDifficultyTables(Brains.Yudi, "YudiBase", "YudiBase_M", 100, { MainBase = 1000 })
+    mainBase:InitializeDifficultyTables(Brains.Yudi, "YudiBase", "YudiBase_M", 100, { MainBase = 1000 }, true)
     mainBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
     mainBase:SetActive('AirScouting', true)
     mainBase:SetBuildAllStructures(true)
@@ -246,6 +246,7 @@ function Main()
 
     ---@type EngineerAttacksOpAIBuilder
     local engyOpAIb = Oxygen.OpAIBuilders.EngineerAttacks()
+
 
     mainBase:LoadOpAIs
     {
