@@ -150,71 +150,72 @@ function SEBase()
 
 
     seBase:SetBuildTransports(true)
-    seBase.TransportsNeeded = 7
+    seBase.TransportsNeeded = 2
     seBase.MaximumConstructionEngineers = 15
 
 
 
+    do --land platoons
 
+        ---@type PlatoonTemplateBuilder
+        local pb = PlatoonBuilder()
 
-    ---@type PlatoonTemplateBuilder
-    local pb = PlatoonBuilder()
-
-    pb
-        :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
-        :UseType "Land"
-        :UseData
-        {
-            PatrolChains = {
-                "M1_LAC3",
-                "M1_LAC6",
+        pb
+            :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
+            :UseType "Land"
+            :UseData
+            {
+                PatrolChains = {
+                    "M1_LAC3",
+                    "M1_LAC6",
+                }
             }
-        }
 
 
-    seBase:LoadPlatoons
-    {
-        pb:NewDefault "SE Titan attack"
-            :AddUnit(UNIT "Titan", DiffValues.M1_SE_Titans)
-            :Priority(200)
-            :InstanceCount(4)
-            :Create()
-
-
-    }
-
-
-    ---@type PlatoonTemplateBuilder
-    local pb = PlatoonBuilder()
-
-    pb
-        :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
-        :UseType "Air"
-        :UseData
+        seBase:LoadPlatoons
         {
-            PatrolChains = {
-                "M1_AAC2",
-            }
+            pb:NewDefault "SE Titan attack"
+                :AddUnit(UNIT "Titan", DiffValues.M1_SE_Titans)
+                :Priority(200)
+                :InstanceCount(4)
+                :Create()
+
+
         }
+    end
+
+    do --air platoons
+        ---@type PlatoonTemplateBuilder
+        local pb = PlatoonBuilder()
+
+        pb
+            :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
+            :UseType "Air"
+            :UseData
+            {
+                PatrolChains = {
+                    "M1_AAC2",
+                }
+            }
 
 
-    seBase:LoadPlatoons
-    {
-        pb:NewDefault "SE T1 bomber attack"
-            :AddUnit(UNIT "T1 UEF Bomber", DiffValues.M1_SE_Bombers)
-            :Priority(200)
-            :InstanceCount(4)
-            :Create(),
+        seBase:LoadPlatoons
+        {
+            pb:NewDefault "SE T1 bomber attack"
+                :AddUnit(UNIT "T1 UEF Bomber", DiffValues.M1_SE_Bombers)
+                :Priority(200)
+                :InstanceCount(4)
+                :Create(),
 
-        pb:NewDefault "SE Gunship attack"
-            :AddUnit(UNIT "T2 UEF Gunship", DiffValues.M1_SE_Gunships)
-            :Priority(100)
-            :InstanceCount(2)
-            :Create()
+            pb:NewDefault "SE Gunship attack"
+                :AddUnit(UNIT "T2 UEF Gunship", DiffValues.M1_SE_Gunships)
+                :Priority(100)
+                :InstanceCount(2)
+                :Create()
 
 
-    }
-
+        }
+    end
 
 
 
