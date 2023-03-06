@@ -94,8 +94,7 @@ function NEBase()
 
     neBase:LoadPlatoons
     {
-        pb
-            :NewDefault "NE Pillar attack"
+        pb:NewDefault "NE Pillar attack"
             :Priority(100)
             :InstanceCount(4)
             :AddUnit(UNIT "Pillar", DiffValues.M1_NE_Pillars)
@@ -103,8 +102,7 @@ function NEBase()
             :AddUnit(UNIT "T2 UEF Flak", DiffValues.M1_NE_Flak)
             :Create(),
 
-        pb
-            :NewDefault "ArtyDrop"
+        pb:NewDefault "ArtyDrop"
             :Priority(200)
             :AddUnit(UNIT "Lobo", DiffValues.M1_NE_LoboDrop)
             :BuildOnce()
@@ -140,6 +138,10 @@ function SWBase()
     swBase.TransportsNeeded = 7
 end
 
+DiffValues.M1_SE_Titans = { 3, 4, 5 }
+DiffValues.M1_SE_Bombers = { 3, 4, 5 }
+DiffValues.M1_SE_Gunships = { 3, 4, 5 }
+
 function SEBase()
     seBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_SE_Base", "M1_SE_Base_M", 150, { ["M1_SE_Base"] = 1000 })
     seBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
@@ -150,6 +152,76 @@ function SEBase()
     seBase:SetBuildTransports(true)
     seBase.TransportsNeeded = 7
     seBase.MaximumConstructionEngineers = 15
+
+
+
+
+
+    ---@type PlatoonTemplateBuilder
+    local pb = PlatoonBuilder()
+
+    pb
+        :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
+        :UseType "Land"
+        :UseData
+        {
+            PatrolChains = {
+                "M1_LAC3",
+                "M1_LAC6",
+            }
+        }
+
+
+    seBase:LoadPlatoons
+    {
+        pb:NewDefault "SE Titan attack"
+            :AddUnit(UNIT "Titan", DiffValues.M1_SE_Titans)
+            :Priority(200)
+            :InstanceCount(4)
+            :Create()
+
+
+    }
+
+
+    ---@type PlatoonTemplateBuilder
+    local pb = PlatoonBuilder()
+
+    pb
+        :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
+        :UseType "Air"
+        :UseData
+        {
+            PatrolChains = {
+                "M1_AAC2",
+            }
+        }
+
+
+    seBase:LoadPlatoons
+    {
+        pb:NewDefault "SE T1 bomber attack"
+            :AddUnit(UNIT "T1 UEF Bomber", DiffValues.M1_SE_Bombers)
+            :Priority(200)
+            :InstanceCount(4)
+            :Create(),
+
+        pb:NewDefault "SE Gunship attack"
+            :AddUnit(UNIT "T2 UEF Gunship", DiffValues.M1_SE_Gunships)
+            :Priority(100)
+            :InstanceCount(2)
+            :Create()
+
+
+    }
+
+
+
+
+
+
+
+
 
     if DV "Build Additional Air defenses" then
         seBase:AddBuildStructures("M1_SE_Air", {
