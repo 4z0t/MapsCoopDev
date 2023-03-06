@@ -10,8 +10,13 @@ local BC = Oxygen.BuildConditions
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
 local YPAIFileName = '/maps/Test/YudiPlatoonAI.lua'
 
+---@type AdvancedBaseManager
+local neBase = Oxygen.BaseManager()
+---@type AdvancedBaseManager
+local swBase = Oxygen.BaseManager()
+---@type AdvancedBaseManager
+local seBase = Oxygen.BaseManager()
 
-local OpAIBuilders = Oxygen.OpAIBuilders
 
 
 DifficultyValue.Extend {
@@ -50,14 +55,9 @@ local DiffValues = Oxygen.DifficultyValues
 DiffValues.M1_NE_Pillars = { 4, 5, 6 }
 DiffValues.M1_NE_Flak = { 0, 1, 2 }
 DiffValues.M1_NE_Shield = { 1, 2, 3 }
+DiffValues.M1_NE_LoboDrop = { 8, 12, 16 }
 
 
----@type AdvancedBaseManager
-local neBase = Oxygen.BaseManager()
----@type AdvancedBaseManager
-local swBase = Oxygen.BaseManager()
----@type AdvancedBaseManager
-local seBase = Oxygen.BaseManager()
 
 
 function NEBase()
@@ -73,12 +73,16 @@ function NEBase()
     neBase.TransportsNeeded = 7
 
 
-    ---@type LandAttacksOpAIBuilder
-    local landOpAI = OpAIBuilders.LandAttacks()
 
 
-    landOpAI
+
+
+    ---@type PlatoonTemplateBuilder
+    local pb = PlatoonBuilder()
+
+    pb
         :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
+        :UseType "Land"
         :UseData
         {
             PatrolChains = {
@@ -88,27 +92,37 @@ function NEBase()
             }
         }
 
+    neBase:LoadPlatoons
+    {
+        pb
+            :NewDefault "NE Pillar attack"
+            :Priority(100)
+            :InstanceCount(4)
+            :AddUnit(UNIT "Pillar", DiffValues.M1_NE_Pillars)
+            :AddUnit(UNIT "Parashield", DiffValues.M1_NE_Shield)
+            :AddUnit(UNIT "T2 UEF Flak", DiffValues.M1_NE_Flak)
+            :Create(),
 
-    -- neBase:LoadOpAIs
-    -- {
-    --     landOpAI
-    --         :New "NE Pillar attack"
-    --         :Priority(100)
-    --         :Quantity("HeavyTanks", DiffValues.M1_NE_Pillars)
-    --         :Quantity("MobileShields", DiffValues.M1_NE_Shield)
-    --         --:Quantity("MobileFlak", DiffValues.M1_NE_Flak)
-    --         :Create(),
-
-    --     landOpAI
-    --         :New "NE Light attack"
-    --         :Priority(200)
-    --         :Quantity("LightArtillery", 4)
-    --         :Quantity("LightTanks", 6)
-    --         :Create()
-    -- }
+        pb
+            :NewDefault "ArtyDrop"
+            :Priority(200)
+            :AddUnit(UNIT "Lobo", DiffValues.M1_NE_LoboDrop)
+            :BuildOnce()
+            :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
+            :Data
+            {
+                TransportReturn = "M1_NE_Base_M",
+                TransportChain = "M1_LTC2",
+                LandingChain = "M1_LLC1",
+                AttackChain = "Spawn_AC"
+            }
+            :Create(),
+    }
 
 
-    
+
+
+
 end
 
 function SWBase()
