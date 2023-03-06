@@ -248,8 +248,29 @@ function Main()
     local engyOpAIb = Oxygen.OpAIBuilders.EngineerAttacks()
 
 
+    ---@type LandAttacksOpAIBuilder
+    local landOpAIb = Oxygen.OpAIBuilders.LandAttacks()
+
     mainBase:LoadOpAIs
     {
+
+        landOpAIb
+            :New "TEST"
+            :EnableChild("HeavyBots")
+            :EnableChild("MobileStealth")
+            :EnableChild("MobileFlak")
+            :ChildCount(1)
+            :AIFunction(SPAIFileName, 'PatrolChainPickerThread')
+            :Data
+            {
+                PatrolChains = {
+                    "LAC01",
+                    "LAC02",
+                    "LAC03",
+                },
+            }
+            :Priority(500)
+            :Create(),
 
         engyOpAIb
             :New "Engi attack"

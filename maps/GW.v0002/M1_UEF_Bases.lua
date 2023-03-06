@@ -142,6 +142,8 @@ DiffValues.M1_SE_Titans = { 3, 4, 5 }
 DiffValues.M1_SE_Bombers = { 3, 4, 5 }
 DiffValues.M1_SE_Gunships = { 3, 4, 5 }
 
+
+
 function SEBase()
     seBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_SE_Base", "M1_SE_Base_M", 150, { ["M1_SE_Base"] = 1000 })
     seBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
