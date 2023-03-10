@@ -48,7 +48,6 @@ function SetupSEBase()
 
     seBase:Initialize(Brains.Yudi, "SE_BASE", "SE_Base_M", 50, { ["SE Base"] = 1500 })
     seBase:StartEmptyBase(DV "Engi Base assisters")
-    nukeBase:SortGroupNames()
     seBase:SetActive('AirScouting', true)
     seBase:SetBuildAllStructures(true)
     seBase.MaximumConstructionEngineers = 10
@@ -101,7 +100,7 @@ function NukeBase()
         Nuke = 1500,
         Defense = 2000,
     })
-    nukeBase:StartEmptyBase( DV "RAS Bois count")
+    nukeBase:StartEmptyBase(DV "RAS Bois count")
     nukeBase:SortGroupNames()
 
     nukeBase:SetBuildAllStructures(true)
@@ -196,20 +195,14 @@ function Main()
             :InstanceCount(1)
             :Priority(500)
             :AddUnit(UNIT "T3 Cybran Engineer", 5)
-            :BuildOnce()
-            :AIFunction(Oxygen.PlatoonAI.Expansion, 'ExpansionPlatoon')
             :Data
             {
                 UseTransports = true,
                 TransportReturn = "YudiBase_M",
-                ExpansionData =
-                {
-                    BaseName = "SE Base",
-                },
                 TransportChain = "SE_Base_chain",
-                LandingLocation = "SE_Base_M"
+                LandingLocation = "SE_Base_M",
             }
-            :Create(),
+            :Create(Oxygen.BaseManagers.ExpansionOf "SE_BASE"),
 
         pb:NewDefault "Massive Brick Attack"
             :InstanceCount(2)
@@ -230,19 +223,9 @@ function Main()
 
         pb:NewDefault "bois"
             :Type "Gate"
-            --:AIFunction(YPAIFileName, "BoiBuild")
-            :AIFunction(Oxygen.PlatoonAI.Expansion, "ExpansionPlatoon")
             :Priority(500)
             :AddUnit(UNIT "Cybran RAS SACU", DV "RAS Bois count")
-            :BuildOnce()
-            :Data
-            {
-                ExpansionData =
-                {
-                    BaseName = "NukeBaseGroup"
-                }
-            }
-            :Create(),
+            :Create(Oxygen.BaseManagers.ExpansionOf "NukeBaseGroup"),
     }
 
 
