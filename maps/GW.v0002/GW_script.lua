@@ -1,6 +1,3 @@
-local MAP_FOLDER = Oxygen.ScenarioFolder()
-LOG(MAP_FOLDER)
-
 local ScenarioFramework = import('/lua/ScenarioFramework.lua')
 local AIBuildStructures = import('/lua/ai/aibuildstructures.lua')
 local ScenarioPlatoonAI = import('/lua/ScenarioPlatoonAI.lua')

@@ -324,7 +324,7 @@ function OnPopulate()
 	}
 	Game.Armies.SetUnitCap(ScenarioInfo.Yudi, 4000)
 
-	ScenarioUtils.CreateArmyGroup('TheWheelie', 'P1Qbases')
+	Game.Armies.CreateArmyGroup('TheWheelie', 'P1Qbases')
 	--ScenarioUtils.CreateArmyGroup('Yudi', 'MainBase')
 
 end

@@ -8,6 +8,7 @@ local BC = Oxygen.BuildConditions
 
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
 local YPAIFileName = '/maps/Test/YudiPlatoonAI.lua'
+local BMPT = '/lua/ai/opai/BaseManagerPlatoonThreads.lua'
 
 ---@type AdvancedBaseManager
 local mainBase = AdvancedBaseManager()
@@ -47,6 +48,7 @@ function SetupSEBase()
 
     seBase:Initialize(Brains.Yudi, "SE_BASE", "SE_Base_M", 50, { ["SE Base"] = 1500 })
     seBase:StartEmptyBase(DV "Engi Base assisters")
+    nukeBase:SortGroupNames()
     seBase:SetActive('AirScouting', true)
     seBase:SetBuildAllStructures(true)
     seBase.MaximumConstructionEngineers = 10
@@ -56,7 +58,7 @@ function SetupSEBase()
     ---@type PlatoonTemplateBuilder
     local pb = PlatoonBuilder()
     pb
-        :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
+        :UseAIFunction(Oxygen.PlatoonAI.Common, "PatrolChainPickerThread")
         :UseLocation "SE_BASE"
         :UseType 'Land'
         :UseData
@@ -65,22 +67,23 @@ function SetupSEBase()
                 "LAC01",
                 "LAC02",
                 "LAC03",
-            }
+            },
+            Offset = 10
         }
 
     seBase:LoadPlatoons {
         pb:NewDefault "Rhinos SE"
             :InstanceCount(5)
             :Priority(280)
-            :AddUnitDefault(UNIT "Rhino", 4)
-            :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
+            :AddUnit(UNIT "Rhino", 4)
+            :AddUnit(UNIT "Deceiver", DV "Deceiver count")
             :Create(),
 
         pb:NewDefault "Bomber attack"
             :Type "Air"
             :InstanceCount(5)
             :Priority(100)
-            :AddUnitDefault(UNIT "Zeus", 5)
+            :AddUnit(UNIT "Zeus", 5)
             :Data
             {
                 PatrolChains =
@@ -97,14 +100,16 @@ function NukeBase()
     nukeBase:Initialize(Brains.Yudi, "NukeBaseGroup", "NukeBase_M", 30, {
         Nuke = 1500,
         Defense = 2000,
-    }, true)
-    nukeBase:StartEmptyBase(0)
+    })
+    nukeBase:StartEmptyBase( DV "RAS Bois count")
+    nukeBase:SortGroupNames()
 
     nukeBase:SetBuildAllStructures(true)
     nukeBase:SetActive('Nuke', true)
 
     nukeBase.PermanentAssistCount = DV "RAS Bois count"
 
+    --mainBase:AddExpansionBase("NukeBaseGroup", 2)
 
 end
 
@@ -122,7 +127,7 @@ function Main()
     ---@type PlatoonTemplateBuilder
     local pb = PlatoonBuilder()
     pb
-        :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
+        :UseAIFunction(Oxygen.PlatoonAI.Common, "PatrolChainPickerThread")
         :UseLocation "YudiBase"
         :UseType 'Land'
         :UseData
@@ -131,7 +136,8 @@ function Main()
                 "LAC01",
                 "LAC02",
                 "LAC03",
-            }
+            },
+            Offset = 20
         }
 
 
@@ -139,24 +145,27 @@ function Main()
         pb:NewDefault "Brick Attack"
             :InstanceCount(5)
             :Priority(200)
-            :AddUnitDefault(UNIT "Brick", DV "Brick count")
-            :AddUnitDefault(UNIT "Banger", DV "Banger count")
-            :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
+            :AddUnits
+            {
+                { UNIT "Brick", DV "Brick count" },
+                { UNIT "Banger", DV "Banger count" },
+                { UNIT "Deceiver", DV "Deceiver count" },
+            }
             :Create(),
 
 
         pb:NewDefault "Lone Brick"
             :InstanceCount(3)
             :Priority(100)
-            :AddUnitDefault(UNIT "Brick", 1)
-            :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
+            :AddUnit(UNIT "Brick", 1)
+            :AddUnit(UNIT "Deceiver", DV "Deceiver count")
             :Create(),
 
         pb:NewDefault "Flying Brick"
             :InstanceCount(3)
             :Priority(250)
-            :AddUnitDefault(UNIT "Brick", 1)
-            :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
+            :AddUnit(UNIT "Brick", 1)
+            :AddUnit(UNIT "Deceiver", DV "Deceiver count")
             :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
             :Data
             {
@@ -170,8 +179,8 @@ function Main()
         pb:NewDefault "Flying Bricks"
             :InstanceCount(1)
             :Priority(50)
-            :AddUnitDefault(UNIT "Brick", DV "Flying Bricks count")
-            :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count" * 5)
+            :AddUnit(UNIT "Brick", DV "Flying Bricks count")
+            :AddUnit(UNIT "Deceiver", DV "Deceiver count" * 5)
             :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
             :Data
             {
@@ -186,16 +195,17 @@ function Main()
         pb:NewDefault "SE Engineers"
             :InstanceCount(1)
             :Priority(500)
-            :AddUnitDefault(UNIT "T3 Cybran Engineer", 5)
-            :AIFunction('/lua/ScenarioPlatoonAI.lua', 'StartBaseEngineerThread')
+            :AddUnit(UNIT "T3 Cybran Engineer", 5)
+            :BuildOnce()
+            :AIFunction(Oxygen.PlatoonAI.Expansion, 'ExpansionPlatoon')
             :Data
             {
                 UseTransports = true,
-                Construction =
+                TransportReturn = "YudiBase_M",
+                ExpansionData =
                 {
-                    BaseTemplate = "SE Base",
+                    BaseName = "SE Base",
                 },
-                MaintainBaseTemplate = "SE Base",
                 TransportChain = "SE_Base_chain",
                 LandingLocation = "SE_Base_M"
             }
@@ -204,32 +214,33 @@ function Main()
         pb:NewDefault "Massive Brick Attack"
             :InstanceCount(2)
             :Priority(150)
-            :AddUnitDefault(UNIT "Brick", DV "M Brick count")
-            :AddUnitDefault(UNIT "Banger", DV "M Banger count")
-            :AddUnitDefault(UNIT "Deceiver", DV "M Deceiver count")
-            :AddUnitDefault(UNIT "Medusa", DV "M Brick count")
+            :AddUnit(UNIT "Brick", DV "M Brick count")
+            :AddUnit(UNIT "Banger", DV "M Banger count")
+            :AddUnit(UNIT "Deceiver", DV "M Deceiver count")
+            :AddUnit(UNIT "Medusa", DV "M Brick count")
             :Create(),
 
         pb:NewDefault "Rhinos"
             :InstanceCount(5)
             :Priority(280)
-            :AddUnitDefault(UNIT "Rhino", 4)
-            :AddUnitDefault(UNIT "Deceiver", DV "Deceiver count")
+            :AddUnit(UNIT "Rhino", 4)
+            :AddUnit(UNIT "Deceiver", DV "Deceiver count")
             :Difficulties { "Medium", "Easy" }
             :Create(),
 
         pb:NewDefault "bois"
             :Type "Gate"
             --:AIFunction(YPAIFileName, "BoiBuild")
-            :AIFunction(SPAIFileName, "StartBaseEngineerThread")
+            :AIFunction(Oxygen.PlatoonAI.Expansion, "ExpansionPlatoon")
             :Priority(500)
-            :AddUnitDefault(UNIT "Cybran RAS SACU", DV "RAS Bois count")
+            :AddUnit(UNIT "Cybran RAS SACU", DV "RAS Bois count")
+            :BuildOnce()
             :Data
             {
-                Construction = {
-                    BaseTemplate = "NukeBaseGroup",
-                },
-                MaintainBaseTemplate = "NukeBaseGroup"
+                ExpansionData =
+                {
+                    BaseName = "NukeBaseGroup"
+                }
             }
             :Create(),
     }
@@ -259,6 +270,7 @@ function Main()
             :EnableChild("HeavyBots")
             :EnableChild("MobileStealth")
             :EnableChild("MobileFlak")
+            :EnableChild("SiegeBots")
             :ChildCount(1)
             :AIFunction(SPAIFileName, 'PatrolChainPickerThread')
             :Data
