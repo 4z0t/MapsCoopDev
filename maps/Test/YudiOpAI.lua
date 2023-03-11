@@ -226,6 +226,12 @@ function Main()
             :Priority(500)
             :AddUnit(UNIT "Cybran RAS SACU", DV "RAS Bois count")
             :Create(Oxygen.BaseManagers.ExpansionOf "NukeBaseGroup"),
+            
+        pb:NewDefault "Arty attack"
+            :Type "Land"
+            :Priority(500)
+            :AddUnits(Oxygen.Misc.FromMapUnits("Yudi", "ArtyAttack"))
+            :Create(),
     }
 
 
@@ -341,6 +347,9 @@ function Main()
 
 
     }
+
+
+
 
     mainBase:AddBuildStructures("AirDefense", {
         Priority = 2000,
