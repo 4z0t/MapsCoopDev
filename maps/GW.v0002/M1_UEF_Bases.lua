@@ -2,7 +2,6 @@ local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 
 local PlatoonBuilder = Oxygen.PlatoonBuilder
 local UNIT = Oxygen.UnitNames.Get
-local AdvancedBaseManager = Oxygen.BaseManager
 local DifficultyValue = Oxygen.DifficultyValue
 local DV = DifficultyValue.Get
 local BC = Oxygen.BuildConditions

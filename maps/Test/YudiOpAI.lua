@@ -1,13 +1,12 @@
 local PlatoonBuilder = Oxygen.PlatoonBuilder
 local OpAIBuilder = Oxygen.OpAIBuilder
 local UNIT = Oxygen.UnitNames.Get
-local AdvancedBaseManager = Oxygen.BaseManager
+local AdvancedBaseManager = Oxygen.AdvancedBaseManager
 local DifficultyValue = Oxygen.DifficultyValue
 local DV = DifficultyValue.Get
 local BC = Oxygen.BuildConditions
 
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
-local YPAIFileName = '/maps/Test/YudiPlatoonAI.lua'
 local BMPT = '/lua/ai/opai/BaseManagerPlatoonThreads.lua'
 
 ---@type AdvancedBaseManager
@@ -108,8 +107,6 @@ function NukeBase()
 
     nukeBase.PermanentAssistCount = DV "RAS Bois count"
 
-    --mainBase:AddExpansionBase("NukeBaseGroup", 2)
-
 end
 
 function Main()
@@ -202,7 +199,7 @@ function Main()
                 TransportChain = "SE_Base_chain",
                 LandingLocation = "SE_Base_M",
             }
-            :Create(Oxygen.BaseManagers.ExpansionOf "SE_BASE"),
+            :Create(Oxygen.BaseManager.Platoons.ExpansionOf "SE_BASE"),
 
         pb:NewDefault "Massive Brick Attack"
             :InstanceCount(2)
@@ -225,7 +222,7 @@ function Main()
             :Type "Gate"
             :Priority(500)
             :AddUnit(UNIT "Cybran RAS SACU", DV "RAS Bois count")
-            :Create(Oxygen.BaseManagers.ExpansionOf "NukeBaseGroup"),
+            :Create(Oxygen.BaseManager.Platoons.ExpansionOf "NukeBaseGroup"),
 
         pb:NewDefault "Arty attack"
             :Type "Land"
