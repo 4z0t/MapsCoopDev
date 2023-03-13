@@ -32,7 +32,9 @@ objectives:Init
     objectiveBuilder
         :New "M1_locate"
         :Title "Scout out the area"
-        :Description ""
+        :Description [[
+            
+        ]]
         :To "locate"
         :OnStart(function()
 

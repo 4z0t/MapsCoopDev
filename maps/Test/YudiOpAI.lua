@@ -114,7 +114,6 @@ function Main()
     mainBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
     mainBase:SetActive('AirScouting', true)
     mainBase:SetBuildAllStructures(true)
-    --mainBase:SetSACUUpgrades { "ResourceAllocation" }
     mainBase:AddBuildGroup('BoiProd', 2000, false, false)
     mainBase:SetACUUpgrades({ "AdvancedEngineering", "T3Engineering" }, false)
     mainBase:SetBuildTransports(true)
@@ -228,6 +227,12 @@ function Main()
             :Type "Land"
             :Priority(500)
             :AddUnits(Oxygen.Misc.FromMapUnits("Yudi", "ArtyAttack", 'Artillery', 'GrowthFormation'))
+            :Create(),
+
+        pb:NewDefault "Loyas attack"
+            :Type "Land"
+            :Priority(500)
+            :AddUnits(Oxygen.Misc.FromMapUnitsDifficulty("Yudi", "Loyas", "Attack", 'GrowthFormation'))
             :Create(),
     }
 

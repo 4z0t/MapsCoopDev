@@ -109,51 +109,51 @@ objectives:Init
 			---@type UnitsController
 			local playersController = Oxygen.UnitsController()
 
-			--AC.NISMode(function()
+			AC.NISMode(function()
 
 
-			---@type UnitsController
-			local ahwassaController = Oxygen.UnitsController()
+				---@type UnitsController
+				local ahwassaController = Oxygen.UnitsController()
 
-			ahwassaController
-				:FromMapArmyUnit("Yudi", "Ahwassa_drop")
-				:MoveToMarker "AhwassaDropTarget"
+				ahwassaController
+					:FromMapArmyUnit("Yudi", "Ahwassa_drop")
+					:MoveToMarker "AhwassaDropTarget"
 
 
-			AC.MoveTo("Cam1", 0)
-			ScenarioFramework.Dialogue(VOStrings.Start, nil, true)
-			WaitSeconds(2)
-			--AC.DisplayText("Global\nWarning", 120, 'ffffffff', 'center', 1)
-			-- AC.MoveTo("Cam2", 3)
-			-- AC.MoveTo("Cam4", 0)
-			-- AC.MoveTo("Cam5", 2)
-			-- AC.MoveTo("Cam6", 0)
-			-- AC.MoveTo("Cam7", 2)
-			ScenarioFramework.KillBaseInArea(Brains.TheWheelie, 'StartArea')
+				AC.MoveTo("Cam1", 0)
+				ScenarioFramework.Dialogue(VOStrings.Start, nil, true)
+				WaitSeconds(2)
+				--AC.DisplayText("Global\nWarning", 120, 'ffffffff', 'center', 1)
+				-- AC.MoveTo("Cam2", 3)
+				-- AC.MoveTo("Cam4", 0)
+				-- AC.MoveTo("Cam5", 2)
+				-- AC.MoveTo("Cam6", 0)
+				-- AC.MoveTo("Cam7", 2)
+				ScenarioFramework.KillBaseInArea(Brains.TheWheelie, 'StartArea')
 
-			AC.MoveTo("Cam3", 2.5)
+				AC.MoveTo("Cam3", 2.5)
 
-			ahwassaController
-				:ImmediatelyKill()
-			WaitSeconds(1.5)
+				ahwassaController
+					:ImmediatelyKill()
+				WaitSeconds(1.5)
 
-			playersController:Units(
-				playersManager:WarpIn(function()
-					ScenarioFramework.Dialogue(VOStrings.E01_D01_010, PlayerDeath, true)
-				end)
-			)
-			playersController
-				:ApplyToUnits(function(unit)
-					LOG("Making invincible")
-					unit.CanTakeDamage = false
-				end)
+				playersController:Units(
+					playersManager:WarpIn(function()
+						ScenarioFramework.Dialogue(VOStrings.E01_D01_010, PlayerDeath, true)
+					end)
+				)
+				playersController
+					:ApplyToUnits(function(unit)
+						LOG("Making invincible")
+						unit.CanTakeDamage = false
+					end)
 
-			WaitSeconds(2.5)
-			AC.VisionAtLocation("YudiBase_M", 60, Brains.Player1):DestroyOnExit(true)
-			AC.MoveTo("BaseCam1", 3)
-			AC.MoveTo("BaseCam2", 1)
-			AC.MoveTo("Cam3", 4)
-			--end)
+				WaitSeconds(2.5)
+				AC.VisionAtLocation("YudiBase_M", 60, Brains.Player1):DestroyOnExit(true)
+				AC.MoveTo("BaseCam1", 3)
+				AC.MoveTo("BaseCam2", 1)
+				AC.MoveTo("Cam3", 4)
+			end)
 
 			playersController
 				:ApplyToUnits(function(unit)
