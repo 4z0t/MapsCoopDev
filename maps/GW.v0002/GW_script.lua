@@ -146,10 +146,12 @@ function OnPopulate()
     Game.Armies.SetUnitCap("Cybran", 4000)
     Game.Armies.SetUnitCap("Aeon", 4000)
     Game.Armies.SetUnitCap("Unknown", 4000)
+    Game.Armies.SetUnitCap("Sera", 4000)
     Game.Armies.SetColor("UEF", "2C2FE0")
     Game.Armies.SetColor("Cybran", "680000")
     Game.Armies.SetColor("Aeon", "6ED346")
     Game.Armies.SetColor("Unknown", "E68200")
+    Game.Armies.SetColor("Sera", "E68200")
 
 
 
@@ -169,7 +171,8 @@ function OnStart(self)
     Brains.UEF = ArmyBrains[2]
     Brains.Cybran = ArmyBrains[3]
     Brains.Aeon = ArmyBrains[4]
-    Brains.Unknown = ArmyBrains[5]
+    Brains.Sera = ArmyBrains[5]
+    Brains.Unknown = ArmyBrains[6]
 
     import(Oxygen.ScenarioFolder "M1_UEF_Bases.lua").Main()
 
