@@ -117,6 +117,7 @@ function Main()
     mainBase:AddBuildGroup('BoiProd', 2000, false, false)
     mainBase:SetACUUpgrades({ "AdvancedEngineering", "T3Engineering" }, false)
     mainBase:SetBuildTransports(true)
+    mainBase:SetTransportsTech(2)
     mainBase.TransportsNeeded = 7
 
     ---@type PlatoonTemplateBuilder
