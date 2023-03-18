@@ -35,7 +35,7 @@ objectives:Init
         :Description [[
             
         ]]
-        :To "locate"
+        :To(Oxygen.Objective.Locate)
         :OnStart(function()
 
             AC.NISMode(function()
@@ -66,7 +66,7 @@ objectives:Init
         :New "M1_capture"
         :Title "Capture unknown structure"
         :Description ""
-        :To "capture"
+        :To(Oxygen.Objective.Capture)
         :Target
         {
             MarkUnits = true

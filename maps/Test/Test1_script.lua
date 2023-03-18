@@ -197,11 +197,15 @@ objectives:Init
 				Units = { prison },
 			}
 		end)
-		:OnSuccess(function(prison)
-			local capturorBrain = prison:GetAIBrain()
+		:OnSuccess(function(capturedUnits)
+			local capturorBrainName
+			if not table.empty(capturedUnits) then
+				capturorBrainName = capturedUnits[1]:GetAIBrain().Name
+			end
+
 			ScenarioFramework.Dialogue(VOStrings.Saved, nil, true)
 			for _, name in prizoners do
-				local unit = ScenarioUtils.CreateArmyUnit(capturorBrain.Name, 'Rescued_player')
+				local unit = ScenarioUtils.CreateArmyUnit("Player1", 'Rescued_player')
 				unit:SetCustomName(name)
 				unit:SetMaxHealth(1)
 				unit:GetWeapon(1):AddDamageMod(4000)
@@ -213,7 +217,7 @@ objectives:Init
 		:NewSecondary "Damage"
 		:Title "Bruh"
 		:Description "Damage unit enough bruh"
-		:To "damage"
+		:To(Oxygen.Objective.Damage)
 		:Target
 		{
 			AlwaysVisible = true,

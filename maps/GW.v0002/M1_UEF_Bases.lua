@@ -5,16 +5,17 @@ local UNIT = Oxygen.UnitNames.Get
 local DifficultyValue = Oxygen.DifficultyValue
 local DV = DifficultyValue.Get
 local BC = Oxygen.BuildConditions
+local BaseManager = Oxygen.BaseManager.BaseManagers.AdvancedBaseManager
 
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
 local YPAIFileName = '/maps/Test/YudiPlatoonAI.lua'
 
 ---@type AdvancedBaseManager
-local neBase = Oxygen.BaseManager()
+local neBase = BaseManager()
 ---@type AdvancedBaseManager
-local swBase = Oxygen.BaseManager()
+local swBase = BaseManager()
 ---@type AdvancedBaseManager
-local seBase = Oxygen.BaseManager()
+local seBase = BaseManager()
 
 
 
