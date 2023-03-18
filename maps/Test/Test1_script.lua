@@ -90,8 +90,8 @@ objectives:Init
 		:New "start"
 		:Title "TEST"
 		:Description "Test"
-		:Function "CategoriesInArea"
-		:To "kill"
+		:To(Oxygen.Objective.CategoriesInArea)
+		:Action("kill")
 		:Target
 		{
 			MarkUnits = true,
@@ -177,7 +177,7 @@ objectives:Init
 		:NewSecondary "prison"
 		:Title "Save Ban prisoners"
 		:Description "Let prisoners escape"
-		:To "capture"
+		:To(Oxygen.Objective.Capture)
 		:Target
 		{
 			AlwaysVisible = true,
@@ -197,10 +197,11 @@ objectives:Init
 				Units = { prison },
 			}
 		end)
-		:OnSuccess(function()
+		:OnSuccess(function(prison)
+			local capturorBrain = prison:GetAIBrain()
 			ScenarioFramework.Dialogue(VOStrings.Saved, nil, true)
 			for _, name in prizoners do
-				local unit = ScenarioUtils.CreateArmyUnit('Player1', 'Rescued_player')
+				local unit = ScenarioUtils.CreateArmyUnit(capturorBrain.Name, 'Rescued_player')
 				unit:SetCustomName(name)
 				unit:SetMaxHealth(1)
 				unit:GetWeapon(1):AddDamageMod(4000)
