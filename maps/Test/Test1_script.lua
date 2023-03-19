@@ -202,16 +202,46 @@ objectives:Init
 			if not table.empty(capturedUnits) then
 				capturorBrainName = capturedUnits[1]:GetAIBrain().Name
 			end
-
+			ScenarioInfo.Prisoners = {}
 			ScenarioFramework.Dialogue(VOStrings.Saved, nil, true)
 			for _, name in prizoners do
 				local unit = ScenarioUtils.CreateArmyUnit("Player1", 'Rescued_player')
 				unit:SetCustomName(name)
 				unit:SetMaxHealth(1)
 				unit:GetWeapon(1):AddDamageMod(4000)
+				table.insert(ScenarioInfo.Prisoners, unit)
 			end
 		end)
+		:Next "Move"
 		:Create(),
+
+	objectiveBuilder
+		:NewBonus "Move"
+		:Title "Save prisoners"
+		:Description "Move prisoners to the area"
+		:To(Oxygen.Objective.SpecificUnitsInArea)
+		:Target
+		{
+			Area = "MoveArea",
+			MarkArea = true,
+			ShowProgress = true,
+			NumRequired = 6
+		}
+		:OnStart(function()
+			LOG("START")
+			return {
+				Units = ScenarioInfo.Prisoners
+			}
+		end)
+		:OnSuccess(function(units)
+			LOG("Success")
+			
+		end)
+		:OnFail(function()
+			LOG("Fail")
+		end)
+		:Create(),
+
 
 	objectiveBuilder
 		:NewSecondary "Damage"
