@@ -123,7 +123,6 @@ function SEBase()
     seBase:SetACUUpgrades(
         {
             "Shield",
-            "AdvancedEngineering",
             "T3Engineering",
             "ResourceAllocation"
         }, true)
