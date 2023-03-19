@@ -10,8 +10,6 @@ local Objectives = import('/lua/ScenarioFramework.lua').Objectives
 local AC = Oxygen.Cinematics
 local Game = Oxygen.Game
 local RequireIn = Oxygen.RequireIn
-local DifficultyValue = Oxygen.DifficultyValue
-local DV = DifficultyValue.Get
 
 
 
@@ -88,8 +86,8 @@ objectives:Init
 
 
 function OnPopulate()
-
     LOG "INITIALIZING ARMIES"
+    
     Game.Armies.Initialize()
 
     LOG "SETTING UP PLAYERS"
@@ -139,8 +137,6 @@ function OnPopulate()
 
     }
 
-
-
     Game.Armies.SetSharedUnitCap(4000)
     Game.Armies.SetUnitCap("UEF", 4000)
     Game.Armies.SetUnitCap("Cybran", 4000)
@@ -152,21 +148,13 @@ function OnPopulate()
     Game.Armies.SetColor("Aeon", "6ED346")
     Game.Armies.SetColor("Unknown", "E68200")
     Game.Armies.SetColor("Sera", "E68200")
-
-
-
-
 end
+
 
 local Brains = Oxygen.Brains
 
 function OnStart(self)
-
     LOG "STARTING SCENARIO"
-
-    Game.SetPlayableArea('M1', false)
-
-
 
     Brains.UEF = ArmyBrains[2]
     Brains.Cybran = ArmyBrains[3]
@@ -174,10 +162,9 @@ function OnStart(self)
     Brains.Sera = ArmyBrains[5]
     Brains.Unknown = ArmyBrains[6]
 
+    Game.SetPlayableArea('M1', false)
+    
     import(Oxygen.ScenarioFolder "M1_UEF_Bases.lua").Main()
 
-
     objectives:Start "M1_locate"
-
-
 end

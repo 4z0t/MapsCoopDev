@@ -21,14 +21,10 @@ local DV = Oxygen.DifficultyValues
 DV.M1_NE_EngineersCount = { 7, 10, 15 }
 DV.M1_NE_AssistersCount = { 5, 7, 10 }
 
-
-
 DV.M1_NE_Pillars = { 4, 5, 6 }
 DV.M1_NE_Flak = { 0, 1, 2 }
 DV.M1_NE_Shield = { 1, 2, 3 }
 DV.M1_NE_LoboDrop = { 8, 12, 16 }
-
-
 
 
 function NEBase()
@@ -42,11 +38,6 @@ function NEBase()
     neBase:SetBuildAllStructures(true)
     neBase:SetBuildTransports(true)
     neBase.TransportsNeeded = 7
-
-
-
-
-
 
     ---@type PlatoonTemplateBuilder
     local pb = PlatoonBuilder()
@@ -207,12 +198,11 @@ function SEBase()
     end
 
     if DV.M1_SE_BuildLandDefenses then
-
         seBase:AddBuildStructures("M1_SE_Land", {
             Priority = 1800,
             BuildConditions =
             {
-                BC.HumansCategoryCondition(categories.LAND, ">=", 30)
+                BC.HumansCategoryCondition(categories.LAND * categories.MOBILE, ">=", 30)
             }
         })
     end
