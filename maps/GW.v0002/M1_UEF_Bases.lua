@@ -36,7 +36,7 @@ function NEBase()
     neBase:StartNonZeroBase { DV.M1_NE_EngineersCount, DV.M1_NE_AssistersCount }
     neBase:SetActive('AirScouting', true)
     neBase:SetBuildAllStructures(true)
-    
+
     neBase:SetBuildTransports(true)
     seBase:SetTransportsTech(3)
     neBase.TransportsNeeded = 3
@@ -114,11 +114,19 @@ DV.M1_SE_BuildLandDefenses = { false, false, true }
 
 
 function SEBase()
+    ScenarioInfo.UEFacu = Oxygen.Game.Armies.CreateUnit("UEF", "UEF_ACU")
+
     seBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_SE_Base", "M1_SE_Base_M", 150, { ["M1_SE_Base"] = 1000 })
     seBase:StartNonZeroBase { DV.M1_SE_EngineerCount, DV.M1_SE_AssisterCount }
     seBase:SetActive('AirScouting', true)
     seBase:SetBuildAllStructures(true)
-
+    seBase:SetACUUpgrades(
+        {
+            "Shield",
+            "AdvancedEngineering",
+            "T3Engineering",
+            "ResourceAllocation"
+        }, true)
 
     seBase:SetBuildTransports(true)
     seBase:SetTransportsTech(3)

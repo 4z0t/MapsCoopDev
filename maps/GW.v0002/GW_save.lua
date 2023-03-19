@@ -13500,6 +13500,19 @@ Scenario = {
                             },
                         },
                     },
+                    ['M1_ACU'] = GROUP {
+                        orders = '',
+                        platoon = '',
+                        Units = {
+                            ['UEF_ACU'] = {
+                                type = 'uel0001',
+                                orders = '',
+                                platoon = '',
+                                Position = { 358.5, 65.14851, 486.5 },
+                                Orientation = { 0, 0, 0 },
+                            },
+                        },
+                    },
                 },
             },
             PlatoonBuilders = {
