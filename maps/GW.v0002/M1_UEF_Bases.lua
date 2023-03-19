@@ -36,8 +36,10 @@ function NEBase()
     neBase:StartNonZeroBase { DV.M1_NE_EngineersCount, DV.M1_NE_AssistersCount }
     neBase:SetActive('AirScouting', true)
     neBase:SetBuildAllStructures(true)
+    
     neBase:SetBuildTransports(true)
-    neBase.TransportsNeeded = 7
+    seBase:SetTransportsTech(3)
+    neBase.TransportsNeeded = 3
 
     ---@type PlatoonTemplateBuilder
     local pb = PlatoonBuilder()
@@ -95,7 +97,8 @@ function SWBase()
 
 
     swBase:SetBuildTransports(true)
-    swBase.TransportsNeeded = 7
+    seBase:SetTransportsTech(2)
+    swBase.TransportsNeeded = 3
 end
 
 DV.M1_SE_EngineerCount = { 10, 20, 30 }
@@ -118,6 +121,7 @@ function SEBase()
 
 
     seBase:SetBuildTransports(true)
+    seBase:SetTransportsTech(3)
     seBase.TransportsNeeded = 2
     seBase.MaximumConstructionEngineers = 15
 
