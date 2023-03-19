@@ -95,6 +95,14 @@ objectives:Init
         }
         :OnStart(function()
             LOG("START DAMAGE")
+            ---@type UnitDeathTrigger
+            objectives.Data.M1_UEF_DeathTrigger = Oxygen.Triggers.UnitDeathTrigger(
+                function(unit)
+                    LOG "FAILED, ACU KILLED!"
+                    objectives:EndGame(false)
+                end
+            )
+            objectives.Data.M1_UEF_DeathTrigger:Add { ScenarioInfo.UEFacu }
             return {
                 Units = { ScenarioInfo.UEFacu },
             }
