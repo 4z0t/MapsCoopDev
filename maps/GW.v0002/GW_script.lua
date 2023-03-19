@@ -10,9 +10,10 @@ local Objectives = import('/lua/ScenarioFramework.lua').Objectives
 local AC = Oxygen.Cinematics
 local Game = Oxygen.Game
 local RequireIn = Oxygen.RequireIn
+local DV = Oxygen.DifficultyValues
 
 
-
+DV.M1_ACU_ShakeAmount = { 0.2, 0.4, 0.7 }
 --local VOStrings = import(Oxygen.MapFolder "VOStrings.lua").lines
 
 
@@ -77,6 +78,30 @@ objectives:Init
         :OnSuccess(function()
             LOG("ABOBA")
         end)
+        :Next "M1_damage"
+        :Create(),
+
+
+    objectiveBuilder
+        :New "M1_damage"
+        :Title "Shake up the commander"
+        :Description [[
+        Damage the commander enough but do not kill him!
+        ]]
+        :To(Oxygen.Objective.Damage)
+        :Target
+        {
+            Amount = DV.M1_ACU_ShakeAmount
+        }
+        :OnStart(function()
+            LOG("START DAMAGE")
+            return {
+                Units = { ScenarioInfo.UEFacu },
+            }
+        end)
+        :OnSuccess(function()
+            LOG("SUCCESS DAMAGE")
+        end)
         :Create()
 
 
@@ -87,7 +112,7 @@ objectives:Init
 
 function OnPopulate()
     LOG "INITIALIZING ARMIES"
-    
+
     Game.Armies.Initialize()
 
     LOG "SETTING UP PLAYERS"
@@ -150,7 +175,6 @@ function OnPopulate()
     Game.Armies.SetColor("Sera", "E68200")
 end
 
-
 local Brains = Oxygen.Brains
 
 function OnStart(self)
@@ -163,7 +187,7 @@ function OnStart(self)
     Brains.Unknown = ArmyBrains[6]
 
     Game.SetPlayableArea('M1', false)
-    
+
     import(Oxygen.ScenarioFolder "M1_UEF_Bases.lua").Main()
 
     objectives:Start "M1_locate"
