@@ -1,14 +1,11 @@
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
-
 local PlatoonBuilder = Oxygen.PlatoonBuilder
 local UNIT = Oxygen.UnitNames.Get
-local DifficultyValue = Oxygen.DifficultyValue
-local DV = DifficultyValue.Get
 local BC = Oxygen.BuildConditions
 local BaseManager = Oxygen.BaseManager.BaseManagers.AdvancedBaseManager
 
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
-local YPAIFileName = '/maps/Test/YudiPlatoonAI.lua'
+
 
 ---@type AdvancedBaseManager
 local neBase = BaseManager()
@@ -18,44 +15,18 @@ local swBase = BaseManager()
 local seBase = BaseManager()
 
 
-
-DifficultyValue.Extend {
-
-    ["Engi Base count"] = { 10, 15, 20 },
-    ["Engi Base assisters"] = { 7, 10, 12 },
-
-    ["Brick count"] = { 3, 4, 5 },
-    ["Banger count"] = { 1, 2, 3 },
-    ["Deceiver count"] = { 0, 0, 1 },
-
-    ["Rhino count"] = { 3, 4, 5 },
-
-    ["M Brick count"] = { 6, 8, 10 },
-    ["M Banger count"] = { 3, 4, 5 },
-    ["M Deceiver count"] = { 0, 1, 2 },
-
-    ["ASF attack count"] = { 15, 20, 25 },
-
-    ["Flying Bricks count"] = { 5, 7, 10 },
-
-    ["RAS Bois count"] = { 10, 30, 5 },
-
-    ["Build Additional Land defenses"] = { false, false, true },
-    ["Build Additional Air defenses"] = { false, false, true },
+local DV = Oxygen.DifficultyValues
 
 
-    ["M1 NE Pillars"] = { 4, 5, 6 },
+DV.M1_NE_EngineersCount = { 7, 10, 15 }
+DV.M1_NE_AssistersCount = { 5, 7, 10 }
 
-    -- ["M1 NE flak"]={0,1,2},
 
-    -- ["M1 NE "]={}
 
-}
-local DiffValues = Oxygen.DifficultyValues
-DiffValues.M1_NE_Pillars = { 4, 5, 6 }
-DiffValues.M1_NE_Flak = { 0, 1, 2 }
-DiffValues.M1_NE_Shield = { 1, 2, 3 }
-DiffValues.M1_NE_LoboDrop = { 8, 12, 16 }
+DV.M1_NE_Pillars = { 4, 5, 6 }
+DV.M1_NE_Flak = { 0, 1, 2 }
+DV.M1_NE_Shield = { 1, 2, 3 }
+DV.M1_NE_LoboDrop = { 8, 12, 16 }
 
 
 
@@ -66,7 +37,7 @@ function NEBase()
             ["M1_NE_Base"] = 1000
         }
     )
-    neBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
+    neBase:StartNonZeroBase { DV.M1_NE_EngineersCount, DV.M1_NE_AssistersCount }
     neBase:SetActive('AirScouting', true)
     neBase:SetBuildAllStructures(true)
     neBase:SetBuildTransports(true)
@@ -97,15 +68,14 @@ function NEBase()
         pb:NewDefault "NE Pillar attack"
             :Priority(100)
             :InstanceCount(4)
-            :AddUnit(UNIT "Pillar", DiffValues.M1_NE_Pillars)
-            :AddUnit(UNIT "Parashield", DiffValues.M1_NE_Shield)
-            :AddUnit(UNIT "T2 UEF Flak", DiffValues.M1_NE_Flak)
+            :AddUnit(UNIT "Pillar", DV.M1_NE_Pillars)
+            :AddUnit(UNIT "Parashield", DV.M1_NE_Shield)
+            :AddUnit(UNIT "T2 UEF Flak", DV.M1_NE_Flak)
             :Create(),
 
         pb:NewDefault "ArtyDrop"
             :Priority(200)
-            :AddUnit(UNIT "Lobo", DiffValues.M1_NE_LoboDrop)
-            :BuildOnce()
+            :AddUnit(UNIT "Lobo", DV.M1_NE_LoboDrop)
             :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
             :Data
             {
@@ -117,11 +87,10 @@ function NEBase()
             :Create(),
     }
 
-
-
-
-
 end
+
+DV.M1_SW_EngineerCount = { 4, 7, 10 }
+DV.M1_SW_AssisterCount = { 2, 4, 6 }
 
 function SWBase()
     swBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_SW_Base", "M1_SW_Base_M", 65,
@@ -129,7 +98,7 @@ function SWBase()
             ["M1_SW_Base"] = 1000
         }
     )
-    swBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
+    swBase:StartNonZeroBase { DV.M1_SW_EngineerCount, DV.M1_SW_AssisterCount }
     swBase:SetActive('AirScouting', true)
     swBase:SetBuildAllStructures(true)
 
@@ -138,15 +107,21 @@ function SWBase()
     swBase.TransportsNeeded = 7
 end
 
-DiffValues.M1_SE_Titans = { 3, 4, 5 }
-DiffValues.M1_SE_Bombers = { 3, 4, 5 }
-DiffValues.M1_SE_Gunships = { 3, 4, 5 }
+DV.M1_SE_EngineerCount = { 10, 20, 30 }
+DV.M1_SE_AssisterCount = { 7, 15, 20 }
 
+
+DV.M1_SE_Titans = { 3, 4, 5 }
+DV.M1_SE_Bombers = { 3, 4, 5 }
+DV.M1_SE_Gunships = { 3, 4, 5 }
+
+DV.M1_SE_BuildAirDefenses = { false, false, true }
+DV.M1_SE_BuildLandDefenses = { false, false, true }
 
 
 function SEBase()
     seBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_SE_Base", "M1_SE_Base_M", 150, { ["M1_SE_Base"] = 1000 })
-    seBase:StartNonZeroBase { DV "Engi Base count", DV "Engi Base assisters" }
+    seBase:StartNonZeroBase { DV.M1_SE_EngineerCount, DV.M1_SE_AssisterCount }
     seBase:SetActive('AirScouting', true)
     seBase:SetBuildAllStructures(true)
 
@@ -177,7 +152,7 @@ function SEBase()
         seBase:LoadPlatoons
         {
             pb:NewDefault "SE Titan attack"
-                :AddUnit(UNIT "Titan", DiffValues.M1_SE_Titans)
+                :AddUnit(UNIT "Titan", DV.M1_SE_Titans)
                 :Priority(200)
                 :InstanceCount(4)
                 :Create()
@@ -204,13 +179,13 @@ function SEBase()
         seBase:LoadPlatoons
         {
             pb:NewDefault "SE T1 bomber attack"
-                :AddUnit(UNIT "T1 UEF Bomber", DiffValues.M1_SE_Bombers)
+                :AddUnit(UNIT "T1 UEF Bomber", DV.M1_SE_Bombers)
                 :Priority(200)
                 :InstanceCount(4)
                 :Create(),
 
             pb:NewDefault "SE Gunship attack"
-                :AddUnit(UNIT "T2 UEF Gunship", DiffValues.M1_SE_Gunships)
+                :AddUnit(UNIT "T2 UEF Gunship", DV.M1_SE_Gunships)
                 :Priority(100)
                 :InstanceCount(2)
                 :Create()
@@ -220,13 +195,7 @@ function SEBase()
     end
 
 
-
-
-
-
-
-
-    if DV "Build Additional Air defenses" then
+    if DV.M1_SE_BuildAirDefenses then
         seBase:AddBuildStructures("M1_SE_Air", {
             Priority = 2000,
             BuildConditions =
@@ -237,7 +206,7 @@ function SEBase()
         })
     end
 
-    if DV "Build Additional Land defenses" then
+    if DV.M1_SE_BuildLandDefenses then
 
         seBase:AddBuildStructures("M1_SE_Land", {
             Priority = 1800,
