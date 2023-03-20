@@ -13,6 +13,8 @@ local DV = Oxygen.DifficultyValues
 
 ---@type GWStrings
 local voStrings = import(Oxygen.ScenarioFolder "VOStrings.lua").lines
+---@type DoNotKillObjective
+local DoNotKill = import(Oxygen.ScenarioFolder "DoNotKill.lua").DoNotKillObjective
 
 local objectiveBuilder = Oxygen.ObjectiveBuilder()
 local playersManager = Oxygen.PlayersManager()
@@ -46,24 +48,14 @@ objectives:Init
                 playersManager:WarpIn(PlayerDeath)
             end)
 
-
-            ---@type UnitDeathTrigger
-            objectives.Data.M1_UEF_DeathTrigger = Oxygen.Triggers.UnitDeathTrigger(
-                function(unit)
-                    ScenarioFramework.Dialogue(voStrings.M1_Kill, nil, true)
-
-                    objectives:EndGame(false)
-                end
-            )
-
             ---@type PlayerIntelTrigger
             objectives.Data.M1_UEF_IntelTrigger = Oxygen.Triggers.PlayerIntelTrigger(
                 function(unit)
                     ScenarioFramework.Dialogue(voStrings.M1_ACU_Locate, nil, true)
+                    objectives:Start "M1_DoNotKill"
                 end
             )
             objectives.Data.M1_UEF_IntelTrigger:Add(ScenarioInfo.UEFacu)
-            objectives.Data.M1_UEF_DeathTrigger:Add { ScenarioInfo.UEFacu }
 
 
             local unit = Game.Armies.CreateUnit('Unknown', 'M1_MindController')
@@ -102,6 +94,26 @@ objectives:Init
         :Next "M1_damage"
         :Create(),
 
+    objectiveBuilder
+        :New "M1_DoNotKill"
+        :Title "Do not kill the commander"
+        :Description ""
+        :To(DoNotKill)
+        :Target
+        {
+            Hidden = true
+        }
+        :OnStart(function()
+            return {
+                Units = { ScenarioInfo.UEFacu },
+            }
+        end)
+        :OnFail(function()
+            ScenarioFramework.Dialogue(voStrings.M1_Kill, nil, true)
+
+            objectives:EndGame(false)
+        end)
+        :Create(),
 
     objectiveBuilder
         :New "M1_damage"
