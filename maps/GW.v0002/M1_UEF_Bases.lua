@@ -1,4 +1,5 @@
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
+local TauntManager = import('/lua/TauntManager.lua')
 local PlatoonBuilder = Oxygen.PlatoonBuilder
 local UNIT = Oxygen.UnitNames.Get
 local BC = Oxygen.BuildConditions
@@ -6,6 +7,8 @@ local BaseManager = Oxygen.BaseManager.BaseManagers.AdvancedBaseManager
 
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
 
+
+local tauntUEF = TauntManager.CreateTauntManager("UEF", Oxygen.ScenarioFolder "VOStrings.lua")
 
 ---@type AdvancedBaseManager
 local neBase = BaseManager()
@@ -222,6 +225,8 @@ end
 function Main()
 
     Oxygen.Game.Armies.CreateArmyGroup("UEF", 'M1_SW_Power', true)
+
+    tauntUEF:AddPlayerIntelCategoryTaunt("M1_UEF_Locate_Taunt", Oxygen.Brains.UEF, categories.ALLUNITS)
 
     NEBase()
     SWBase()

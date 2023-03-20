@@ -34,11 +34,34 @@ lines = {
             faction = 'UEF'
         }
     },
+    M1_ACU_Locate =
+    {
+        {
+            text = [[[HQ]: Here is the commander we are looking for! Do not kill him, we are here to save him.]],
+            vid = 'AllyCom.sfd',
+            bank = '',
+            cue = '',
+            faction = 'UEF'
+        }
+    },
     M1_Kill =
     {
-        
+        {
+            text = [[[HQ]: Commander! He is our ally! You must not do like that! Mission failed! We are recalling you.]],
+            vid = 'AllyCom.sfd',
+            bank = '',
+            cue = '',
+            faction = 'UEF'
+        }
     }
+}
 
-
-
+M1_UEF_Locate_Taunt = {
+    {
+        text = [[[<TODO>]: Leave this planet or die!]],
+        vid = 'Fletcher.sfd',
+        bank = '',
+        cue = '',
+        faction = 'UEF'
+    }
 }

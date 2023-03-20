@@ -46,6 +46,26 @@ objectives:Init
                 playersManager:WarpIn(PlayerDeath)
             end)
 
+
+            ---@type UnitDeathTrigger
+            objectives.Data.M1_UEF_DeathTrigger = Oxygen.Triggers.UnitDeathTrigger(
+                function(unit)
+                    ScenarioFramework.Dialogue(voStrings.M1_Kill, nil, true)
+
+                    objectives:EndGame(false)
+                end
+            )
+
+            ---@type PlayerIntelTrigger
+            objectives.Data.M1_UEF_IntelTrigger = Oxygen.Triggers.PlayerIntelTrigger(
+                function(unit)
+                    ScenarioFramework.Dialogue(voStrings.M1_ACU_Locate, nil, true)
+                end
+            )
+            objectives.Data.M1_UEF_IntelTrigger:Add(ScenarioInfo.UEFacu)
+            objectives.Data.M1_UEF_DeathTrigger:Add { ScenarioInfo.UEFacu }
+
+
             local unit = Game.Armies.CreateUnit('Unknown', 'M1_MindController')
             objectives.Data.M1_MindController = unit
             unit:SetDoNotTarget(true)
@@ -97,14 +117,6 @@ objectives:Init
 
             ScenarioFramework.Dialogue(voStrings.M1_Damage, nil, true)
 
-            ---@type UnitDeathTrigger
-            objectives.Data.M1_UEF_DeathTrigger = Oxygen.Triggers.UnitDeathTrigger(
-                function(unit)
-                    LOG "FAILED, ACU KILLED!"
-                    objectives:EndGame(false)
-                end
-            )
-            objectives.Data.M1_UEF_DeathTrigger:Add { ScenarioInfo.UEFacu }
             return {
                 Units = { ScenarioInfo.UEFacu },
             }
