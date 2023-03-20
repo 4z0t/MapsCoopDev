@@ -63,5 +63,12 @@ M1_UEF_Locate_Taunt = {
         bank = '',
         cue = '',
         faction = 'UEF'
+    },
+    {
+        text = [[[HQ]: He is agressive for some reason. Continue the mission commander, we have to get him alive!]],
+        vid = 'AllyCom.sfd',
+        bank = '',
+        cue = '',
+        faction = 'UEF'
     }
 }
