@@ -61,8 +61,8 @@ objectives:Init
             local unit = Game.Armies.CreateUnit('Unknown', 'M1_MindController')
             objectives.Data.M1_MindController = unit
             unit:SetDoNotTarget(true)
-            unit:SetCanTakeDamage(false)
-            unit:SetCanBeKilled(false)
+            unit.CanTakeDamage = false
+            unit.CanBeKilled = false
             unit:SetReclaimable(false)
             --ScenarioFramework.Dialogue(VOStrings.Save, nil, true)
             ---@type ObjectiveTarget
