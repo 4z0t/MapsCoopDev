@@ -157,6 +157,11 @@ function OnPopulate()
 
     playersManager:Init
     {
+        enhancements = {
+            UEF = { "ResourceAllocation", "AdvancedEngineering", "T3Engineering" },
+            Cybran = { "ResourceAllocation", "AdvancedEngineering", "T3Engineering" },
+            Aeon = { "ResourceAllocation", "AdvancedEngineering", "T3Engineering" },
+        },
         {
             units = {
                 UEF = "UEF1",
