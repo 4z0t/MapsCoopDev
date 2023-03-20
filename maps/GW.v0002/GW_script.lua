@@ -137,6 +137,7 @@ objectives:Init
             LOG("SUCCESS DAMAGE")
             WaitSeconds(10)
 
+            objectives:Get("M1_DoNotKill"):ManualResult(true)
             objectives:EndGame(true)
         end)
         :Create()
