@@ -6,41 +6,44 @@ local Utilities = import('/lua/Utilities.lua')
 local Cinematics = import('/lua/cinematics.lua')
 local Buff = import('/lua/sim/Buff.lua')
 local TauntManager = import('/lua/TauntManager.lua')
-local Objectives = import('/lua/ScenarioFramework.lua').Objectives
 local AC = Oxygen.Cinematics
 local Game = Oxygen.Game
 local RequireIn = Oxygen.RequireIn
 local DV = Oxygen.DifficultyValues
 
-
-DV.M1_ACU_ShakeAmount = { 0.2, 0.4, 0.7 }
---local VOStrings = import(Oxygen.MapFolder "VOStrings.lua").lines
-
-
+---@type GWStrings
+local voStrings = import(Oxygen.ScenarioFolder "VOStrings.lua").lines
 
 local objectiveBuilder = Oxygen.ObjectiveBuilder()
 local playersManager = Oxygen.PlayersManager()
-
-
 local objectives = Oxygen.ObjectiveManager()
 
+
+DV.M1_ACU_ShakeAmount = { 0.2, 0.4, 0.7 }
+
 objectives.Data = {}
+
+
+---@param unit Unit
+local function PlayerDeath(unit)
+    LOG("Death")
+end
 
 objectives:Init
 {
     objectiveBuilder
         :New "M1_locate"
         :Title "Scout out the area"
-        :Description [[
-            
-        ]]
+        :Description [[Three commanders were lost on this planet during scout mission.
+                    Find out what happend and if they are alive, save them.]]
         :To(Oxygen.Objective.Locate)
         :OnStart(function()
 
             AC.NISMode(function()
                 AC.MoveTo("Cam0", 0)
+                ScenarioFramework.Dialogue(voStrings.M1_Start, nil, true)
                 AC.MoveTo("Cam1", 3)
-                playersManager:WarpIn()
+                playersManager:WarpIn(PlayerDeath)
             end)
 
             local unit = Game.Armies.CreateUnit('Unknown', 'M1_MindController')
@@ -109,6 +112,9 @@ objectives:Init
         end)
         :OnSuccess(function()
             LOG("SUCCESS DAMAGE")
+            WaitSeconds(10)
+
+            objectives:EndGame(true)
         end)
         :Create()
 
