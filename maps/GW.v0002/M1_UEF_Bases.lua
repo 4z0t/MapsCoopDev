@@ -38,7 +38,7 @@ function NEBase()
     neBase:SetBuildAllStructures(true)
 
     neBase:SetBuildTransports(true)
-    seBase:SetTransportsTech(3)
+    neBase:SetTransportsTech(2)
     neBase.TransportsNeeded = 3
 
     ---@type PlatoonTemplateBuilder
@@ -97,7 +97,7 @@ function SWBase()
 
 
     swBase:SetBuildTransports(true)
-    seBase:SetTransportsTech(2)
+    swBase:SetTransportsTech(2)
     swBase.TransportsNeeded = 3
 end
 

@@ -58,28 +58,26 @@ objectives:Init
                 Units = { objectives.Data.M1_MindController },
             }
         end)
-        :OnSuccess(function()
-            LOG("ABOBA")
-        end)
         :Next "M1_capture"
         :Create(),
 
     objectiveBuilder
         :New "M1_capture"
         :Title "Capture unknown structure"
-        :Description ""
+        :Description [[We need to know what this structure does.
+        Capture it, so, we can examine it.
+        ]]
         :To(Oxygen.Objective.Capture)
         :Target
         {
             MarkUnits = true
         }
         :OnStart(function()
+            ScenarioFramework.Dialogue(voStrings.M1_Capture, nil, true)
+
             return {
                 Units = { objectives.Data.M1_MindController },
             }
-        end)
-        :OnSuccess(function()
-            LOG("ABOBA")
         end)
         :Next "M1_damage"
         :Create(),
@@ -88,8 +86,7 @@ objectives:Init
     objectiveBuilder
         :New "M1_damage"
         :Title "Shake up the commander"
-        :Description [[
-        Damage the commander enough but do not kill him!
+        :Description [[Damage the commander enough but do not kill him!
         ]]
         :To(Oxygen.Objective.Damage)
         :Target
@@ -97,7 +94,9 @@ objectives:Init
             Amount = DV.M1_ACU_ShakeAmount
         }
         :OnStart(function()
-            LOG("START DAMAGE")
+
+            ScenarioFramework.Dialogue(voStrings.M1_Damage, nil, true)
+
             ---@type UnitDeathTrigger
             objectives.Data.M1_UEF_DeathTrigger = Oxygen.Triggers.UnitDeathTrigger(
                 function(unit)
