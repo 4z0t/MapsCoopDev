@@ -324,7 +324,7 @@ function Main()
             }
             :Quantity("StratBombers", 5)
             :EnableChild("StratBombers")
-            :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 300 / 10))
+            :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 300))
             :Create(),
 
         opAIb
