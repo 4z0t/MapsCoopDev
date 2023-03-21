@@ -212,7 +212,7 @@ objectives:Init
 				table.insert(ScenarioInfo.Prisoners, unit)
 			end
 		end)
-		:Next "Move"
+		:Next { "Move", "Protect" }
 		:Create(),
 
 	objectiveBuilder
@@ -235,10 +235,35 @@ objectives:Init
 		end)
 		:OnSuccess(function(units)
 			LOG("Success")
-			
+
 		end)
 		:OnFail(function()
 			LOG("Fail")
+		end)
+		:Create(),
+
+	objectiveBuilder
+		:NewSecondary "Protect"
+		:Title "Protect test"
+		:Description "AAAAAAAA"
+		:To(Oxygen.Objective.Protect)
+		:Target
+		{
+			Timer = 60,
+			ExpireResult = 'complete',
+			NumRequired = 6,
+			ShowProgress = true
+		}
+		:OnStart(function()
+			return {
+				Units = ScenarioInfo.Prisoners
+			}
+		end)
+		:OnSuccess(function()
+			LOG("GGG")
+		end)
+		:OnFail(function()
+			LOG "Lox"
 		end)
 		:Create(),
 
