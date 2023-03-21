@@ -70,14 +70,14 @@ function SetupSEBase()
         }
 
     seBase:LoadPlatoons {
-        pb:NewDefault "Rhinos SE"
+        pb:New "Rhinos SE"
             :InstanceCount(5)
             :Priority(280)
             :AddUnit(UNIT "Rhino", 4)
             :AddUnit(UNIT "Deceiver", DV "Deceiver count")
             :Create(),
 
-        pb:NewDefault "Bomber attack"
+        pb:New "Bomber attack"
             :Type "Air"
             :InstanceCount(5)
             :Priority(100)
@@ -115,7 +115,7 @@ function Main()
     mainBase:SetActive('AirScouting', true)
     mainBase:SetBuildAllStructures(true)
     mainBase:AddBuildGroup('BoiProd', 2000, false, false)
-    mainBase:SetACUUpgrades({ "AdvancedEngineering", "T3Engineering" }, false)
+    mainBase:SetACUUpgrades({ "T3Engineering" }, false)
     mainBase:SetBuildTransports(true)
     mainBase:SetTransportsTech(2)
     mainBase.TransportsNeeded = 7
@@ -138,7 +138,7 @@ function Main()
 
 
     mainBase:LoadPlatoons {
-        pb:NewDefault "Brick Attack"
+        pb:New "Brick Attack"
             :InstanceCount(5)
             :Priority(200)
             :AddUnits
@@ -150,14 +150,14 @@ function Main()
             :Create(),
 
 
-        pb:NewDefault "Lone Brick"
+        pb:New "Lone Brick"
             :InstanceCount(3)
             :Priority(100)
             :AddUnit(UNIT "Brick", 1)
             :AddUnit(UNIT "Deceiver", DV "Deceiver count")
             :Create(),
 
-        pb:NewDefault "Flying Brick"
+        pb:New "Flying Brick"
             :InstanceCount(3)
             :Priority(250)
             :AddUnit(UNIT "Brick", 1)
@@ -172,7 +172,7 @@ function Main()
             }
             :Create(),
 
-        pb:NewDefault "Flying Bricks"
+        pb:New "Flying Bricks"
             :InstanceCount(1)
             :Priority(50)
             :AddUnit(UNIT "Brick", DV "Flying Bricks count")
@@ -188,7 +188,7 @@ function Main()
             :Create(),
 
 
-        pb:NewDefault "SE Engineers"
+        pb:New "SE Engineers"
             :InstanceCount(1)
             :Priority(500)
             :AddUnit(UNIT "T3 Cybran Engineer", 5)
@@ -201,7 +201,7 @@ function Main()
             }
             :Create(Oxygen.BaseManager.Platoons.ExpansionOf "SE_BASE"),
 
-        pb:NewDefault "Massive Brick Attack"
+        pb:New "Massive Brick Attack"
             :InstanceCount(2)
             :Priority(150)
             :AddUnit(UNIT "Brick", DV "M Brick count")
@@ -210,7 +210,7 @@ function Main()
             :AddUnit(UNIT "Medusa", DV "M Brick count")
             :Create(),
 
-        pb:NewDefault "Rhinos"
+        pb:New "Rhinos"
             :InstanceCount(5)
             :Priority(280)
             :AddUnit(UNIT "Rhino", 4)
@@ -218,19 +218,19 @@ function Main()
             :Difficulties { "Medium", "Easy" }
             :Create(),
 
-        pb:NewDefault "bois"
+        pb:New "bois"
             :Type "Gate"
             :Priority(500)
             :AddUnit(UNIT "Cybran RAS SACU", DV "RAS Bois count")
             :Create(Oxygen.BaseManager.Platoons.ExpansionOf "NukeBaseGroup"),
 
-        pb:NewDefault "Arty attack"
+        pb:New "Arty attack"
             :Type "Land"
             :Priority(500)
             :AddUnits(Oxygen.Misc.FromMapUnits("Yudi", "ArtyAttack", 'Artillery', 'GrowthFormation'))
             :Create(),
 
-        pb:NewDefault "Loyas attack"
+        pb:New "Loyas attack"
             :Type "Land"
             :Priority(500)
             :AddUnits(Oxygen.Misc.FromMapUnitsDifficulty("Yudi", "Loyas", "Attack", 'GrowthFormation'))

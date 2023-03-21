@@ -61,7 +61,7 @@ function NEBase()
 
     neBase:LoadPlatoons
     {
-        pb:NewDefault "NE Pillar attack"
+        pb:New "NE Pillar attack"
             :Priority(100)
             :InstanceCount(4)
             :AddUnit(UNIT "Pillar", DV.M1_NE_Pillars)
@@ -69,7 +69,7 @@ function NEBase()
             :AddUnit(UNIT "T2 UEF Flak", DV.M1_NE_Flak)
             :Create(),
 
-        pb:NewDefault "ArtyDrop"
+        pb:New "ArtyDrop"
             :Priority(200)
             :AddUnit(UNIT "Lobo", DV.M1_NE_LoboDrop)
             :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
@@ -156,7 +156,7 @@ function SEBase()
 
         seBase:LoadPlatoons
         {
-            pb:NewDefault "SE Titan attack"
+            pb:New "SE Titan attack"
                 :AddUnit(UNIT "Titan", DV.M1_SE_Titans)
                 :Priority(200)
                 :InstanceCount(4)
@@ -171,25 +171,26 @@ function SEBase()
         local pb = PlatoonBuilder()
 
         pb
-            :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
+            :UseAIFunction(Oxygen.PlatoonAI.Common, "PatrolChainPickerThread")
             :UseType "Air"
             :UseData
             {
                 PatrolChains = {
                     "M1_AAC2",
-                }
+                },
+                Offset = 30
             }
 
 
         seBase:LoadPlatoons
         {
-            pb:NewDefault "SE T1 bomber attack"
+            pb:New "SE T1 bomber attack"
                 :AddUnit(UNIT "T1 UEF Bomber", DV.M1_SE_Bombers)
                 :Priority(200)
                 :InstanceCount(4)
                 :Create(),
 
-            pb:NewDefault "SE Gunship attack"
+            pb:New "SE Gunship attack"
                 :AddUnit(UNIT "T2 UEF Gunship", DV.M1_SE_Gunships)
                 :Priority(100)
                 :InstanceCount(2)
