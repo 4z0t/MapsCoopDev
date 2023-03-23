@@ -304,7 +304,35 @@ function SEBase()
                 :AddUnit(UNIT "Percival", DV.M1_SE_PercivalCount)
                 :AddUnit(UNIT "Parashield", DV.M1_SE_PercivalShieldsCount)
                 :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 100))
-                :Create()
+                :Create(),
+
+            pb:New "NE Engineers"
+                :InstanceCount(1)
+                :Priority(700)
+                :Difficulty "Hard"
+                :AddUnit(UNIT "T3 UEF Engineer", 5)
+                :Data
+                {
+                    UseTransports = true,
+                    TransportReturn = "M1_SE_Base_M",
+                    TransportChain = "M1_TLC5",
+                    LandingLocation = "M1_NE_Base_M",
+                }
+                :Create(Oxygen.BaseManager.Platoons.ExpansionOf "M1_NE_Base"),
+
+            pb:New "SW Engineers"
+                :InstanceCount(1)
+                :Priority(700)
+                :Difficulty "Hard"
+                :AddUnit(UNIT "T3 UEF Engineer", 5)
+                :Data
+                {
+                    UseTransports = true,
+                    TransportReturn = "M1_SE_Base_M",
+                    TransportChain = "M1_TLC4",
+                    LandingLocation = "M1_SW_Base_M",
+                }
+                :Create(Oxygen.BaseManager.Platoons.ExpansionOf "M1_SW_Base"),
         }
     end
 
