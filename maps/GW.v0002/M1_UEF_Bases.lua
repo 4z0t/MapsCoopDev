@@ -223,7 +223,7 @@ function SEBase()
 
             pb:New "SE Heavy gunships"
                 :Priority(500)
-                :InstanceCount(5)
+                :InstanceCount(1)
                 :Difficulty { "Hard", "Medium" }
                 :AddUnit(UNIT "<TODO heavy gunship>", DV.M1_SE_HeavyGunships, "Attack", "GrowthFormation")
                 :AddUnit(UNIT "<TODO Asf>", DV.M1_SE_HeavyGunshipsSupportASFs, 'Support', "GrowthFormation")
