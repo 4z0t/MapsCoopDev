@@ -245,6 +245,7 @@ function SEBase()
             pb:New "SE ASFs"
                 :Priority(1000)
                 :InstanceCount(2)
+                :Difficulty { "Hard", "Medium" }
                 :AddUnit(UNIT "<TODO Asf>", DV.M1_SE_Strats, 'Attack', "GrowthFormation")
                 :AddCondition(BC.HumansCategoryCondition(categories.AIR, ">=", 20))
                 :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
