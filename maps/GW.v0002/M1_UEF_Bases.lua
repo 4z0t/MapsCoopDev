@@ -125,6 +125,10 @@ DV.M1_SE_Gunships = { 3, 4, 5 }
 DV.M1_SE_BuildAirDefenses = { false, false, true }
 DV.M1_SE_BuildLandDefenses = { false, false, true }
 
+DV.M1_SE_PercivalCount = { 1, 2, 4 }
+DV.M1_SE_PercivalShieldsCount = { 1, 3, 6 }
+
+
 
 function SEBase()
     ScenarioInfo.UEFacu = Oxygen.Game.Armies.CreateUnit("UEF", "UEF_ACU")
@@ -172,9 +176,14 @@ function SEBase()
                 :InstanceCount(4)
                 :Create(),
 
-
-
-
+            pb:New "SE Percy attack"
+                :Priority(100)
+                :InstanceCount(4)
+                :Difficulty { "Hard", "Medium" }
+                :AddUnit(UNIT "Percival", DV.M1_SE_PercivalCount)
+                :AddUnit(UNIT "Parashield", DV.M1_SE_PercivalShieldsCount, 'Guard')
+                :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 100))
+                :Create()
         }
     end
 
