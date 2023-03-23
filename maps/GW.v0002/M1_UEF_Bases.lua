@@ -19,9 +19,25 @@ local swBase = BaseManager()
 ---@type AdvancedBaseManager
 local seBase = BaseManager()
 
+---@type NukeBaseManger
+local nukeBase = Oxygen.BaseManager.BaseManagers.NukeBaseManger()
+
 
 local DV = Oxygen.DifficultyValues
 
+function NukeBase()
+    nukeBase:Initialize(Oxygen.Brains.UEF, "M1_Nuke_Base", "M1_Nuke_Base_M", 10, {
+        ["M1_Nuke_Base"] = 1000,
+        ["M1_Nuke_Stealth"] = 2000,
+    })
+    nukeBase:StartEmptyBase(5)
+    nukeBase:SortGroupNames()
+
+    nukeBase:SetBuildAllStructures(true)
+    nukeBase:SetActive('Nuke', true)
+
+    nukeBase.MaximumConstructionEngineers = 5
+end
 
 DV.M1_NE_EngineersCount = { 7, 10, 15 }
 DV.M1_NE_AssistersCount = { 5, 7, 10 }
@@ -33,10 +49,12 @@ DV.M1_NE_LoboDrop = { 8, 12, 16 }
 DV.M1_NE_MMLs = { 3, 5, 8 }
 
 
+
+
 function NEBase()
     neBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_NE_Base", "M1_NE_Base_M", 100,
         {
-            ["M1_NE_Base"] = 1000
+            ["M1_NE_Base"] = 1000,
         }
     )
     neBase:StartNonZeroBase { DV.M1_NE_EngineersCount, DV.M1_NE_AssistersCount }
@@ -59,8 +77,7 @@ function NEBase()
                 "M1_LAC7",
                 "M1_LAC5",
                 "M1_LAC4",
-            },
-            Offset = 20
+            }
 
         }
 
@@ -135,8 +152,7 @@ function SWBase()
                 PatrolChains = {
                     "M1_LAC2",
                     "M1_LAC1",
-                },
-                Offset = 30
+                }
             }
 
 
@@ -333,6 +349,20 @@ function SEBase()
                     LandingLocation = "M1_SW_Base_M",
                 }
                 :Create(Oxygen.BaseManager.Platoons.ExpansionOf "M1_SW_Base"),
+
+            pb:New "Nuke base Engineers"
+                :InstanceCount(1)
+                :Priority(1000)
+                :Difficulty "Hard"
+                :AddUnit(UNIT "T3 UEF Engineer", 5)
+                :Data
+                {
+                    UseTransports = true,
+                    TransportReturn = "M1_SE_Base_M",
+                    TransportChain = "M1_NukeBase_Transport",
+                    LandingLocation = "M1_Nuke_Base_M",
+                }
+                :Create(Oxygen.BaseManager.Platoons.ExpansionOf "M1_Nuke_Base"),
         }
     end
 
@@ -452,4 +482,5 @@ function Main()
     NEBase()
     SWBase()
     SEBase()
+    NukeBase()
 end
