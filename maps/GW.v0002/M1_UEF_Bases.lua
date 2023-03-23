@@ -262,7 +262,12 @@ function SEBase()
                 :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
                 :Data
                 {
-                    CategoryList = { categories.MASSFABRICATION, categories.MASSEXTRACTION, categories.ENERGYPRODUCTION }
+                    CategoryList =
+                    {
+                        categories.MASSFABRICATION,
+                        categories.MASSEXTRACTION,
+                        categories.ENERGYPRODUCTION
+                    }
                 }
                 :Create(),
 
