@@ -5,6 +5,8 @@ local UNIT = Oxygen.UnitNames.Get
 local BC = Oxygen.BuildConditions
 local BaseManager = Oxygen.BaseManager.BaseManagers.AdvancedBaseManager
 
+local PARSE = Oxygen.UnitNames.FactionParse.FactionUnitParser("UEF")
+
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
 
 
@@ -225,8 +227,8 @@ function SEBase()
                 :Priority(500)
                 :InstanceCount(1)
                 :Difficulty { "Hard", "Medium" }
-                :AddUnit(UNIT "<TODO heavy gunship>", DV.M1_SE_HeavyGunships, "Attack", "GrowthFormation")
-                :AddUnit(UNIT "<TODO Asf>", DV.M1_SE_HeavyGunshipsSupportASFs, 'Support', "GrowthFormation")
+                :AddUnit(PARSE "HeavyGunships", DV.M1_SE_HeavyGunships, "Attack", "GrowthFormation")
+                :AddUnit(PARSE "AirSuperiority", DV.M1_SE_HeavyGunshipsSupportASFs, 'Support', "GrowthFormation")
                 :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 250))
                 :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
                 :Data
@@ -246,7 +248,7 @@ function SEBase()
                 :Priority(1000)
                 :InstanceCount(2)
                 :Difficulty { "Hard", "Medium" }
-                :AddUnit(UNIT "<TODO Asf>", DV.M1_SE_Strats, 'Attack', "GrowthFormation")
+                :AddUnit(PARSE "AirSuperiority", DV.M1_SE_ASFs, 'Attack', "GrowthFormation")
                 :AddCondition(BC.HumansCategoryCondition(categories.AIR, ">=", 20))
                 :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
                 :Data
@@ -258,7 +260,7 @@ function SEBase()
             pb:New "SE Strats"
                 :Priority(1500)
                 :InstanceCount(3)
-                :AddUnit(UNIT "<TODO t3 uef bomber>", DV.M1_SE_ASFs, 'Attack', "GrowthFormation")
+                :AddUnit(PARSE "StratBombers", DV.M1_SE_Strats, 'Attack', "GrowthFormation")
                 :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 300))
                 :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
                 :Data
