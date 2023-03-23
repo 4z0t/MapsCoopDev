@@ -228,6 +228,18 @@ function SEBase()
                 :AddUnit(UNIT "<TODO heavy gunship>", DV.M1_SE_HeavyGunships, "Attack", "GrowthFormation")
                 :AddUnit(UNIT "<TODO Asf>", DV.M1_SE_HeavyGunshipsSupportASFs, 'Support', "GrowthFormation")
                 :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 250))
+                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+                :Data
+                {
+                    CategoryList =
+                    {
+                        (categories.DEFENSE + categories.MOBILE) * categories.ANTIAIR,
+                        categories.SHIELD * categories.STRUCTURE,
+                        categories.MASSFABRICATION,
+                        categories.MASSEXTRACTION,
+                        categories.ENERGYPRODUCTION
+                    }
+                }
                 :Create(),
 
             pb:New "SE ASFs"
