@@ -5,6 +5,8 @@ local UNIT = Oxygen.UnitNames.Get
 local BC = Oxygen.BuildConditions
 local BaseManager = Oxygen.BaseManager.BaseManagers.AdvancedBaseManager
 
+local PARSE = Oxygen.UnitNames.FactionParse.FactionUnitParser("UEF")
+
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
 
 
@@ -28,6 +30,7 @@ DV.M1_NE_Pillars = { 4, 5, 6 }
 DV.M1_NE_Flak = { 0, 1, 2 }
 DV.M1_NE_Shield = { 1, 2, 3 }
 DV.M1_NE_LoboDrop = { 8, 12, 16 }
+DV.M1_NE_MMLs = { 3, 5, 8 }
 
 
 function NEBase()
@@ -62,7 +65,7 @@ function NEBase()
     neBase:LoadPlatoons
     {
         pb:New "NE Pillar attack"
-            :Priority(100)
+            :Priority(200)
             :InstanceCount(4)
             :AddUnit(UNIT "Pillar", DV.M1_NE_Pillars)
             :AddUnit(UNIT "Parashield", DV.M1_NE_Shield)
@@ -70,7 +73,7 @@ function NEBase()
             :Create(),
 
         pb:New "ArtyDrop"
-            :Priority(200)
+            :Priority(100)
             :AddUnit(UNIT "Lobo", DV.M1_NE_LoboDrop)
             :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
             :Data
@@ -81,6 +84,15 @@ function NEBase()
                 AttackChain = "Spawn_AC"
             }
             :Create(),
+
+        pb:New "NE MMLs"
+            :Priority(200)
+            :InstanceCount(3)
+            :AddUnit(UNIT "T2 UEF MML", DV.M1_NE_MMLs, 'Artillery')
+            :AddUnit(UNIT "Parashield", DV.M1_NE_Shield, 'Guard')
+            :AddCondition(BC.HumansCategoryCondition(categories.DEFENSE * categories.LAND, ">=", 10))
+            :Create()
+
     }
 
 end
@@ -114,6 +126,14 @@ DV.M1_SE_Gunships = { 3, 4, 5 }
 
 DV.M1_SE_BuildAirDefenses = { false, false, true }
 DV.M1_SE_BuildLandDefenses = { false, false, true }
+
+DV.M1_SE_PercivalCount = { 1, 2, 4 }
+DV.M1_SE_PercivalShieldsCount = { 1, 3, 6 }
+
+DV.M1_SE_HeavyGunships = { 3, 5, 10 }
+DV.M1_SE_HeavyGunshipsSupportASFs = { 0, 10, 15 }
+DV.M1_SE_ASFs = { 0, 20, 30 }
+DV.M1_SE_Strats = { 2, 5, 8 }
 
 
 function SEBase()
@@ -160,9 +180,16 @@ function SEBase()
                 :AddUnit(UNIT "Titan", DV.M1_SE_Titans)
                 :Priority(200)
                 :InstanceCount(4)
+                :Create(),
+
+            pb:New "SE Percy attack"
+                :Priority(300)
+                :InstanceCount(4)
+                :Difficulty { "Hard", "Medium" }
+                :AddUnit(UNIT "Percival", DV.M1_SE_PercivalCount)
+                :AddUnit(UNIT "Parashield", DV.M1_SE_PercivalShieldsCount, 'Guard')
+                :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 100))
                 :Create()
-
-
         }
     end
 
@@ -194,8 +221,58 @@ function SEBase()
                 :AddUnit(UNIT "T2 UEF Gunship", DV.M1_SE_Gunships)
                 :Priority(100)
                 :InstanceCount(2)
-                :Create()
+                :Create(),
 
+            pb:New "SE Heavy gunships"
+                :Priority(500)
+                :InstanceCount(1)
+                :Difficulty { "Hard", "Medium" }
+                :AddUnit(PARSE "HeavyGunship", DV.M1_SE_HeavyGunships, "Attack", "GrowthFormation")
+                :AddUnit(PARSE "AirSuperiority", DV.M1_SE_HeavyGunshipsSupportASFs, 'Support', "GrowthFormation")
+                :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 250))
+                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+                :Data
+                {
+                    CategoryList =
+                    {
+                        (categories.DEFENSE + categories.MOBILE) * categories.ANTIAIR,
+                        categories.SHIELD * categories.STRUCTURE,
+                        categories.MASSFABRICATION,
+                        categories.MASSEXTRACTION,
+                        categories.ENERGYPRODUCTION
+                    }
+                }
+                :Create(),
+
+            pb:New "SE ASFs"
+                :Priority(1000)
+                :InstanceCount(2)
+                :Difficulty { "Hard", "Medium" }
+                :AddUnit(PARSE "AirSuperiority", DV.M1_SE_ASFs, 'Attack', "GrowthFormation")
+                :AddCondition(BC.HumansCategoryCondition(categories.AIR, ">=", 20))
+                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+                :Data
+                {
+                    CategoryList = { categories.AIR }
+                }
+                :Create(),
+
+            pb:New "SE Strats"
+                :Priority(1500)
+                :InstanceCount(3)
+                :AddUnit(PARSE "StratBomber", DV.M1_SE_Strats, 'Attack', "GrowthFormation")
+                :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 300))
+                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+                :Data
+                {
+                    CategoryList =
+                    {
+                        categories.MASSFABRICATION,
+                        categories.MASSEXTRACTION,
+                        categories.ENERGYPRODUCTION
+                    }
+                }
+                :Create(),
 
         }
     end
