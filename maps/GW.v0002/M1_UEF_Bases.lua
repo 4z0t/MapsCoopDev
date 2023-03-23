@@ -91,8 +91,8 @@ function NEBase()
             :Priority(200)
             :InstanceCount(3)
             :AddUnit(UNIT "T2 UEF MML", DV.M1_NE_MMLs, 'Artillery')
-            :AddUnit(UNIT "Parashield", DV.M1_NE_Shield, 'Guard')
-            :AddCondition(BC.HumansCategoryCondition(categories.DEFENSE * categories.LAND, ">=", 10))
+            :AddUnit(UNIT "Parashield", DV.M1_NE_Shield, 'Artillery')
+            :AddCondition(BC.HumansCategoryCondition(categories.DEFENSE, ">=", 10))
             :Create()
 
     }
@@ -214,6 +214,7 @@ function SWBase()
                 :InstanceCount(2)
                 :Difficulty { "Hard", "Medium" }
                 :AddUnit(PARSE "CombatFighter", DV.M1_SW_JanusCount, 'Attack', "GrowthFormation")
+                :AddCondition(BC.HumansEconomyCondition("EnergyIncome", ">", 5000))
                 :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
                 :Data
                 {
@@ -301,7 +302,7 @@ function SEBase()
                 :InstanceCount(4)
                 :Difficulty { "Hard", "Medium" }
                 :AddUnit(UNIT "Percival", DV.M1_SE_PercivalCount)
-                :AddUnit(UNIT "Parashield", DV.M1_SE_PercivalShieldsCount, 'Guard')
+                :AddUnit(UNIT "Parashield", DV.M1_SE_PercivalShieldsCount)
                 :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 100))
                 :Create()
         }
