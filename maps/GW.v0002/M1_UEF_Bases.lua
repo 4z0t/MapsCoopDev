@@ -63,7 +63,7 @@ function NEBase()
     neBase:LoadPlatoons
     {
         pb:New "NE Pillar attack"
-            :Priority(100)
+            :Priority(200)
             :InstanceCount(4)
             :AddUnit(UNIT "Pillar", DV.M1_NE_Pillars)
             :AddUnit(UNIT "Parashield", DV.M1_NE_Shield)
@@ -71,7 +71,7 @@ function NEBase()
             :Create(),
 
         pb:New "ArtyDrop"
-            :Priority(200)
+            :Priority(100)
             :AddUnit(UNIT "Lobo", DV.M1_NE_LoboDrop)
             :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
             :Data
@@ -128,6 +128,8 @@ DV.M1_SE_BuildLandDefenses = { false, false, true }
 DV.M1_SE_PercivalCount = { 1, 2, 4 }
 DV.M1_SE_PercivalShieldsCount = { 1, 3, 6 }
 
+DV.M1_SE_HeavyGunships = { 3, 5, 10 }
+DV.M1_SE_HeavyGunshipsSupportASFs = { 0, 10, 15 }
 
 
 function SEBase()
@@ -177,7 +179,7 @@ function SEBase()
                 :Create(),
 
             pb:New "SE Percy attack"
-                :Priority(100)
+                :Priority(300)
                 :InstanceCount(4)
                 :Difficulty { "Hard", "Medium" }
                 :AddUnit(UNIT "Percival", DV.M1_SE_PercivalCount)
@@ -215,9 +217,15 @@ function SEBase()
                 :AddUnit(UNIT "T2 UEF Gunship", DV.M1_SE_Gunships)
                 :Priority(100)
                 :InstanceCount(2)
+                :Create(),
+
+            pb:New "SE Heavy gunships"
+                :Priority(500)
+                :InstanceCount(5)
+                :AddUnit(UNIT "<TODO heavy gunship>", DV.M1_SE_HeavyGunships, "Attack", "GrowthFormation")
+                :AddUnit(UNIT "<TODO Asf>", DV.M1_SE_HeavyGunshipsSupportASFs, 'Support', "GrowthFormation")
+                :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 250))
                 :Create()
-
-
         }
     end
 
