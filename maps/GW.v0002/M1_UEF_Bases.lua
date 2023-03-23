@@ -28,6 +28,7 @@ DV.M1_NE_Pillars = { 4, 5, 6 }
 DV.M1_NE_Flak = { 0, 1, 2 }
 DV.M1_NE_Shield = { 1, 2, 3 }
 DV.M1_NE_LoboDrop = { 8, 12, 16 }
+DV.M1_NE_MMLs = { 3, 5, 8 }
 
 
 function NEBase()
@@ -81,6 +82,15 @@ function NEBase()
                 AttackChain = "Spawn_AC"
             }
             :Create(),
+
+        pb:New "NE MMLs"
+            :Priority(200)
+            :InstanceCount(3)
+            :AddUnit(UNIT "T2 UEF MML", DV.M1_NE_MMLs, 'Artillery')
+            :AddUnit(UNIT "Parashield", DV.M1_NE_Shield, 'Guard')
+            :AddCondition(BC.HumansCategoryCondition(categories.DEFENSE * categories.LAND, ">=", 10))
+            :Create()
+
     }
 
 end
@@ -160,7 +170,9 @@ function SEBase()
                 :AddUnit(UNIT "Titan", DV.M1_SE_Titans)
                 :Priority(200)
                 :InstanceCount(4)
-                :Create()
+                :Create(),
+
+
 
 
         }
