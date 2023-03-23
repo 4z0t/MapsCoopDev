@@ -227,7 +227,7 @@ function SEBase()
                 :Priority(500)
                 :InstanceCount(1)
                 :Difficulty { "Hard", "Medium" }
-                :AddUnit(PARSE "HeavyGunships", DV.M1_SE_HeavyGunships, "Attack", "GrowthFormation")
+                :AddUnit(PARSE "HeavyGunship", DV.M1_SE_HeavyGunships, "Attack", "GrowthFormation")
                 :AddUnit(PARSE "AirSuperiority", DV.M1_SE_HeavyGunshipsSupportASFs, 'Support', "GrowthFormation")
                 :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 250))
                 :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
@@ -260,7 +260,7 @@ function SEBase()
             pb:New "SE Strats"
                 :Priority(1500)
                 :InstanceCount(3)
-                :AddUnit(PARSE "StratBombers", DV.M1_SE_Strats, 'Attack', "GrowthFormation")
+                :AddUnit(PARSE "StratBomber", DV.M1_SE_Strats, 'Attack', "GrowthFormation")
                 :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 300))
                 :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
                 :Data
