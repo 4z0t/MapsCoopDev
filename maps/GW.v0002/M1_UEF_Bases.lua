@@ -130,6 +130,8 @@ DV.M1_SE_PercivalShieldsCount = { 1, 3, 6 }
 
 DV.M1_SE_HeavyGunships = { 3, 5, 10 }
 DV.M1_SE_HeavyGunshipsSupportASFs = { 0, 10, 15 }
+DV.M1_SE_ASFs = { 0, 20, 30 }
+DV.M1_SE_Strats = { 2, 5, 8 }
 
 
 function SEBase()
@@ -222,10 +224,36 @@ function SEBase()
             pb:New "SE Heavy gunships"
                 :Priority(500)
                 :InstanceCount(5)
+                :Difficulty { "Hard", "Medium" }
                 :AddUnit(UNIT "<TODO heavy gunship>", DV.M1_SE_HeavyGunships, "Attack", "GrowthFormation")
                 :AddUnit(UNIT "<TODO Asf>", DV.M1_SE_HeavyGunshipsSupportASFs, 'Support', "GrowthFormation")
                 :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 250))
-                :Create()
+                :Create(),
+
+            pb:New "SE ASFs"
+                :Priority(1000)
+                :InstanceCount(2)
+                :AddUnit(UNIT "<TODO Asf>", DV.M1_SE_Strats, 'Attack', "GrowthFormation")
+                :AddCondition(BC.HumansCategoryCondition(categories.AIR, ">=", 20))
+                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+                :Data
+                {
+                    CategoryList = { categories.AIR }
+                }
+                :Create(),
+
+            pb:New "SE Strats"
+                :Priority(1500)
+                :InstanceCount(3)
+                :AddUnit(UNIT "<TODO t3 uef bomber>", DV.M1_SE_ASFs, 'Attack', "GrowthFormation")
+                :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 300))
+                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+                :Data
+                {
+                    CategoryList = { categories.MASSFABRICATION, categories.MASSEXTRACTION, categories.ENERGYPRODUCTION }
+                }
+                :Create(),
+
         }
     end
 
