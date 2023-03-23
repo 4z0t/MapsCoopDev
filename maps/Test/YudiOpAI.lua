@@ -185,6 +185,7 @@ function Main()
                 LandingChain = "FlyingBrickLanding",
                 AttackChain = "TransportAttack"
             }
+            :AddCondition(BC.ArmyCategoryCondition("HumanPlayers", categories.LAND, ">", 10))
             :Create(),
 
 

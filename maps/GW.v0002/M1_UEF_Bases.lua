@@ -51,7 +51,7 @@ function NEBase()
     local pb = PlatoonBuilder()
 
     pb
-        :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
+        :UseAIFunction(Oxygen.PlatoonAI.Common, "PatrolChainPickerThread")
         :UseType "Land"
         :UseData
         {
@@ -59,7 +59,9 @@ function NEBase()
                 "M1_LAC7",
                 "M1_LAC5",
                 "M1_LAC4",
-            }
+            },
+            Offset = 20
+
         }
 
     neBase:LoadPlatoons
@@ -100,6 +102,10 @@ end
 DV.M1_SW_EngineerCount = { 4, 7, 10 }
 DV.M1_SW_AssisterCount = { 2, 4, 6 }
 
+DV.M1_SW_JanusCount = { 2, 4, 6 }
+DV.M1_SW_Gunships = { 2, 4, 6 }
+DV.M1_SW_Bombers = { 2, 4, 6 }
+
 function SWBase()
     swBase:InitializeDifficultyTables(Oxygen.Brains.UEF, "M1_SW_Base", "M1_SW_Base_M", 65,
         {
@@ -114,6 +120,113 @@ function SWBase()
     swBase:SetBuildTransports(true)
     swBase:SetTransportsTech(2)
     swBase.TransportsNeeded = 3
+
+
+    do --land platoons
+
+        ---@type PlatoonTemplateBuilder
+        local pb = PlatoonBuilder()
+
+        pb
+            :UseAIFunction(Oxygen.PlatoonAI.Common, "PatrolChainPickerThread")
+            :UseType "Land"
+            :UseData
+            {
+                PatrolChains = {
+                    "M1_LAC2",
+                    "M1_LAC1",
+                },
+                Offset = 30
+            }
+
+
+        swBase:LoadPlatoons
+        {
+            pb:New "SW Pillar attack"
+                :Priority(200)
+                :InstanceCount(4)
+                :AddUnit(UNIT "Pillar", DV.M1_NE_Pillars)
+                :AddUnit(UNIT "Parashield", DV.M1_NE_Shield)
+                :AddUnit(UNIT "T2 UEF Flak", DV.M1_NE_Flak)
+                :Create(),
+
+
+            pb:New "ArtyDrop SW"
+                :Priority(100)
+                :AddUnit(UNIT "Lobo", DV.M1_NE_LoboDrop)
+                :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
+                :Data
+                {
+                    TransportReturn = "M1_SW_Base_M",
+                    TransportChain = "M1_LTC1",
+                    LandingChain = "M1_LLC1",
+                    AttackChain = "Spawn_AC"
+                }
+                :Create(),
+
+        }
+    end
+
+    do --air platoons
+        ---@type PlatoonTemplateBuilder
+        local pb = PlatoonBuilder()
+
+        pb
+            :UseAIFunction(Oxygen.PlatoonAI.Common, "PatrolChainPickerThread")
+            :UseType "Air"
+            :UseData
+            {
+                PatrolChains = {
+                    "M1_AAC1",
+                    "M1_LAC2",
+                    "M1_LAC1",
+                },
+                Offset = 30
+            }
+
+
+        swBase:LoadPlatoons
+        {
+            pb:New "SW T1 bomber attack"
+                :AddUnit(UNIT "T1 UEF Bomber", DV.M1_SW_Bombers)
+                :Priority(200)
+                :InstanceCount(4)
+                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+                :Data
+                {
+                    CategoryList = {
+                        categories.ENGINEER * categories.TECH1,
+                        categories.ENGINEER * categories.TECH2,
+                        categories.ENGINEER * categories.TECH3
+                    }
+                }
+                :Create(),
+
+            pb:New "SW Gunship attack"
+                :AddUnit(UNIT "T2 UEF Gunship", DV.M1_SW_Gunships)
+                :Priority(100)
+                :InstanceCount(2)
+                :Create(),
+
+
+            pb:New "SW Janus attacks"
+                :Priority(1000)
+                :InstanceCount(2)
+                :Difficulty { "Hard", "Medium" }
+                :AddUnit(PARSE "CombatFighter", DV.M1_SW_JanusCount, 'Attack', "GrowthFormation")
+                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+                :Data
+                {
+                    CategoryList = {
+                        categories.ENERGYPRODUCTION,
+                        categories.MASSEXTRACTION + categories.MASSFABRICATION,
+                        categories.ENGINEER
+                    }
+                }
+                :Create(),
+        }
+    end
+
 end
 
 DV.M1_SE_EngineerCount = { 10, 20, 30 }
@@ -163,14 +276,15 @@ function SEBase()
         local pb = PlatoonBuilder()
 
         pb
-            :UseAIFunction(SPAIFileName, "PatrolChainPickerThread")
+            :UseAIFunction(Oxygen.PlatoonAI.Common, "PatrolChainPickerThread")
             :UseType "Land"
             :UseData
             {
                 PatrolChains = {
                     "M1_LAC3",
                     "M1_LAC6",
-                }
+                },
+                Offset = 30
             }
 
 
