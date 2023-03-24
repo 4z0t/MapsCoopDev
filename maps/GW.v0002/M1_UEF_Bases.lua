@@ -360,7 +360,6 @@ function SEBase()
                 :Priority(1000)
                 :Difficulty "Hard"
                 :AddUnit(UNIT "T3 UEF Engineer", 5)
-                :BuildOnce()
                 :Data
                 {
                     UseTransports = true,
@@ -403,7 +402,7 @@ function SEBase()
                 :Create(),
 
             pb:New "SE Heavy gunships"
-                :Priority(500)
+                :Priority(2000)
                 :InstanceCount(1)
                 :Difficulty { "Hard", "Medium" }
                 :AddUnit(PARSE "HeavyGunship", DV.M1_SE_HeavyGunships, "Attack", "GrowthFormation")
