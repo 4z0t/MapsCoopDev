@@ -15112,6 +15112,34 @@ Scenario = {
                             },
                         },
                     },
+                    ['M2_CM_Base'] = GROUP {
+                        prefix = 'M2',
+                        orders = '',
+                        platoon = '',
+                        Units = {
+                            ['M2_CM_Base_D3'] = GROUP {
+                                prefix = 'M2',
+                                orders = '',
+                                platoon = '',
+                                Units = {
+                                    ['M2_CM_Base_D2'] = GROUP {
+                                        prefix = 'M2',
+                                        orders = '',
+                                        platoon = '',
+                                        Units = {
+                                            ['M2_CM_Base_D1'] = GROUP {
+                                                prefix = 'M2',
+                                                orders = '',
+                                                platoon = '',
+                                                Units = {
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
                 },
             },
             PlatoonBuilders = {
