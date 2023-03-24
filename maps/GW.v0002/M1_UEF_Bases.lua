@@ -48,6 +48,8 @@ DV.M1_NE_Shield = { 1, 2, 3 }
 DV.M1_NE_LoboDrop = { 8, 12, 16 }
 DV.M1_NE_MMLs = { 3, 5, 8 }
 
+DV.M1_NE_Janus = { 3, 7, 10 }
+DV.M1_NE_Gunships = { 5, 10, 15 }
 
 
 
@@ -64,61 +66,111 @@ function NEBase()
     neBase:SetBuildTransports(true)
     neBase:SetTransportsTech(2)
     neBase.TransportsNeeded = 3
+    do -- land
+        ---@type PlatoonTemplateBuilder
+        local pb = PlatoonBuilder()
 
-    ---@type PlatoonTemplateBuilder
-    local pb = PlatoonBuilder()
-
-    pb
-        :UseAIFunction(Oxygen.PlatoonAI.Common, "PatrolChainPickerThread")
-        :UseType "Land"
-        :UseData
-        {
-            PatrolChains = {
-                "M1_LAC7",
-                "M1_LAC5",
-                "M1_LAC4",
+        pb
+            :UseAIFunction(Oxygen.PlatoonAI.Common, "PatrolChainPickerThread")
+            :UseType "Land"
+            :UseData
+            {
+                PatrolChains = {
+                    "M1_LAC7",
+                    "M1_LAC5",
+                    "M1_LAC4",
+                }
             }
+
+        neBase:LoadPlatoons
+        {
+            pb:New "NE Pillar attack"
+                :Priority(200)
+                :InstanceCount(4)
+                :AddUnit(UNIT "Pillar", DV.M1_NE_Pillars)
+                :AddUnit(UNIT "Parashield", DV.M1_NE_Shield)
+                :AddUnit(UNIT "T2 UEF Flak", DV.M1_NE_Flak)
+                :Create(),
+
+            pb:New "ArtyDrop"
+                :Priority(100)
+                :AddUnit(UNIT "Lobo", DV.M1_NE_LoboDrop)
+                :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
+                :Data
+                {
+                    TransportReturn = "M1_NE_Base_M",
+                    TransportChain = "M1_LTC2",
+                    LandingChain = "M1_LLC1",
+                    AttackChain = "Spawn_AC"
+                }
+                :Create(),
+
+            pb:New "NE MMLs"
+                :Priority(200)
+                :InstanceCount(3)
+                :AddUnit(UNIT "T2 UEF MML", DV.M1_NE_MMLs, 'Artillery')
+                :AddUnit(UNIT "Parashield", DV.M1_NE_Shield, 'Artillery')
+                :AddCondition(BC.HumansCategoryCondition(categories.DEFENSE, ">=", 10))
+                :Create(Oxygen.Platoons.TargettingPriorities
+                    {
+                        categories.ANTIMISSILE * categories.TECH2,
+                        categories.DEFENSE * categories.STRUCTURE * categories.DIRECTFIRE
+                    }
+                )
+
 
         }
+    end
+    do --air
+        ---@type PlatoonTemplateBuilder
+        local pb = PlatoonBuilder()
 
-    neBase:LoadPlatoons
-    {
-        pb:New "NE Pillar attack"
-            :Priority(200)
-            :InstanceCount(4)
-            :AddUnit(UNIT "Pillar", DV.M1_NE_Pillars)
-            :AddUnit(UNIT "Parashield", DV.M1_NE_Shield)
-            :AddUnit(UNIT "T2 UEF Flak", DV.M1_NE_Flak)
-            :Create(),
-
-        pb:New "ArtyDrop"
-            :Priority(100)
-            :AddUnit(UNIT "Lobo", DV.M1_NE_LoboDrop)
-            :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
-            :Data
+        pb
+            :UseAIFunction(Oxygen.PlatoonAI.Common, "PatrolChainPickerThread")
+            :UseType "Air"
+            :UseData
             {
-                TransportReturn = "M1_NE_Base_M",
-                TransportChain = "M1_LTC2",
-                LandingChain = "M1_LLC1",
-                AttackChain = "Spawn_AC"
-            }
-            :Create(),
-
-        pb:New "NE MMLs"
-            :Priority(200)
-            :InstanceCount(3)
-            :AddUnit(UNIT "T2 UEF MML", DV.M1_NE_MMLs, 'Artillery')
-            :AddUnit(UNIT "Parashield", DV.M1_NE_Shield, 'Artillery')
-            :AddCondition(BC.HumansCategoryCondition(categories.DEFENSE, ">=", 10))
-            :Create(Oxygen.Platoons.TargettingPriorities
-                {
-                    categories.ANTIMISSILE * categories.TECH2,
-                    categories.DEFENSE * categories.STRUCTURE * categories.DIRECTFIRE
+                PatrolChains = {
+                    "M1_LAC7",
+                    "M1_LAC5",
+                    "M1_LAC4",
                 }
-            )
+            }
 
-    }
+        neBase:LoadPlatoons
+        {
+            pb:New "NE Janus attack"
+                :Priority(1000)
+                :AddUnit(PARSE "CombatFighter", DV.M1_NE_Janus, 'Attack', "GrowthFormation")
+                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+                :Data
+                {
+                    CategoryList = {
+                        categories.DEFENSE * categories.DIRECTFIRE * categories.STRUCTURE,
+                        categories.STRUCTURE * categories.SHIELD,
+                    }
+                }
+                :AddCondition(BC.HumansEconomyCondition("AvgMassIncome", ">=", 250))
+                :Create(),
 
+            pb:New "NE gunships attack"
+                :Priority(750)
+                :AddUnit(PARSE "Gunship", DV.M1_NE_Gunships, 'Attack', "GrowthFormation")
+                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+                :Data
+                {
+                    CategoryList = {
+                        categories.ANTIAIR * categories.STRUCTURE,
+                        categories.ENERGYPRODUCTION,
+                        categories.ENGINEER,
+                    }
+                }
+                :AddCondition(BC.HumansEconomyCondition("AvgMassIncome", ">=", 150))
+                :AddCondition(BC.HumansCategoryCondition(categories.ANTIAIR, "<", 10))
+                :Create(),
+        }
+
+    end
 end
 
 DV.M1_SW_EngineerCount = { 4, 7, 10 }
@@ -264,11 +316,14 @@ DV.M1_SE_BuildLandDefenses = { false, false, true }
 
 DV.M1_SE_PercivalCount = { 1, 2, 4 }
 DV.M1_SE_PercivalShieldsCount = { 1, 3, 6 }
+DV.M1_SE_HugePercivalCount = { 1, 6, 10 }
+DV.M1_SE_HugePercivalShieldsCount = { 1, 6, 10 }
 
 DV.M1_SE_HeavyGunships = { 3, 5, 10 }
 DV.M1_SE_HeavyGunshipsSupportASFs = { 0, 10, 15 }
 DV.M1_SE_ASFs = { 0, 20, 30 }
 DV.M1_SE_Strats = { 2, 5, 8 }
+DV.M1_SE_StratsHuge = { 2, 11, 15 }
 
 
 function SEBase()
@@ -318,14 +373,7 @@ function SEBase()
                 :InstanceCount(4)
                 :Create(),
 
-            pb:New "SE Percy attack"
-                :Priority(300)
-                :InstanceCount(4)
-                :Difficulty { "Hard", "Medium" }
-                :AddUnit(UNIT "Percival", DV.M1_SE_PercivalCount)
-                :AddUnit(UNIT "Parashield", DV.M1_SE_PercivalShieldsCount)
-                :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 100))
-                :Create(),
+
 
             pb:New "NE Engineers"
                 :InstanceCount(1)
@@ -358,6 +406,7 @@ function SEBase()
             pb:New "Nuke base Engineers"
                 :InstanceCount(1)
                 :Priority(1000)
+                :Type "Any"
                 :Difficulty "Hard"
                 :AddUnit(UNIT "T3 UEF Engineer", 5)
                 :Data
@@ -368,6 +417,19 @@ function SEBase()
                     LandingLocation = "M1_Nuke_Base_M",
                 }
                 :Create(Oxygen.BaseManager.Platoons.ExpansionOf "M1_Nuke_Base"),
+
+            pb:New "SE Huge Percy attack"
+                :Priority(1500)
+                :InstanceCount(2)
+                :Difficulty { "Hard", "Medium" }
+                :AddUnit(UNIT "Percival", DV.M1_SE_HugePercivalCount)
+                :AddUnit(UNIT "Parashield", DV.M1_SE_HugePercivalShieldsCount)
+                :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 300))
+                :Create(Oxygen.Platoons.TargettingPriorities {
+                    categories.MASSFABRICATION - categories.COMMAND, -- target all that makes mass from nothing, but ACU
+                    categories.MASSEXTRACTION,
+                    categories.ENERGYPRODUCTION
+                }),
         }
     end
 
@@ -401,26 +463,7 @@ function SEBase()
                 :InstanceCount(2)
                 :Create(),
 
-            pb:New "SE Heavy gunships"
-                :Priority(2000)
-                :InstanceCount(1)
-                :Difficulty { "Hard", "Medium" }
-                :AddUnit(PARSE "HeavyGunship", DV.M1_SE_HeavyGunships, "Attack", "GrowthFormation")
-                :AddUnit(PARSE "AirSuperiority", DV.M1_SE_HeavyGunshipsSupportASFs, 'Support', "GrowthFormation")
-                :AddCondition(BC.HumansEconomyCondition("AvgMassIncome", ">=", 250))
-                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
-                :Data
-                {
-                    CategoryList =
-                    {
-                        (categories.DEFENSE + categories.MOBILE) * categories.ANTIAIR,
-                        categories.SHIELD * categories.STRUCTURE,
-                        categories.MASSFABRICATION - categories.COMMAND,
-                        categories.MASSEXTRACTION,
-                        categories.ENERGYPRODUCTION
-                    }
-                }
-                :Create(),
+
 
             pb:New "SE ASFs"
                 :Priority(1000)
@@ -451,6 +494,46 @@ function SEBase()
                     }
                 }
                 :Create(),
+
+            pb:New "SE Heavy gunships"
+                :Priority(2000)
+                :InstanceCount(1)
+                :Difficulty { "Hard", "Medium" }
+                :AddUnit(PARSE "HeavyGunship", DV.M1_SE_HeavyGunships, "Attack", "GrowthFormation")
+                :AddUnit(PARSE "AirSuperiority", DV.M1_SE_HeavyGunshipsSupportASFs, 'Support', "GrowthFormation")
+                :AddCondition(BC.HumansEconomyCondition("AvgMassIncome", ">=", 250))
+                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+                :Data
+                {
+                    CategoryList =
+                    {
+                        (categories.DEFENSE + categories.MOBILE) * categories.ANTIAIR,
+                        categories.SHIELD * categories.STRUCTURE,
+                        categories.MASSFABRICATION - categories.COMMAND,
+                        categories.MASSEXTRACTION,
+                        categories.ENERGYPRODUCTION
+                    }
+                }
+                :Create(),
+
+            pb:New "SE Strats huge"
+                :Priority(2000)
+                :InstanceCount(1)
+                :AddUnit(PARSE "StratBomber", DV.M1_SE_Strats, 'Attack', "GrowthFormation")
+                :AddCondition(BC.HumansEconomyCondition("AvgMassIncome", ">=", 400))
+                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+                :Data
+                {
+                    CategoryList =
+                    {
+                        categories.MASSFABRICATION, -- target all that makes mass from nothing, but ACU
+                        categories.MASSEXTRACTION,
+                        categories.ENERGYPRODUCTION
+                    }
+                }
+                :Create(),
+
+
 
         }
     end
