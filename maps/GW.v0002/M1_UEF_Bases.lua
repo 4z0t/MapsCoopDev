@@ -113,7 +113,7 @@ function NEBase()
             :Create(Oxygen.Platoons.TargettingPriorities
                 {
                     categories.ANTIMISSILE * categories.TECH2,
-                    categories.DEFENSE * categories.LAND * categories.STRUCTURE
+                    categories.DEFENSE * categories.STRUCTURE * categories.DIRECTFIRE
                 }
             )
 
