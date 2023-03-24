@@ -410,7 +410,7 @@ function SEBase()
                     {
                         (categories.DEFENSE + categories.MOBILE) * categories.ANTIAIR,
                         categories.SHIELD * categories.STRUCTURE,
-                        categories.MASSFABRICATION,
+                        categories.MASSFABRICATION - categories.COMMAND,
                         categories.MASSEXTRACTION,
                         categories.ENERGYPRODUCTION
                     }
@@ -440,7 +440,7 @@ function SEBase()
                 {
                     CategoryList =
                     {
-                        categories.MASSFABRICATION,
+                        categories.MASSFABRICATION - categories.COMMAND, -- target all that makes mass from nothing, but ACU
                         categories.MASSEXTRACTION,
                         categories.ENERGYPRODUCTION
                     }
