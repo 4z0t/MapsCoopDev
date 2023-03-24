@@ -110,7 +110,12 @@ function NEBase()
             :AddUnit(UNIT "T2 UEF MML", DV.M1_NE_MMLs, 'Artillery')
             :AddUnit(UNIT "Parashield", DV.M1_NE_Shield, 'Artillery')
             :AddCondition(BC.HumansCategoryCondition(categories.DEFENSE, ">=", 10))
-            :Create()
+            :Create(Oxygen.Platoons.TargettingPriorities
+                {
+                    categories.ANTIMISSILE * categories.TECH2,
+                    categories.DEFENSE * categories.LAND * categories.STRUCTURE
+                }
+            )
 
     }
 
@@ -355,6 +360,7 @@ function SEBase()
                 :Priority(1000)
                 :Difficulty "Hard"
                 :AddUnit(UNIT "T3 UEF Engineer", 5)
+                :BuildOnce()
                 :Data
                 {
                     UseTransports = true,
