@@ -439,7 +439,7 @@ function SEBase()
                 :Priority(1500)
                 :InstanceCount(3)
                 :AddUnit(PARSE "StratBomber", DV.M1_SE_Strats, 'Attack', "GrowthFormation")
-                :AddCondition(BC.HumansEconomyCondition("AvgMassIncome", ">=", 300))
+                :AddCondition(BC.HumansEconomyCondition("AvgMassIncome", ">=", 200))
                 :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
                 :Data
                 {
