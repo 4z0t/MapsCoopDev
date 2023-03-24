@@ -235,7 +235,7 @@ function Main()
             :Type "Land"
             :Priority(500)
             :AddUnits(Oxygen.Misc.FromMapUnitsDifficulty("Yudi", "Loyas", "Attack", 'GrowthFormation'))
-            :Create(),
+            :Create(Oxygen.Platoons.NavigateTo "AhwassaDropTarget"),
     }
 
 

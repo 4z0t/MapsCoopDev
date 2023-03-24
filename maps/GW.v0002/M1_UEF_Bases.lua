@@ -463,8 +463,6 @@ function SEBase()
                 :InstanceCount(2)
                 :Create(),
 
-
-
             pb:New "SE ASFs"
                 :Priority(1000)
                 :InstanceCount(2)
