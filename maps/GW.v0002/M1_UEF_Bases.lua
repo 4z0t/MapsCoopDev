@@ -373,12 +373,11 @@ function SEBase()
                 :InstanceCount(4)
                 :Create(),
 
-
-
             pb:New "NE Engineers"
                 :InstanceCount(1)
                 :Priority(700)
                 :Difficulty "Hard"
+                :Type "Any"
                 :AddUnit(UNIT "T3 UEF Engineer", 5)
                 :Data
                 {
@@ -392,6 +391,7 @@ function SEBase()
             pb:New "SW Engineers"
                 :InstanceCount(1)
                 :Priority(700)
+                :Type "Any"
                 :Difficulty "Hard"
                 :AddUnit(UNIT "T3 UEF Engineer", 5)
                 :Data
@@ -417,6 +417,19 @@ function SEBase()
                     LandingLocation = "M1_Nuke_Base_M",
                 }
                 :Create(Oxygen.BaseManager.Platoons.ExpansionOf "M1_Nuke_Base"),
+
+            pb:New "SE Percy attack"
+                :Priority(1000)
+                :InstanceCount(2)
+                :Difficulty { "Hard", "Medium" }
+                :AddUnit(UNIT "Percival", DV.M1_SE_PercivalCount)
+                :AddUnit(UNIT "Parashield", DV.M1_SE_PercivalShieldsCount)
+                :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 200))
+                :Create(Oxygen.Platoons.TargettingPriorities {
+                    categories.MASSFABRICATION - categories.COMMAND, -- target all that makes mass from nothing, but ACU
+                    categories.MASSEXTRACTION,
+                    categories.ENERGYPRODUCTION
+                }),
 
             pb:New "SE Huge Percy attack"
                 :Priority(1500)
