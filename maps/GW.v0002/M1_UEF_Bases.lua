@@ -325,6 +325,9 @@ DV.M1_SE_ASFs = { 0, 20, 30 }
 DV.M1_SE_Strats = { 2, 5, 8 }
 DV.M1_SE_StratsHuge = { 2, 11, 15 }
 
+DV.M1_SE_FatboyAssist = { 2, 4, 7 }
+DV.M1_SE_FatboyAmout = { 1, 2, 3 }
+
 
 function SEBase()
     ScenarioInfo.UEFacu = Oxygen.Game.Armies.CreateUnit("UEF", "UEF_ACU")
@@ -570,6 +573,29 @@ function SEBase()
             }
         })
     end
+
+
+    seBase:AddUnitAI("M1_Fatboy",
+        {
+            PlatoonAIFunction = { Oxygen.PlatoonAI.Common, "PatrolChainPickerThread" },
+            PlatoonData = {
+                PatrolChains = {
+                    "M1_LAC3",
+                    "M1_LAC6",
+                },
+            },
+            Priority = 2000,
+            Amount = DV.M1_SE_FatboyAmout,
+            KeepAlive = true,
+            Retry = true,
+            MaxAssist = DV.M1_SE_FatboyAssist,
+            BuildCondition =
+            {
+                BC.HumansCategoryCondition(categories.DEFENSE * categories.DIRECTFIRE, ">=", 10),
+                BC.HumansCategoryCondition(categories.SHIELD * categories.STRUCTURE, ">=", 5),
+                BC.HumansEconomyCondition("AvgMassIncome", ">=", 200)
+            }
+        })
 end
 
 function Main()
