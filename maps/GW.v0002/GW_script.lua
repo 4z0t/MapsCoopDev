@@ -4,7 +4,6 @@ local ScenarioPlatoonAI = import('/lua/ScenarioPlatoonAI.lua')
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 local Utilities = import('/lua/Utilities.lua')
 local Cinematics = import('/lua/cinematics.lua')
-local Buff = import('/lua/sim/Buff.lua')
 local TauntManager = import('/lua/TauntManager.lua')
 local AC = Oxygen.Cinematics
 local Game = Oxygen.Game
@@ -52,8 +51,8 @@ objectives:Init
                 playersManager:WarpIn(PlayerDeath)
             end)
 
-            ---@type PlayerIntelTrigger
-            objectives.Data.M1_UEF_IntelTrigger = Oxygen.Triggers.PlayerIntelTrigger(
+            ---@type PlayerUnitIntelTrigger
+            objectives.Data.M1_UEF_IntelTrigger = Oxygen.Triggers.PlayerUnitIntelTrigger(
                 function(unit)
                     ScenarioFramework.Dialogue(voStrings.M1_ACU_Locate, nil, true)
                     objectives:Start "M1_DoNotKill"
@@ -61,6 +60,13 @@ objectives:Init
             )
             objectives.Data.M1_UEF_IntelTrigger:Add(ScenarioInfo.UEFacu)
 
+            ---@type PlayerCategoryIntelTrigger
+            objectives.Data.M1_Nuke_IntelTrigger = Oxygen.Triggers.PlayerCategoryIntelTrigger(
+                function(unit)
+                    objectives:Start "M1_kill_nuke"
+                end
+            )
+            objectives.Data.M1_Nuke_IntelTrigger:Add(categories.NUKE * categories.STRUCTURE, Oxygen.Brains.UEF)
 
             local unit = Game.Armies.CreateUnit('Unknown', 'M1_MindController')
             objectives.Data.M1_MindController = unit
@@ -144,7 +150,29 @@ objectives:Init
             objectives:Get("M1_DoNotKill"):Success()
             objectives:EndGame(true)
         end)
-        :Create()
+        :Create(),
+
+    objectiveBuilder
+        :NewSecondary "M1_kill_nuke"
+        :Title "Kill nuke before it launches"
+        :Description [[Kill the nuke on South-west of the area
+        ]]
+        :To(Oxygen.Objective.Kill)
+        :Target
+        {
+            MarkUnits = true
+        }
+        :OnStart(function()
+            LOG("NUKE LOCATED")
+            local nukes = Oxygen.Brains.UEF:GetListOfUnits(categories.NUKE * categories.STRUCTURE, false)
+            return {
+                Units = nukes,
+            }
+        end)
+        :OnSuccess(function()
+            LOG("NUKE KILLED")
+        end)
+        :Create(),
 
 
 
