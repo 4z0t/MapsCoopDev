@@ -507,6 +507,7 @@ function SEBase()
                         categories.ENERGYPRODUCTION
                     }
                 }
+                :EnableJamming()
                 :Create(),
 
             pb:New "SE Heavy gunships"
@@ -540,11 +541,12 @@ function SEBase()
                 {
                     CategoryList =
                     {
-                        categories.MASSFABRICATION, -- target all that makes mass from nothing, but ACU
+                        categories.MASSFABRICATION,
                         categories.MASSEXTRACTION,
                         categories.ENERGYPRODUCTION
                     }
                 }
+                :EnableJamming()
                 :Create(),
 
 
