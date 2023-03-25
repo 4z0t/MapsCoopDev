@@ -26,9 +26,13 @@ DV.M1_ACU_ShakeAmount = { 0.2, 0.4, 0.7 }
 objectives.Data = {}
 
 
+local deadCounter = 0
 ---@param unit Unit
 local function PlayerDeath(unit)
-    LOG("Death")
+    deadCounter = deadCounter + 1
+    if ScenarioInfo.Options.ACUDeathType == 2 or deadCounter == table.getsize(ScenarioInfo.HumanPlayers) then
+        objectives:EndGame(false)
+    end
 end
 
 objectives:Init
