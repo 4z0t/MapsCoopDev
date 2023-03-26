@@ -322,6 +322,7 @@ DV.M1_SE_HugePercivalShieldsCount = { 1, 6, 10 }
 DV.M1_SE_HeavyGunships = { 3, 5, 10 }
 DV.M1_SE_HeavyGunshipsSupportASFs = { 0, 10, 15 }
 DV.M1_SE_ASFs = { 0, 20, 30 }
+DV.M1_SE_ASFs_Counter_exp = { 10, 30, 50 }
 DV.M1_SE_Strats = { 2, 5, 8 }
 DV.M1_SE_StratsHuge = { 2, 11, 15 }
 
@@ -492,6 +493,8 @@ function SEBase()
                 }
                 :Create(),
 
+
+
             pb:New "SE Strats"
                 :Priority(1500)
                 :InstanceCount(3)
@@ -547,6 +550,18 @@ function SEBase()
                     }
                 }
                 :EnableJamming()
+                :Create(),
+
+            pb:New "SE ASFs counter exp"
+                :Priority(2500)
+                :InstanceCount(1)
+                :AddUnit(PARSE "AirSuperiority", DV.M1_SE_ASFs_Counter_exp, 'Attack', "GrowthFormation")
+                :AddCondition(BC.HumansBuiltOrActiveCategoryCondition(categories.AIR * categories.EXPERIMENTAL, ">", 0))
+                :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
+                :Data
+                {
+                    CategoryList = { categories.AIR * categories.EXPERIMENTAL }
+                }
                 :Create(),
 
 
