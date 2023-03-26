@@ -571,7 +571,8 @@ function SEBase()
             Priority = 1800,
             BuildConditions =
             {
-                BC.HumansCategoryCondition(categories.LAND * categories.MOBILE, ">=", 30)
+                BC.HumansCategoryCondition(categories.LAND * categories.MOBILE, ">=", 30),
+                BC.HumansBuiltOrActiveCategoryCondition(categories.EXPERIMENTAL * categories.LAND, ">", 0)
             }
         })
     end

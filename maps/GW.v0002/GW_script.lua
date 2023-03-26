@@ -18,7 +18,7 @@ local DoNotKill = import(Oxygen.ScenarioFolder "DoNotKill.lua").DoNotKillObjecti
 local objectiveBuilder = Oxygen.ObjectiveBuilder()
 local playersManager = Oxygen.PlayersManager()
 local objectives = Oxygen.ObjectiveManager()
-
+local Brains = Oxygen.Brains
 
 DV.M1_ACU_ShakeAmount = { 0.2, 0.4, 0.7 }
 
@@ -250,7 +250,6 @@ function OnPopulate()
     Game.Armies.SetColor("Sera", "E68200")
 end
 
-local Brains = Oxygen.Brains
 
 function OnStart(self)
     LOG "STARTING SCENARIO"
