@@ -428,7 +428,7 @@ function SEBase()
                 :Difficulty { "Hard", "Medium" }
                 :AddUnit(UNIT "Percival", DV.M1_SE_PercivalCount)
                 :AddUnit(UNIT "Parashield", DV.M1_SE_PercivalShieldsCount)
-                :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 200))
+                :AddCondition(BC.HumansEconomyCondition("AvgMassIncome", ">=", 200))
                 :Create(Oxygen.Platoons.TargettingPriorities {
                     categories.MASSFABRICATION - categories.COMMAND, -- target all that makes mass from nothing, but ACU
                     categories.MASSEXTRACTION,
@@ -441,7 +441,7 @@ function SEBase()
                 :Difficulty { "Hard", "Medium" }
                 :AddUnit(UNIT "Percival", DV.M1_SE_HugePercivalCount)
                 :AddUnit(UNIT "Parashield", DV.M1_SE_HugePercivalShieldsCount)
-                :AddCondition(BC.HumansEconomyCondition("MassIncome", ">=", 300))
+                :AddCondition(BC.HumansEconomyCondition("AvgMassIncome", ">=", 300))
                 :Create(Oxygen.Platoons.TargettingPriorities {
                     categories.MASSFABRICATION - categories.COMMAND, -- target all that makes mass from nothing, but ACU
                     categories.MASSEXTRACTION,
