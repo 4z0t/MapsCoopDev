@@ -174,7 +174,7 @@ function Main()
 
         pb:New "Flying Bricks"
             :InstanceCount(1)
-            :Priority(50)
+            :Priority(5000)
             :AddUnit(UNIT "Brick", DV "Flying Bricks count")
             :AddUnit(UNIT "Deceiver", DV "Deceiver count" * 5)
             :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
@@ -186,6 +186,8 @@ function Main()
                 AttackChain = "TransportAttack"
             }
             :AddCondition(BC.ArmyCategoryCondition("HumanPlayers", categories.LAND, ">", 10))
+            :AddCondition(BC.HumansBuiltOrActiveCategoryCondition(categories.EXPERIMENTAL * categories.LAND, ">", 0))
+            :ConditionType("ANY")
             :Create(),
 
 

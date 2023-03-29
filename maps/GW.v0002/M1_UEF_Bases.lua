@@ -493,8 +493,6 @@ function SEBase()
                 }
                 :Create(),
 
-
-
             pb:New "SE Strats"
                 :Priority(1500)
                 :InstanceCount(3)
@@ -618,7 +616,7 @@ end
 
 function Main()
 
-    Oxygen.Game.Armies.CreateArmyGroup("UEF", 'M1_SW_Power', true)
+    Oxygen.Game.Armies.CreateGroup("UEF", 'M1_SW_Power', true)
 
     tauntUEF:AddPlayerIntelCategoryTaunt("M1_UEF_Locate_Taunt", Oxygen.Brains.UEF, categories.ALLUNITS)
 
