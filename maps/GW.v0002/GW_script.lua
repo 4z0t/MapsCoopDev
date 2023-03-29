@@ -250,13 +250,15 @@ function OnPopulate()
     Game.Armies.SetColor("Unknown", "E68200")
     Game.Armies.SetColor("Sera", "E68200")
 
-
     local playersCount = table.getsize(playersData)
 
     local buffDef = Buffs['CheatIncome']
     buffAffects = buffDef.Affects
     buffAffects.EnergyProduction.Mult = ({ 1.1, 1.2, 1.3, 1.4, 1.5 })[playersCount]
     buffAffects.MassProduction.Mult = ({ 1.5, 1.75, 2, 2.25, 2.5 })[playersCount]
+
+    LOG(("MASS income cheat buff %.2f"):format(buffAffects.MassProduction.Mult))
+    LOG(("ENERGY income cheat buff %.2f"):format(buffAffects.EnergyProduction.Mult))
 end
 
 function OnStart(self)
@@ -272,7 +274,7 @@ function OnStart(self)
 
     import(Oxygen.ScenarioFolder "M1_UEF_Bases.lua").Main()
     for _, unit in Brains.UEF:GetPlatoonUniquelyNamed('ArmyPool'):GetPlatoonUnits() do
-		Buff.ApplyBuff(unit, 'CheatIncome')
-	end
+        Buff.ApplyBuff(unit, 'CheatIncome')
+    end
     objectives:Start "M1_locate"
 end
