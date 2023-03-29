@@ -5,6 +5,7 @@ local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 local Utilities = import('/lua/Utilities.lua')
 local Cinematics = import('/lua/cinematics.lua')
 local TauntManager = import('/lua/TauntManager.lua')
+local Buff = import('/lua/sim/Buff.lua')
 local AC = Oxygen.Cinematics
 local Game = Oxygen.Game
 local RequireIn = Oxygen.RequireIn
@@ -187,7 +188,7 @@ function OnPopulate()
 
     LOG "SETTING UP PLAYERS"
 
-    playersManager:Init
+    local playersData = playersManager:Init
     {
         enhancements = {
             UEF = { "ResourceAllocation", "AdvancedEngineering", "T3Engineering" },
@@ -234,8 +235,8 @@ function OnPopulate()
             },
             color = "55D4B9"
         },
-
     }
+
 
     Game.Armies.SetSharedUnitCap(4000)
     Game.Armies.SetUnitCap("UEF", 4000)
@@ -248,8 +249,15 @@ function OnPopulate()
     Game.Armies.SetColor("Aeon", "6ED346")
     Game.Armies.SetColor("Unknown", "E68200")
     Game.Armies.SetColor("Sera", "E68200")
-end
 
+
+    local playersCount = table.getsize(playersData)
+
+    local buffDef = Buffs['CheatIncome']
+    buffAffects = buffDef.Affects
+    buffAffects.EnergyProduction.Mult = ({ 1.1, 1.2, 1.3, 1.4, 1.5 })[playersCount]
+    buffAffects.MassProduction.Mult = ({ 1.5, 1.75, 2, 2.25, 2.5 })[playersCount]
+end
 
 function OnStart(self)
     LOG "STARTING SCENARIO"
@@ -263,6 +271,8 @@ function OnStart(self)
     Game.SetPlayableArea('M1', false)
 
     import(Oxygen.ScenarioFolder "M1_UEF_Bases.lua").Main()
-
+    for _, unit in Brains.UEF:GetPlatoonUniquelyNamed('ArmyPool'):GetPlatoonUnits() do
+		Buff.ApplyBuff(unit, 'CheatIncome')
+	end
     objectives:Start "M1_locate"
 end
