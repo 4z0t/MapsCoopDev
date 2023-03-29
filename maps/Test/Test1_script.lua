@@ -81,7 +81,7 @@ end
 local objectives = Oxygen.ObjectiveManager()
 
 local function PlayerDeath()
-	objectives:EndGame(false)
+	--objectives:EndGame(false)
 end
 
 objectives:Init
@@ -384,7 +384,7 @@ function OnPopulate()
 	}
 	Game.Armies.SetUnitCap(ScenarioInfo.Yudi, 4000)
 
-	Game.Armies.CreateArmyGroup('TheWheelie', 'P1Qbases')
+	Game.Armies.CreateGroup('TheWheelie', 'P1Qbases')
 	--ScenarioUtils.CreateArmyGroup('Yudi', 'MainBase')
 
 end

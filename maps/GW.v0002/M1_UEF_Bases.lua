@@ -94,7 +94,7 @@ function NEBase()
 
             pb:New "ArtyDrop"
                 :Priority(100)
-                :AddUnit(UNIT "Lobo", DV.M1_NE_LoboDrop)
+                :AddUnit(UNIT "Lobo", DV.M1_NE_LoboDrop,"Artillery")
                 :AIFunction('/lua/ScenarioPlatoonAI.lua', 'LandAssaultWithTransports')
                 :Data
                 {
