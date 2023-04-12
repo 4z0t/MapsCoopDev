@@ -8,6 +8,7 @@ local BaseManager = Oxygen.BaseManager.BaseManagers.AdvancedBaseManager
 local PARSE = Oxygen.UnitNames.FactionParse.FactionUnitParser("UEF")
 
 local SPAIFileName = '/lua/scenarioplatoonai.lua'
+local DV = Oxygen.DifficultyValues
 
 
 local tauntUEF = TauntManager.CreateTauntManager("UEF", Oxygen.ScenarioFolder "VOStrings.lua")
@@ -23,7 +24,6 @@ local seBase = BaseManager()
 local nukeBase = Oxygen.BaseManager.BaseManagers.NukeBaseManger()
 
 
-local DV = Oxygen.DifficultyValues
 
 function NukeBase()
     nukeBase:Initialize(Oxygen.Brains.UEF, "M1_Nuke_Base", "M1_Nuke_Base_M", 10, {
@@ -367,6 +367,7 @@ function SEBase()
                 },
                 Offset = 30
             }
+            :UseOrderPriority(true)
 
 
         seBase:LoadPlatoons
@@ -379,10 +380,10 @@ function SEBase()
 
             pb:New "NE Engineers"
                 :InstanceCount(1)
-                :Priority(700)
                 :Difficulty "Hard"
-                :Type "Any"
+                :Priority(700)
                 :AddUnit(UNIT "T3 UEF Engineer", 5)
+                :Type "Any"
                 :Data
                 {
                     UseTransports = true,

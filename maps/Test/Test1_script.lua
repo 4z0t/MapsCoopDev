@@ -184,7 +184,7 @@ objectives:Init
 		}
 		:StartDelay(5)
 		:OnStart(function()
-			local prison = ScenarioUtils.CreateArmyUnit('Yudi', 'Prison')
+			local prison = Oxygen.Game.Armies.CreateUnit('Yudi', 'Prison')
 			prison:SetDoNotTarget(true)
 			prison:SetCanTakeDamage(false)
 			prison:SetCanBeKilled(false)
@@ -205,7 +205,7 @@ objectives:Init
 			ScenarioInfo.Prisoners = {}
 			ScenarioFramework.Dialogue(VOStrings.Saved, nil, true)
 			for _, name in prizoners do
-				local unit = ScenarioUtils.CreateArmyUnit("Player1", 'Rescued_player')
+				local unit = Oxygen.Game.Armies.CreateUnit("Player1", 'Rescued_player')
 				unit:SetCustomName(name)
 				unit:SetMaxHealth(1)
 				unit:GetWeapon(1):AddDamageMod(4000)
@@ -279,7 +279,7 @@ objectives:Init
 			Amount = 0.3,
 		}
 		:OnStart(function()
-			local unit = ScenarioUtils.CreateArmyUnit('Yudi', 'Damage')
+			local unit = Oxygen.Game.Armies.CreateUnit('Yudi', 'Damage')
 
 			unit:SetCustomName('Punch me')
 			--ScenarioFramework.Dialogue(VOStrings.Save, nil, true)
