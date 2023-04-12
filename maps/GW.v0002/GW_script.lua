@@ -29,7 +29,7 @@ Oxygen.BaseManagers.CustomBaseManager = Class(Oxygen.AdvancedBaseManager)
     ---```
     ---@param self CustomBaseManager
     ---@param path? string
-    LoadPlatoonsFrom = function(self, path)
+    LoadPlatoonsFromFile = function(self, path)
         path = path or "Platoons_"
 
         platoonsFilePath = Oxygen.ScenarioFolder(path .. self.BaseName .. ".lua")
