@@ -9,17 +9,51 @@ local Buff = import('/lua/sim/Buff.lua')
 local AC = Oxygen.Cinematics
 local Game = Oxygen.Game
 local RequireIn = Oxygen.RequireIn
-local DV = Oxygen.DifficultyValues
-
----@type GWStrings
-local voStrings = import(Oxygen.ScenarioFolder "VOStrings.lua").lines
 ---@type DoNotKillObjective
 local DoNotKill = import(Oxygen.ScenarioFolder "DoNotKill.lua").DoNotKillObjective
+
+---@class CustomBaseManager : AdvancedBaseManager
+Oxygen.BaseManagers.CustomBaseManager = Class(Oxygen.AdvancedBaseManager)
+{
+    ---Loads platoons from file
+    ---It must have these contents:
+    ---```lua
+    ---function Land(baseManager)
+    ---end
+    ---
+    ---function Air(baseManager)
+    ---end
+    ---
+    ---function Naval(baseManager)
+    ---end
+    ---```
+    ---@param self CustomBaseManager
+    ---@param path? string
+    LoadPlatoonsFrom = function(self, path)
+        path = path or "Platoons_"
+
+        platoonsFilePath = Oxygen.ScenarioFolder(path .. self.BaseName .. ".lua")
+
+        if not exists(platoonsFilePath) then
+            WARN(path .. self.BaseName .. ".lua wasnt found during loading platoons, skipping...")
+            return
+        end
+
+        local PlatoonsModule = import(platoonsFilePath)
+        PlatoonsModule.Land(self)
+        PlatoonsModule.Air(self)
+        PlatoonsModule.Naval(self)
+        LOG("Loaded platoons from " .. platoonsFilePath)
+    end
+}
 
 local objectiveBuilder = Oxygen.ObjectiveBuilder()
 local playersManager = Oxygen.PlayersManager()
 local objectives = Oxygen.ObjectiveManager()
 local Brains = Oxygen.Brains
+local DV = Oxygen.DifficultyValues
+---@type GWStrings
+local voStrings = import(Oxygen.ScenarioFolder "VOStrings.lua").lines
 
 DV.M1_ACU_ShakeAmount = { 0.2, 0.4, 0.7 }
 
