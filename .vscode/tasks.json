@@ -6,7 +6,7 @@
       "command": "C:\\ProgramData\\FAForever\\bin\\ForgedAlliance.exe",
       "args": [
         "/init",
-        "init-coop-dev.lua",
+        "init_coop_dev.lua",
         "/nobugreport",
         "/log",
         "C:\\Users\\4z0t\\AppData\\Roaming\\Forged Alliance Forever\\logs\\game.log",

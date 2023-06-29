@@ -84,6 +84,20 @@ objectives:Init
                 ScenarioFramework.Dialogue(voStrings.M1_Start, nil, true)
                 AC.MoveTo("Cam1", 3)
                 playersManager:WarpIn(PlayerDeath)
+
+                AC.DisplayText(
+                    [[Mission made by 4z0t
+                    Credits: 
+                        - Tron- (he didnt make a map but wanted to)
+                        - Zasport (measured how many mexes he could make before death)
+                        - Razarem (is in Jail)
+                        - Sladow-Noob (complaining about strats killing mexes)]],
+                    24,
+                    "ffffffff",
+                    "leftcenter",
+                    10
+                )
+
             end)
 
             ---@type PlayerUnitIntelTrigger
