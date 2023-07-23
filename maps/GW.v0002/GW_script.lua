@@ -170,7 +170,14 @@ objectives:Init
         :OnFail(function()
             ScenarioFramework.Dialogue(voStrings.M1_Kill, nil, true)
 
-            objectives:EndGame(false)
+            --objectives:EndGame(false)
+            WaitSeconds(5)
+
+            ---@type UnitsController
+            local unitsController = Oxygen.UnitsController()
+            unitsController
+                :FromArmyUnits(Brains.UEF, categories.ALLUNITS)
+                :ImmediatelyKill()
         end)
         :Create(),
 
@@ -195,8 +202,19 @@ objectives:Init
         :OnSuccess(function()
             LOG("SUCCESS DAMAGE")
             WaitSeconds(10)
+            local doNotKillObjective = objectives:Get("M1_DoNotKill")
+            if not doNotKillObjective.Active and not doNotKillObjective.Complete then
+                LOG("UEF commander was killed")
+                return
+            end
+            Oxygen.Game.Armies.SetPlayersAlliance(Brains.UEF:GetArmyIndex(), "Ally")
+            doNotKillObjective:Success()
 
-            objectives:Get("M1_DoNotKill"):Success()
+            ScenarioFramework.FakeTeleportUnit(ScenarioInfo.UEFacu, true)
+
+            Oxygen.Game.Armies.TransferUnitsToArmy(Brains.UEF, Brains.MainPlayer, categories.ALLUNITS)
+
+            WaitSeconds(5)
             objectives:EndGame(true)
         end)
         :Create(),
@@ -312,6 +330,7 @@ end
 function OnStart(self)
     LOG "STARTING SCENARIO"
 
+    Brains.MainPlayer = ArmyBrains[1]
     Brains.UEF = ArmyBrains[2]
     Brains.Cybran = ArmyBrains[3]
     Brains.Aeon = ArmyBrains[4]
