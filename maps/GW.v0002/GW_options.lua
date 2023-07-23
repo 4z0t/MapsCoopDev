@@ -6,8 +6,16 @@ options = {
         key = 'ACUDeathType',
         pref = 'ACUDeathType',
         values = {
-            { text = "all", help = "Mission fails when all players' ACUs are dead", key = 1, },
-            { text = "any", help = "Mission fails when any of players' ACU dies", key = 2, },
+            {
+                text = "all",
+                help = "Mission fails when all players' ACUs are dead",
+                key = 1,
+            },
+            {
+                text = "any",
+                help = "Mission fails when any of players' ACU dies",
+                key = 2,
+            },
         },
     },
 }
