@@ -1,16 +1,16 @@
 local ScenarioUtils = import('/lua/sim/ScenarioUtilities.lua')
 local TauntManager = import('/lua/TauntManager.lua')
 local BC = Oxygen.BuildConditions
-local BaseManager = Oxygen.BaseManagers.CustomBaseManager
+local BaseManager = Oxygen.BaseManagers.AdvancedBaseManager
 local DV = Oxygen.DifficultyValues
 
 local tauntUEF = TauntManager.CreateTauntManager("UEF", Oxygen.ScenarioFolder "VOStrings.lua")
 
----@type CustomBaseManager
+---@type AdvancedBaseManager
 local neBase = BaseManager()
----@type CustomBaseManager
+---@type AdvancedBaseManager
 local swBase = BaseManager()
----@type CustomBaseManager
+---@type AdvancedBaseManager
 local seBase = BaseManager()
 
 ---@type NukeBaseManger

@@ -12,41 +12,6 @@ local RequireIn = Oxygen.RequireIn
 ---@type DoNotKillObjective
 local DoNotKill = import(Oxygen.ScenarioFolder "DoNotKill.lua").DoNotKillObjective
 
----@class CustomBaseManager : AdvancedBaseManager
-Oxygen.BaseManagers.CustomBaseManager = Class(Oxygen.AdvancedBaseManager)
-{
-    ---Loads platoons from file
-    ---It must have these contents:
-    ---```lua
-    ---function Land(baseManager)
-    ---end
-    ---
-    ---function Air(baseManager)
-    ---end
-    ---
-    ---function Naval(baseManager)
-    ---end
-    ---```
-    ---@param self CustomBaseManager
-    ---@param path? string
-    LoadPlatoonsFromFile = function(self, path)
-        path = path or "Platoons_"
-
-        platoonsFilePath = Oxygen.ScenarioFolder(path .. self.BaseName .. ".lua")
-
-        if not exists(platoonsFilePath) then
-            WARN(path .. self.BaseName .. ".lua wasnt found during loading platoons, skipping...")
-            return
-        end
-
-        local PlatoonsModule = import(platoonsFilePath)
-        PlatoonsModule.Land(self)
-        PlatoonsModule.Air(self)
-        PlatoonsModule.Naval(self)
-        LOG("Loaded platoons from " .. platoonsFilePath)
-    end
-}
-
 local objectiveBuilder = Oxygen.ObjectiveBuilder()
 local playersManager = Oxygen.PlayersManager()
 local objectives = Oxygen.ObjectiveManager()
@@ -207,12 +172,12 @@ objectives:Init
                 LOG("UEF commander was killed")
                 return
             end
-            Oxygen.Game.Armies.SetPlayersAlliance(Brains.UEF:GetArmyIndex(), "Ally")
+            Game.Armies.SetPlayersAlliance(Brains.UEF:GetArmyIndex(), "Ally")
             doNotKillObjective:Success()
 
             ScenarioFramework.FakeTeleportUnit(ScenarioInfo.UEFacu, true)
 
-            Oxygen.Game.Armies.TransferUnitsToArmy(Brains.UEF, Brains.MainPlayer, categories.ALLUNITS)
+            Game.Armies.TransferUnitsToArmy(Brains.UEF, Brains.MainPlayer, categories.ALLUNITS)
 
             WaitSeconds(5)
             objectives:EndGame(true)
@@ -231,7 +196,7 @@ objectives:Init
         }
         :OnStart(function()
             LOG("NUKE LOCATED")
-            local nukes = Oxygen.Brains.UEF:GetListOfUnits(categories.NUKE * categories.STRUCTURE, false)
+            local nukes = Brains.UEF:GetListOfUnits(categories.NUKE * categories.STRUCTURE, false)
             return {
                 Units = nukes,
             }
@@ -319,7 +284,7 @@ function OnPopulate()
     local playersCount = table.getsize(playersData)
 
     local buffDef = Buffs['CheatIncome']
-    buffAffects = buffDef.Affects
+    local buffAffects = buffDef.Affects
     buffAffects.EnergyProduction.Mult = ({ 1.1, 1.2, 1.3, 1.4, 1.5 })[playersCount]
     buffAffects.MassProduction.Mult = ({ 1.5, 1.75, 2, 2.25, 2.5 })[playersCount]
 
