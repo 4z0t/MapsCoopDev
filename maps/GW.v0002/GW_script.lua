@@ -24,6 +24,22 @@ DV.M1_ACU_ShakeAmount = { 0.2, 0.4, 0.7 }
 
 objectives.Data = {}
 
+Oxygen.Callbacks.Add("ResultMission", function(data)
+
+    local name = data.name
+    local result = data.result
+
+    if not name or not CheatsEnabled() then
+        return
+    end
+
+    local objective = objectives:Get(name)
+    if not objective then
+        return
+    end
+
+    objective:ManualResult(result)
+end)
 
 local deadCounter = 0
 ---@param unit Unit
