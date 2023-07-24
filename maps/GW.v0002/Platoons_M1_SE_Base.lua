@@ -176,7 +176,7 @@ function Air(baseManager)
 
         pb:New "SE Strats"
             :Priority(1500)
-            :InstanceCount(3)
+            :InstanceCount(1)
             :AddUnit(PARSE "StratBomber", DV.M1_SE_Strats, 'Attack', "GrowthFormation")
             :AddCondition(BC.HumansEconomyCondition("AvgMassIncome", ">=", 200))
             :AIFunction(SPAIFileName, 'CategoryHunterPlatoonAI')
