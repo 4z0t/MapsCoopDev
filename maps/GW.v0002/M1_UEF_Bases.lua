@@ -80,6 +80,11 @@ DV.M1_SE_EngineerCount = { 10, 20, 30 }
 DV.M1_SE_AssisterCount = { 7, 15, 20 }
 
 
+
+DV.M1_SE_FatboyAssist = { 2, 4, 7 }
+DV.M1_SE_FatboyAmout = { 1, 2, 3 }
+
+
 function SEBase()
     ScenarioInfo.UEFacu = Oxygen.Game.Armies.CreateUnit("UEF", "UEF_ACU")
 

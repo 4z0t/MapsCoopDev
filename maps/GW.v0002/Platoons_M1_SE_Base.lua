@@ -26,9 +26,6 @@ DV.M1_SE_ASFs_Counter_exp = { 10, 30, 50 }
 DV.M1_SE_Strats = { 2, 5, 8 }
 DV.M1_SE_StratsHuge = { 2, 11, 15 }
 
-DV.M1_SE_FatboyAssist = { 2, 4, 7 }
-DV.M1_SE_FatboyAmout = { 1, 2, 3 }
-
 ---@param baseManager AdvancedBaseManager
 function Land(baseManager)
 
