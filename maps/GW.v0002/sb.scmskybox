@@ -1,0 +1,33 @@
+{
+    "Data": {
+        "Position": {
+            "x": 512.0,
+            "y": 0.0,
+            "z": 512.0
+        },
+        "Scale": 2343.162841796875,
+        "SubtractHeight": 1.2566369771957398,
+        "SubdivisionsAxis": 16,
+        "SubdivisionsHeight": 6,
+        "HorizonHeight": -42.5,
+        "ZenithHeight": 293.507080078125,
+        "HorizonColor": {
+            "r": 0.1385936999320984,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 1.0
+        },
+        "ZenithColor": {
+            "r": 0.9299999856948853,
+            "g": 0.62,
+            "b": 0.0,
+            "a": 1.0
+        },
+           "MidRgbColor": {
+            "r": 0.61,
+            "g": 0.22,
+            "b": 0,
+            "a": 0
+        }
+    }
+}

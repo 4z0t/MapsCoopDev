@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "FAF Coop dev",
+      "command": "C:\\ProgramData\\FAForever\\bin\\ForgedAlliance.exe",
+      "args": [
+        "/init",
+        "init_coop_dev.lua",
+        "/nobugreport",
+        "/log",
+        "C:\\Users\\4z0t\\AppData\\Roaming\\Forged Alliance Forever\\logs\\game.log",
+        "/EnableDiskWatch",
+        "/showlog"
+      ],
+      "type": "shell"
+    }
+  ]
+}
